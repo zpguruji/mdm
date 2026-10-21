@@ -145,7 +145,7 @@ const ds=c.us.map((x,i)=>{const a=x/n;return a>0?Math.floor(c.c[i]/a):0});
 return H("दैनंदिनी नोंद अहवाल")+`<div class=sc><table><tr><th class=l>सारांश${IT.map(x=>`<th>${x}`).join("")}</tr>${sm}<tr><td class=l>शिल्लक अंदाजे किती दिवस पुरेल?${ds.map(x=>`<td>${x}`).join("")}</tr></table></div><br>
 <div class=sc><table><tr><th>दिनांक<th>वार<th>पट<th>लाभार्थी<th>पाककृती${IT.map(x=>`<th>${x}`).join("")}</tr>${bd}</table></div>${SG}`}
 // ---- Google Drive sync ----
-const AP="https://www.googleapis.com/",DEFAULT_CID="PASTE_YOUR_CLIENT_ID_HERE",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
+const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
 function tok(){return new Promise((ok,no)=>{if(TK&&Date.now()<TX)return ok(TK);if(!window.google)return no("Google स्क्रिप्ट लोड नाही (इंटरनेट तपासा)");if(cid().startsWith("PASTE"))return no("Client ID भरलेला नाही");
 google.accounts.oauth2.initTokenClient({client_id:cid(),scope:"https://www.googleapis.com/auth/drive.file",callback:r=>{if(r.error)return no(r.error);TK=r.access_token;TX=Date.now()+(r.expires_in-60)*1000;localStorage.mdmok=1;ok(TK)},error_callback:e=>no(e.type||"लॉगिन रद्द")}).requestAccessToken({prompt:localStorage.mdmok?"":"consent"})})}
 async function gx(u,o={}){const t=await tok(),r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});if(!r.ok)throw new Error(r.status+" "+(await r.text()).slice(0,100));return r}
