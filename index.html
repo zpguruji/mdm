@@ -63,13 +63,37 @@ const pend=()=>!!(localStorage.mdmok&&(+localStorage.mdmls||0)<(S.ts||0));
 const old=()=>!!localStorage.mdmok&&(!+localStorage.mdmlt||Date.now()-localStorage.mdmlt>30*864e5);
 const lst=()=>{if(!localStorage.mdmok)return"💡 Drive जोडलेले नाही. डेटा सुरक्षित राहण्यासाठी Drive जोडा आणि किमान महिन्यातून एकदा Drive sync करा.";const t=+localStorage.mdmlt;return(t?"शेवटचे sync: "+dm(ds2(new Date(t)))+". ":"अजून sync झालेले नाही. ")+"💡 डेटा सुरक्षित राहण्यासाठी किमान महिन्यातून एकदा Drive sync करा."+(old()?(t?" ⚠ 30 दिवसांपेक्षा जास्त झाले, आता sync करा.":" ⚠ आता sync करा."):"")};
 const st=(t,k)=>{GS=t;const e=$("gs");if(e)e.textContent=t;if(k)toast(t)};
-const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(),3000)}else if(localStorage.mdmok)st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
+
+// Auto-Sync मध्ये पॉप-अप ब्लॉक न होऊ देण्यासाठी सेफ कॉल
+const save=()=>{
+  S.ts=Date.now();
+  localStorage.mdm=JSON.stringify(S);
+  if(localStorage.mdmauto!="1"){
+    if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी");
+  }else if(TK&&Date.now()<TX){
+    clearTimeout(SQ);
+    SQ=setTimeout(()=>sync(0),2500);
+  }else if(localStorage.mdmok){
+    st("Drive sync बाकी - 'Drive sync' बटण दाबा");
+  }
+};
+
 const ds2=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),tod=()=>ds2(new Date());
 const wd=s=>{const[y,m,d]=s.split("-");return new Date(y,m-1,d).getDay()},dm=s=>s.split("-").reverse().join("-");
 
 let DR=null,T="h",CD=tod(),CM=tod().slice(0,7),CMenu=0,RP=1,RS=0,RG=0,SUB_S=0,SUB_T=0;
 let TT;function toast(m){const e=$("ts");e.textContent=m;e.style.display="block";clearTimeout(TT);TT=setTimeout(()=>e.style.display="none",5000)}
-function done(m){clearTimeout(SQ);if(localStorage.mdmok&&!cid().startsWith("PASTE")){if(localStorage.mdmauto!="1")return toast(m);toast(m+". Drive ला पाठवत आहे…");sync(0)}else toast(m+" (Drive जोडलेले नाही)")}
+function done(m){
+  clearTimeout(SQ);
+  if(localStorage.mdmok&&!cid().startsWith("PASTE")){
+    if(localStorage.mdmauto!="1")return toast(m);
+    toast(m+". Drive ला पाठवत आहे…");
+    sync(0);
+  }else{
+    toast(m+" (Drive जोडलेले नाही)");
+  }
+}
+
 let OD=null;const o22=a=>[...Array(22)].map((_,i)=>+(a||[])[i]||0);
 function iod(){OD={d:S.opd,op:o22(S.op),op2:o22(S.op2)}}
 function odirty(){return !!OD&&(OD.d!=S.opd||JSON.stringify(OD.op)!=JSON.stringify(o22(S.op))||JSON.stringify(OD.op2)!=JSON.stringify(o22(S.op2)))}
@@ -235,30 +259,177 @@ function R4(){
 }
 function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
+// ---- Google Drive Sync (दुरुस्त व सुरक्षित लॉजिक) ----
 // ---- Google Drive Sync ----
 const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
 try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}catch(e){}
-function tok(){return new Promise((ok,no)=>{if(TK&&Date.now()<TX)return ok(TK);if(!window.google)return no("Google स्क्रिप्ट लोड नाही (इंटरनेट तपासा)");if(cid().startsWith("PASTE"))return no("Client ID भरलेला नाही");
-google.accounts.oauth2.initTokenClient({client_id:cid(),scope:"https://www.googleapis.com/auth/drive.file",
-callback:r=>{if(r.error)return no(r.error);TK=r.access_token;TX=Date.now()+(r.expires_in-60)*1000;localStorage.mdmtk=JSON.stringify({t:TK,x:TX});localStorage.mdmok=1;ok(TK)},
-error_callback:e=>no(e.type=="popup_failed_to_open"?"popup_blocked":(e.type||"लॉगिन रद्द"))}).requestAccessToken({prompt:localStorage.mdmok?"":"consent"})})}
-async function gx(u,o={}){const t=await tok(),r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});if(r.status==401&&!o.rt){TK=null;TX=0;localStorage.removeItem("mdmtk");return gx(u,{...o,rt:1})}if(!r.ok)throw new Error(r.status+" "+(await r.text()).slice(0,100));return r}
-async function folder(){if(FID)return FID;const q=encodeURIComponent("name='MDM_Data' and mimeType='application/vnd.google-apps.folder' and trashed=false");let j=await(await gx(AP+"drive/v3/files?q="+q+"&fields=files(id)")).json();
-if(j.files[0])FID=j.files[0].id;else{j=await(await gx(AP+"drive/v3/files",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:"MDM_Data",mimeType:"application/vnd.google-apps.folder"})})).json();FID=j.id}localStorage.mdmfid2=FID;return FID}
-function parts(){const dl={},mn={},sp={};for(const k in S.days){const d={...S.days[k]};if(d.s)sp[k]=d.s;delete d.s;(d.h?mn:dl)[k]=d}
-return{"Profiles.json":{ts:S.ts||0,sch:S.sch,cooks:S.cooks,hon:S.hon,fuel:S.fuel,cls:S.cls,lvl:S.lvl},"Praman.json":{rL:S.rL,rU:S.rU,N:S.N,nv:S.nv,menus:S.menus},"Opening_Stock.json":{inn:S.inn,op:S.op,op2:S.op2,opd:S.opd},"Daily_Entries.json":dl,"Meal_Not_Cook.json":mn,"School_Visit.json":S.mon,"Supplementary_Foods.json":{sup:S.sup,byDate:sp}}}
-function apply(p){const a=p["Profiles.json"]||{},b=p["Praman.json"]||{},sf=p["Supplementary_Foods.json"]||{},os=p["Opening_Stock.json"]||{};
-S=Object.assign({},D,{ts:a.ts,cls:a.cls||D.cls,lvl:a.lvl||D.lvl,op:os.op||[],op2:os.op2||[],opd:os.opd||D.opd,sch:a.sch||D.sch,cooks:a.cooks??D.cooks,hon:a.hon??D.hon,fuel:a.fuel??D.fuel,rL:b.rL??D.rL,rU:b.rU??D.rU,menus:b.menus||D.menus,N:b.N||D.N,inn:os.inn||[],mon:p["School_Visit.json"]||{},sup:sf.sup||D.sup,days:Object.assign({},p["Daily_Entries.json"],p["Meal_Not_Cook.json"])});
-const bd=sf.byDate||{};for(const k in bd)if(S.days[k])S.days[k].s=bd[k];if(!b.N)mig();else if(!b.nv)fixn();S.nv=2;localStorage.mdm=JSON.stringify(S);localStorage.mdmls=S.ts;localStorage.mdmlt=Date.now()}
-async function sync(manual){if(busy)return;busy=1;st("sync होत आहे…");
-try{const f=await folder(),l=await(await gx(AP+"drive/v3/files?q="+encodeURIComponent("'"+f+"' in parents and trashed=false")+"&fields=files(id,name)")).json(),ids={};l.files.forEach(x=>ids[x.name]=x.id);
-let dts=0;if(ids["Profiles.json"])dts=(await(await gx(AP+"drive/v3/files/"+ids["Profiles.json"]+"?alt=media")).json()).ts||0;
-if(dts>(S.ts||0)){if(Object.keys(S.days).length&&!confirm("Drive वरील डेटा नवीन आहे. फोनवरील डेटा त्याने बदलायचा?")){st("sync रद्द केले");busy=0;return}
-const p={};for(const n in ids)if(n.endsWith(".json"))p[n]=await(await gx(AP+"drive/v3/files/"+ids[n]+"?alt=media")).json();apply(p);st("Drive वरून डेटा घेतला ✔",1);busy=0;return go(T)}
-const ts0=S.ts,P=parts();for(const n in P){const body=JSON.stringify(P[n]);if(ids[n])await gx(AP+"upload/drive/v3/files/"+ids[n]+"?uploadType=media",{method:"PATCH",headers:{"Content-Type":"application/json"},body});
-else{const fd=new FormData();fd.append("metadata",new Blob([JSON.stringify({name:n,parents:[f],mimeType:"application/json"})],{type:"application/json"}));fd.append("file",new Blob([body],{type:"application/json"}));await gx(AP+"upload/drive/v3/files?uploadType=multipart",{method:"POST",body:fd})}}
-localStorage.mdmls=ts0;localStorage.mdmlt=Date.now();st("☁ मोबाईल आणि Drive दोन्हीकडे जतन झाले ✔",1);if(T=="h")vh()}
-catch(e){if(String(e).includes("404")){FID="";localStorage.removeItem("mdmfid2")}const m=String(e.message||e);st(m.includes("popup")?"⚠ Google लॉगिन विंडो (pop-up) ब्लॉक झाली. ब्राउझरमध्ये या साइटसाठी Pop-ups 'Allow' करा आणि 'Drive sync' पुन्हा दाबा.":"Drive sync बाकी: "+m+" — 'Drive sync' पुन्हा दाबा",1)}busy=0}
+
+function tok(interactive=false){
+  return new Promise((ok,no)=>{
+    // अगर टोकन 2 मिनट से ज्यादा पुराना नहीं है तो ही इस्तेमाल करें
+    if(TK && Date.now() < (TX - 120000)) return ok(TK);
+    
+    // पुराना या समाप्त हुआ टोकन साफ़ करें
+    TK = null;
+    TX = 0;
+    localStorage.removeItem("mdmtk");
+
+    if(!window.google || !google.accounts || !google.accounts.oauth2) {
+      return no("Google स्क्रिप्ट लोड नाही (इंटरनेट तपासा)");
+    }
+    if(cid().startsWith("PASTE")) return no("Client ID भरलेला नाही");
+    if(!interactive) return no("टोकन संपले आहे. 'Drive sync' बटण दाबा.");
+    
+    const client = google.accounts.oauth2.initTokenClient({
+      client_id: cid(),
+      scope: "https://www.googleapis.com/auth/drive.file",
+      callback: r => {
+        if(r.error) return no(r.error);
+        TK = r.access_token;
+        TX = Date.now() + (r.expires_in - 60) * 1000;
+        localStorage.mdmtk = JSON.stringify({t: TK, x: TX});
+        localStorage.mdmok = 1;
+        ok(TK);
+      },
+      error_callback: e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.type || "लॉगिन रद्द"))
+    });
+    client.requestAccessToken({prompt: ""});
+  });
+}
+
+async function gx(u,o={},interactive=false){
+  const t=await tok(interactive);
+  const r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});
+  if(r.status==401&&!o.rt){
+    TK=null;TX=0;localStorage.removeItem("mdmtk");
+    return gx(u,{...o,rt:1},interactive);
+  }
+  if(!r.ok)throw new Error("HTTP "+r.status+" "+(await r.text()).slice(0,120));
+  return r;
+}
+
+async function folder(interactive){
+  if(FID){
+    try{
+      const chk=await gx(AP+"drive/v3/files/"+FID+"?fields=id,trashed",{},interactive);
+      const j=await chk.json();
+      if(!j.trashed)return FID;
+    }catch(e){FID="";localStorage.removeItem("mdmfid2")}
+  }
+  const q=encodeURIComponent("name='MDM_Data' and mimeType='application/vnd.google-apps.folder' and trashed=false");
+  let j=await(await gx(AP+"drive/v3/files?q="+q+"&fields=files(id)",{},interactive)).json();
+  if(j.files&&j.files[0])FID=j.files[0].id;
+  else{
+    j=await(await gx(AP+"drive/v3/files",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({name:"MDM_Data",mimeType:"application/vnd.google-apps.folder"})
+    },interactive)).json();
+    FID=j.id;
+  }
+  localStorage.mdmfid2=FID;
+  return FID;
+}
+
+function parts(){
+  const dl={},mn={},sp={};
+  for(const k in S.days){
+    const d={...S.days[k]};
+    if(d.s)sp[k]=d.s;
+    delete d.s;
+    (d.h?mn:dl)[k]=d;
+  }
+  return{
+    "Profiles.json":{ts:S.ts||0,sch:S.sch,cooks:S.cooks,hon:S.hon,fuel:S.fuel,cls:S.cls,lvl:S.lvl},
+    "Praman.json":{rL:S.rL,rU:S.rU,N:S.N,nv:S.nv,menus:S.menus},
+    "Opening_Stock.json":{inn:S.inn,op:S.op,op2:S.op2,opd:S.opd},
+    "Daily_Entries.json":dl,
+    "Meal_Not_Cook.json":mn,
+    "School_Visit.json":S.mon,
+    "Supplementary_Foods.json":{sup:S.sup,byDate:sp}
+  };
+}
+
+function apply(p){
+  const a=p["Profiles.json"]||{},b=p["Praman.json"]||{},sf=p["Supplementary_Foods.json"]||{},os=p["Opening_Stock.json"]||{};
+  S=Object.assign({},D,{ts:a.ts,cls:a.cls||D.cls,lvl:a.lvl||D.lvl,op:os.op||[],op2:os.op2||[],opd:os.opd||D.opd,sch:a.sch||D.sch,cooks:a.cooks??D.cooks,hon:a.hon??D.hon,fuel:a.fuel??D.fuel,rL:b.rL??D.rL,rU:b.rU??D.rU,menus:b.menus||D.menus,N:b.N||D.N,inn:os.inn||[],mon:p["School_Visit.json"]||{},sup:sf.sup||D.sup,days:Object.assign({},p["Daily_Entries.json"],p["Meal_Not_Cook.json"])});
+  const bd=sf.byDate||{};for(const k in bd)if(S.days[k])S.days[k].s=bd[k];
+  if(!b.N)mig();else if(!b.nv)fixn();
+  S.nv=2;
+  localStorage.mdm=JSON.stringify(S);
+  localStorage.mdmls=S.ts;
+  localStorage.mdmlt=Date.now();
+}
+
+async function sync(manual=0){
+  if(busy)return;
+  busy=1;
+  st("sync होत आहे…");
+  try{
+    const isInter=!!manual;
+    const f=await folder(isInter);
+    const l=await(await gx(AP+"drive/v3/files?q="+encodeURIComponent("'"+f+"' in parents and trashed=false")+"&fields=files(id,name)",{},isInter)).json();
+    const ids={};
+    (l.files||[]).forEach(x=>ids[x.name]=x.id);
+    
+    let dts=0;
+    if(ids["Profiles.json"]){
+      try{
+        dts=(await(await gx(AP+"drive/v3/files/"+ids["Profiles.json"]+"?alt=media",{},isInter)).json()).ts||0;
+      }catch(e){}
+    }
+    
+    if(dts>(S.ts||0)){
+      if(Object.keys(S.days).length&&!confirm("Drive वरील डेटा नवीन आहे. फोनवरील डेटा त्याने बदलायचा?")){
+        st("sync रद्द केले");busy=0;return;
+      }
+      const p={};
+      for(const n in ids){
+        if(n.endsWith(".json"))p[n]=await(await gx(AP+"drive/v3/files/"+ids[n]+"?alt=media",{},isInter)).json();
+      }
+      apply(p);
+      st("Drive वरून डेटा घेतला ✔",1);
+      busy=0;
+      return go(T);
+    }
+    
+    const ts0=S.ts,P=parts();
+    for(const n in P){
+      const body=JSON.stringify(P[n]);
+      let fileId=ids[n];
+      if(!fileId){
+        const cr=await gx(AP+"drive/v3/files",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({name:n,parents:[f]})
+        },isInter);
+        const crj=await cr.json();
+        fileId=crj.id;
+        ids[n]=fileId;
+      }
+      await gx(AP+"upload/drive/v3/files/"+fileId+"?uploadType=media",{
+        method:"PATCH",
+        headers:{"Content-Type":"application/json"},
+        body:body
+      },isInter);
+    }
+    
+    localStorage.mdmls=ts0;
+    localStorage.mdmlt=Date.now();
+    st("☁ मोबाईल आणि Drive दोन्हीकडे जतन झाले ✔",1);
+    if(T=="h")vh();
+  }catch(e){
+    if(String(e).includes("404")){FID="";localStorage.removeItem("mdmfid2")}
+    const m=String(e.message||e);
+    if(!manual&&m.includes("टोकन संपले")){
+      st("Drive sync बाकी - 'Drive sync' बटण दाबा");
+    }else{
+      st(m.includes("पॉप-अप")?"⚠ Google लॉगिन विंडो ब्लॉक झाली. ब्राउझर सेटिंग्जमध्ये Pop-ups Allow करा.":"Drive sync बाकी: "+m+" — 'Drive sync' पुन्हा दाबा",1);
+    }
+  }
+  busy=0;
+}
+
 function shr(){const u=location.href.split("#")[0].replace(/index\.html$/,"");navigator.share?navigator.share({title:"MDM पोषण आहार नोंदवही",text:"शालेय पोषण आहार नोंदवही app",url:u}):prompt("लिंक कॉपी करा",u)}
 let IP=null;const SA=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();IP=e});addEventListener("appinstalled",()=>{$("ib").style.display="none";toast("✔ app इन्स्टॉल झाला")});
