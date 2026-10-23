@@ -74,7 +74,8 @@ menus:[{n:"सोयाबीन पुलाव",p:{9:1,10:1,11:1,12:1,17:1}},{
 sup:["चिक्की","शेंगा लाडू","राजगिरा लाडू"],cls:[1,2,3,4,5,6,7,8],op:[],op2:[],opd:"2026-04-01",days:{},inn:[],mon:{}};
 let S;try{const L=JSON.parse(localStorage.mdm);S=Object.assign({},D,L);if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2}catch(e){S=JSON.parse(JSON.stringify(D))}
 function ri(){IT=S.items.map(x=>x.n);while(S.N.length<S.items.length)S.N.push([0,0])}ri();
-const vis=()=>IT.map((_,i)=>i).filter(i=>!S.items[i].h),cols=c=>IT.map((_,i)=>i).filter(i=>!S.items[i].h||[c.o[i],c.rc[i],c.us[i],c.c[i]].some(v=>v));
+const vis=()=>IT.map((_,i)=>i).filter(i=>!S.items[i].h);
+const cols=c=>IT.map((_,i)=>i).filter(i=>!S.items[i].h || (r3(c.o[i])!=0 || r3(c.rc[i])!=0 || r3(c.us[i])!=0 || r3(c.c[i])!=0));
 function fixn(){for(let i=1;i<10;i++)if(S.N[i][0]==20&&S.N[i][1]==20)S.N[i][1]=30;S.nv=2}
 function mig(){S.N=JSON.parse(JSON.stringify(D.N));S.N[0]=[S.rL||100,S.rU||150];S.menus=JSON.parse(JSON.stringify(S.menus));S.menus.forEach(m=>{for(const k in m.p){const n=S.N[k][0];m.p[k]=n>0?Math.round(m.p[k]/n*100)/100:1}})}
 const $=i=>document.getElementById(i),r3=x=>Math.round(x*1000)/1000,f3=x=>r3(x).toFixed(3),fx=(i,x)=>un(i)=="नग"?Math.round(x):f3(x),un=i=>((S.items||[])[i]||{}).u||"किलो",esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");let SQ,GS="";
@@ -82,7 +83,7 @@ const pend=()=>!!(localStorage.mdmok&&(+localStorage.mdmls||0)<(S.ts||0));
 const old=()=>!!localStorage.mdmok&&(!+localStorage.mdmlt||Date.now()-localStorage.mdmlt>30*864e5);
 const lst=()=>{if(!localStorage.mdmok)return"💡 Drive जोडलेले नाही. डेटा सुरक्षित राहण्यासाठी Drive जोडा आणि किमान महिन्यातून एकदा Drive sync करा.";const t=+localStorage.mdmlt;return(t?"शेवटचे sync: "+dm(ds2(new Date(t)))+". ":"अजून sync झालेले नाही. ")+"💡 डेटा सुरक्षित राहण्यासाठी किमान महिन्यातून एकदा Drive sync करा."+(old()?(t?" ⚠ 30 दिवसांपेक्षा जास्त झाले, आता sync करा.":" ⚠ आता sync करा."):"")};
 const st=(t,k)=>{GS=t;const e=$("gs");if(e)e.textContent=t;if(k)toast(t)};
-const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(),3000)}else if(localStorage.mdmok)st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
+const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(0),3000)}else if(localStorage.mdmok)st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
 const ds2=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),tod=()=>ds2(new Date());
 const wd=s=>{const[y,m,d]=s.split("-");return new Date(y,m-1,d).getDay()},dm=s=>s.split("-").reverse().join("-");
 
@@ -94,7 +95,13 @@ function iod(){OD={d:S.opd,op:o22(S.op),op2:o22(S.op2)}}
 function odirty(){return !!OD&&(OD.d!=S.opd||JSON.stringify(OD.op)!=JSON.stringify(o22(S.op))||JSON.stringify(OD.op2)!=JSON.stringify(o22(S.op2)))}
 function so(){if(!OD.d)return alert("साठ्याची दिनांक भरा");S.opd=OD.d;S.op=OD.op.slice();S.op2=OD.op2.slice();save();vs();done("✔ सुरुवातीचा साठा मोबाईलवर जतन झाला")}
 function ask(h,f,t,c){$("mc").textContent=c||"परत जा";$("mt").innerHTML=h;$("my").textContent=t||"सेव्ह करा";$("my").onclick=()=>{$("md").style.display="none";f()};$("md").style.display="flex"}
-function bal(dt,ex,g,inc){const b=Array(IT.length).fill(0),op=g?S.op2:S.op;if(S.opd&&S.opd<=dt)(op||[]).forEach((x,i)=>b[i]+=+x||0);S.inn.forEach(e=>{if((e.g||0)==g&&e.d<=dt)b[e.i]+=(e.t||1)*e.q});for(const k in S.days)if((inc?k<=dt:k<dt)&&k!=ex)ug(S.days[k])[g].forEach((x,i)=>b[i]-=x);return b}
+function bal(dt,ex,g,inc){
+  const b=Array(IT.length).fill(0),op=g?S.op2:S.op;
+  if(S.opd&&S.opd<=dt)(op||[]).forEach((x,i)=>b[i]+=+x||0);
+  S.inn.forEach(e=>{if((e.g||0)==g&&e.d<=dt)b[e.i]+=(e.t||1)*e.q});
+  for(const k in S.days)if((inc?k<=dt:k<dt)&&k!=ex)ug(S.days[k])[g].forEach((x,i)=>b[i]-=x);
+  return b.map(r3); 
+}
 function chk(d){const er=[],wr=[];S.cls.forEach(k=>{const x=(d.c||{})[k];if(!x)return;const[r,p,b]=x;if([r,p,b].some(v=>v<0||v%1))er.push("इयत्ता "+k+": संख्या ऋण किंवा दशांश असू नये");else{if(p>r)wr.push("इयत्ता "+k+": हजर ("+p+") पटापेक्षा ("+r+") जास्त आहेत");if(b>p)wr.push("इयत्ता "+k+": लाभार्थी ("+b+") हजेरीपेक्षा ("+p+") जास्त आहेत")}});return{er,wr}}
 const wh=({er,wr})=>(er.length?'<p style="color:#b42318">⛔ '+er.join("<br>⛔ ")+'</p>':"")+(wr.length?'<p style="color:#b45309">⚠️ '+wr.join("<br>⚠️ ")+'</p>':"");
 function dr(o){$("dw").classList.toggle("o",!!o);$("ov").classList.toggle("o",!!o)}
@@ -218,6 +225,7 @@ function vt(){
 }
 function ss(){const first=!S.sch.name;DR.sch.name=(DR.sch.name||"").trim();
 if(!DR.sch.name){alert("आधी शाळेचे नाव भरा, ते रिपोर्टमध्ये आवश्यक आहे.");SUB_T=0;$("ht").textContent="सेटिंग: "+TN[0];document.querySelectorAll("#tsub button").forEach(b=>b.classList.toggle("on",b.dataset.set==0));return vt()}
+if(DR.items.some(x=>!x.n.trim())) return alert("कोणत्याही वस्तूचे नाव रिकामे ठेवू नका.");
 S=DR;save();DR=JSON.parse(JSON.stringify(S));go("h");done("✔ सेटिंग मोबाईलवर जतन झाली");if(first&&!localStorage.mdmok&&!localStorage.mdmask&&!cid().startsWith("PASTE")){localStorage.mdmask=1;setTimeout(()=>ask("<b>Google Drive शी जोडा</b><p>डेटा सुरक्षित राहण्यासाठी आता एकदा Drive शी जोडा. नंतर किमान महिन्यातून एकदा मुख्य पानावरील <b>Drive sync</b> दाबा.</p>",()=>sync(1),"आता Drive शी जोडा","नंतर"),700)}}
 function usedi(i){return S.inn.some(e=>e.i==i)||(S.op||[])[i]>0||(S.op2||[])[i]>0||Object.values(S.days).some(d=>ug(d).some(a=>a[i]))||S.menus.some(m=>m.p[i])}
 function ani(){const n=$("ni").value.trim();if(!n)return alert("वस्तूचे नाव लिहा");if(DR.items.some(x=>x.n.toLowerCase()==n.toLowerCase()))return alert("ही वस्तू आधीच आहे");DR.items.push({n,u:$("nu").value,h:0});DR.N.push([0,0]);vt()}
@@ -249,27 +257,34 @@ const u=ug(d)[g];return st+'<td>'+(g?d.p2:d.p1)+'<td>'+(g?d.a2:d.a1)+'<td class=
 const ds=cl.map(i=>{const a=c.us[i]/n;return a>0?Math.floor(c.c[i]/a):0});
 return H("दैनंदिन नोंद अहवाल")+'<div class="sc"><table><thead><tr><th class="l">तपशील / धान्य'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+sm+'<tr><td class="l">अंदाजे किती दिवस पुरेल?'+ds.map(x=>'<td>'+x+'</td>').join("")+'</tr></tbody></table></div><br><div class="sc"><table><thead><tr><th>दि.<th>वार<th>पट<th>ताटे<th>पाककृती'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+bd+'</tbody></table></div>'+SG}
 function R4(){
-  const A=gs().map(g=>({g,c:calc(CM,g),s:ms(CM,g)})),ord=[2,6,7,8,9,4,17,12,10,11,13,14,1,3,5,15,16,18,19,20,21,...IT.map((_,i)=>i).filter(i=>i>=22)];
+  const A=gs().map(g=>({g,c:calc(CM,g),s:ms(CM,g)}));
+  const ord=[1,2,3,4,5,6,7,8,9,20, 10,11,12,13,14,15,16,17,18,19,21, ...IT.map((_,i)=>i).filter(i=>i>=22)];
+
   const t1='<div class="sc"><table><thead><tr><th>वर्ग<th>पट<th>कामाचे दिवस<th>शिजवलेले दिवस<th>मागील शिल्लक तांदूळ<th>प्राप्त तांदूळ<th>एकूण तांदूळ<th>एकूण लाभार्थी (ताटे)<th>शिजवलेला तांदूळ<th>अखेर शिल्लक तांदूळ</tr></thead><tbody>'+A.map(({g,c,s})=>'<tr><td class="l"><b>'+(g?"इ. 6 वी ते 8 वी":"इ. 1 ली ते 5 वी")+'</b><td>'+s.roll+'<td>'+s.work+'<td>'+s.ds.length+'<td>'+f3(c.o[0])+'<td>'+f3(c.rc[0])+'<td>'+f3(c.o[0]+c.rc[0])+'<td>'+s.pl+'<td>'+f3(c.us[0])+'<td>'+f3(c.c[0])+'</tr>').join("")+'</tbody></table></div>';
+  
   const t2=A.map(({g,c})=>{
-    const cl=ord.filter(i=>r3(c.o[i])!=0||r3(c.rc[i])!=0||r3(c.us[i])!=0||r3(c.c[i])!=0);
+    const cl=ord.filter(i=>{
+      const hasData = (r3(c.o[i])!=0 || r3(c.rc[i])!=0 || r3(c.us[i])!=0 || r3(c.c[i])!=0);
+      return hasData || !S.items[i].h;
+    });
+
     if(!cl.length)return'<p style="margin-top:8px"><b>धान्य व धान्यादी माहिती '+GN[g]+' :</b> या महिन्यात कोणतीही नोंद नाही.</p>';
     return'<p style="margin:12px 0 4px"><b>धान्य व माल तपशील: '+GN[g]+'</b></p><div class="sc"><table><thead><tr><th class="l">तपशील'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+[["मागील शिल्लक","o"],["प्राप्त (आवक)","rc"],["एकूण",""],["खर्च (वापर)","us"],["अखेर शिल्लक","c"]].map(([t,k])=>'<tr><td class="l"><b>'+t+'</b>'+cl.map(i=>'<td>'+fx(i,k?c[k][i]:c.o[i]+c.rc[i])+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>'}).join("");
-  return'<div style="text-align:center"><b>पीएम पोषण आहार योजना - प्रपत्र \'ड\'</b></div><p style="font-size:12px;margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | माहे: <b>'+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></p>'+t1+t2+SG;
+    
+  const SG4 = '<p style="margin-top:36px;text-align:right"><span>मुख्याध्यापक / सचिव</span></p>';
+
+return'<div style="text-align:center"><b>पीएम पोषण आहार योजना - प्रपत्र \'ड\'</b></div><p style="font-size:12px;margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | माहे: <b>'+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></p>'+t1+t2+SG4;
 }
 function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
-// ---- Google Drive Sync (दुरुस्त व सुरक्षित लॉजिक) ----
 // ---- Google Drive Sync ----
 const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
 try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}catch(e){}
 
 function tok(interactive=false){
   return new Promise((ok,no)=>{
-    // अगर टोकन 2 मिनट से ज्यादा पुराना नहीं है तो ही इस्तेमाल करें
     if(TK && Date.now() < (TX - 120000)) return ok(TK);
     
-    // पुराना या समाप्त हुआ टोकन साफ़ करें
     TK = null;
     TX = 0;
     localStorage.removeItem("mdmtk");
@@ -356,6 +371,7 @@ function apply(p){
   const bd=sf.byDate||{};for(const k in bd)if(S.days[k])S.days[k].s=bd[k];
   if(!b.N)mig();else if(!b.nv)fixn();
   S.nv=2;
+  ri();
   localStorage.mdm=JSON.stringify(S);
   localStorage.mdmls=S.ts;
   localStorage.mdmlt=Date.now();
