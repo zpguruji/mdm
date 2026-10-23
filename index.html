@@ -283,12 +283,10 @@ try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}
 
 function tok(interactive=false){
   return new Promise((ok,no)=>{
-    // एकदा टोकन मिळाले की ते संपेपर्यंत तेच वापरा (वारंवार विंडो उघडणार नाही)
-    if(TK && Date.now() < (TX - 60000)) {
-      return ok(TK);
-    }
+    //  टोकन 2 मिनीट पेक्षा जास्‍त वेळ झाला नसल्‍यास वापरा
+    if(TK && Date.now() < (TX - 120000)) return ok(TK);
     
-    // टोकन नसेल किंवा संपले असेल तरच मेमरी साफ करा
+    // जुना टोकन संपले असेल तर
     TK = null;
     TX = 0;
     localStorage.removeItem("mdmtk");
@@ -303,28 +301,25 @@ function tok(interactive=false){
       client_id: cid(),
       scope: "https://www.googleapis.com/auth/drive.file",
       callback: r => {
-        if(r.error) {
-          console.error("GIS Auth Error:", r);
-          return no(r.error_description || r.error);
-        }
+        if(r.error) return no(r.error);
         TK = r.access_token;
         TX = Date.now() + (r.expires_in - 60) * 1000;
         localStorage.mdmtk = JSON.stringify({t: TK, x: TX});
         localStorage.mdmok = 1;
         ok(TK);
       },
-      error_callback: e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.message || e.type || "लॉगिन रद्द"))
+      error_callback: e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.type || "लॉगिन रद्द"))
     });
-    
-    client.requestAccessToken({});
+    client.requestAccessToken({prompt: ""});
   });
 }
+
 async function gx(u,o={},interactive=false){
   const t=await tok(interactive);
   const r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});
   if(r.status==401&&!o.rt){
     TK=null;TX=0;localStorage.removeItem("mdmtk");
-    return gx(u,{...o,rt:1},false); // keep false
+    return gx(u,{...o,rt:1},interactive);
   }
   if(!r.ok)throw new Error("HTTP "+r.status+" "+(await r.text()).slice(0,120));
   return r;
