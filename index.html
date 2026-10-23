@@ -283,12 +283,12 @@ try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}
 
 function tok(interactive=false){
   return new Promise((ok,no)=>{
-    // १. जर युझरने स्वतः सिंक बटण दाबले नसेल आणि टोकन वैध असेल तरच जुने वापरा
-    if(!interactive && TK && Date.now() < (TX - 120000)) {
+    // एकदा टोकन मिळाले की ते संपेपर्यंत तेच वापरा (वारंवार विंडो उघडणार नाही)
+    if(TK && Date.now() < (TX - 60000)) {
       return ok(TK);
     }
     
-    // २. मॅन्युअल सिंक किंवा टोकन संपले असल्यास मेमरी पूर्ण साफ करा
+    // टोकन नसेल किंवा संपले असेल तरच मेमरी साफ करा
     TK = null;
     TX = 0;
     localStorage.removeItem("mdmtk");
@@ -316,7 +316,6 @@ function tok(interactive=false){
       error_callback: e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.message || e.type || "लॉगिन रद्द"))
     });
     
-    // ३. रिकाम्या स्ट्रिंगऐवजी सरळ ऑब्जेक्ट पाठवा (Error 400 कायमचा बंद होईल)
     client.requestAccessToken({});
   });
 }
@@ -325,7 +324,7 @@ async function gx(u,o={},interactive=false){
   const r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});
   if(r.status==401&&!o.rt){
     TK=null;TX=0;localStorage.removeItem("mdmtk");
-    return gx(u,{...o,rt:1},interactive);
+    return gx(u,{...o,rt:1},false); // keep false
   }
   if(!r.ok)throw new Error("HTTP "+r.status+" "+(await r.text()).slice(0,120));
   return r;
