@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MDM पोषण आहार नोंदवही</title>
-<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#14532d"><script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#14532d"><script src="https://accounts.google.com/gsi/client" async defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 'Noto Sans Devanagari',system-ui,sans-serif;background:#f3f5ef;color:#1d2a1f}
@@ -63,37 +63,13 @@ const pend=()=>!!(localStorage.mdmok&&(+localStorage.mdmls||0)<(S.ts||0));
 const old=()=>!!localStorage.mdmok&&(!+localStorage.mdmlt||Date.now()-localStorage.mdmlt>30*864e5);
 const lst=()=>{if(!localStorage.mdmok)return"💡 Drive जोडलेले नाही. डेटा सुरक्षित राहण्यासाठी Drive जोडा आणि किमान महिन्यातून एकदा Drive sync करा.";const t=+localStorage.mdmlt;return(t?"शेवटचे sync: "+dm(ds2(new Date(t)))+". ":"अजून sync झालेले नाही. ")+"💡 डेटा सुरक्षित राहण्यासाठी किमान महिन्यातून एकदा Drive sync करा."+(old()?(t?" ⚠ 30 दिवसांपेक्षा जास्त झाले, आता sync करा.":" ⚠ आता sync करा."):"")};
 const st=(t,k)=>{GS=t;const e=$("gs");if(e)e.textContent=t;if(k)toast(t)};
-
-// Auto-Sync मध्ये पॉप-अप ब्लॉक न होऊ देण्यासाठी सेफ कॉल
-const save=()=>{
-  S.ts=Date.now();
-  localStorage.mdm=JSON.stringify(S);
-  if(localStorage.mdmauto!="1"){
-    if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी");
-  }else if(TK&&Date.now()<TX){
-    clearTimeout(SQ);
-    SQ=setTimeout(()=>sync(0),2500);
-  }else if(localStorage.mdmok){
-    st("Drive sync बाकी - 'Drive sync' बटण दाबा");
-  }
-};
-
+const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(),3000)}else if(localStorage.mdmok)st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
 const ds2=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),tod=()=>ds2(new Date());
 const wd=s=>{const[y,m,d]=s.split("-");return new Date(y,m-1,d).getDay()},dm=s=>s.split("-").reverse().join("-");
 
 let DR=null,T="h",CD=tod(),CM=tod().slice(0,7),CMenu=0,RP=1,RS=0,RG=0,SUB_S=0,SUB_T=0;
 let TT;function toast(m){const e=$("ts");e.textContent=m;e.style.display="block";clearTimeout(TT);TT=setTimeout(()=>e.style.display="none",5000)}
-function done(m){
-  clearTimeout(SQ);
-  if(localStorage.mdmok&&!cid().startsWith("PASTE")){
-    if(localStorage.mdmauto!="1")return toast(m);
-    toast(m+". Drive ला पाठवत आहे…");
-    sync(0);
-  }else{
-    toast(m+" (Drive जोडलेले नाही)");
-  }
-}
-
+function done(m){clearTimeout(SQ);if(localStorage.mdmok&&!cid().startsWith("PASTE")){if(localStorage.mdmauto!="1")return toast(m);toast(m+". Drive ला पाठवत आहे…");sync(0)}else toast(m+" (Drive जोडलेले नाही)")}
 let OD=null;const o22=a=>[...Array(22)].map((_,i)=>+(a||[])[i]||0);
 function iod(){OD={d:S.opd,op:o22(S.op),op2:o22(S.op2)}}
 function odirty(){return !!OD&&(OD.d!=S.opd||JSON.stringify(OD.op)!=JSON.stringify(o22(S.op))||JSON.stringify(OD.op2)!=JSON.stringify(o22(S.op2)))}
@@ -314,7 +290,7 @@ async function folder(interactive){
       const chk=await gx(AP+"drive/v3/files/"+FID+"?fields=id,trashed",{},interactive);
       const j=await chk.json();
       if(!j.trashed)return FID;
-    }catch(e){FID="";localStorage.removeItem("mdmfid2")}
+    }catch(e){const m=String(e.message||e);if(/टोकन|पॉप|Google स्क्रिप्ट|Client ID/.test(m))throw e;FID="";localStorage.removeItem("mdmfid2")}
   }
   const q=encodeURIComponent("name='MDM_Data' and mimeType='application/vnd.google-apps.folder' and trashed=false");
   let j=await(await gx(AP+"drive/v3/files?q="+q+"&fields=files(id)",{},interactive)).json();
@@ -376,7 +352,7 @@ async function sync(manual=0){
     if(ids["Profiles.json"]){
       try{
         dts=(await(await gx(AP+"drive/v3/files/"+ids["Profiles.json"]+"?alt=media",{},isInter)).json()).ts||0;
-      }catch(e){}
+      }catch(e){if(!(e instanceof SyntaxError))throw e}
     }
     
     if(dts>(S.ts||0)){
