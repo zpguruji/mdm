@@ -278,39 +278,49 @@ return'<div style="text-align:center"><b>पीएम पोषण आहार 
 function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
 // ---- Google Drive Sync ----
-const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
+const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0,tokenClient=null;
 try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}catch(e){}
+
+function initGis(){
+  if(tokenClient || !window.google || !google.accounts || !google.accounts.oauth2) return;
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: cid(),
+    scope: "https://www.googleapis.com/auth/drive.file",
+    callback: ""
+  });
+}
+window.addEventListener("load", () => setTimeout(initGis, 800));
 
 function tok(interactive=false){
   return new Promise((ok,no)=>{
-    //  टोकन 2 मिनीट पेक्षा जास्‍त वेळ झाला नसल्‍यास वापरा
-    if(TK && Date.now() < (TX - 120000)) return ok(TK);
-    
-    // जुना टोकन संपले असेल तर
-    TK = null;
-    TX = 0;
-    localStorage.removeItem("mdmtk");
+    if(TK && Date.now() < (TX - 60000)) return ok(TK);
+
+    if(!interactive) return no("टोकन संपले आहे. 'Drive sync' बटण दाबा.");
 
     if(!window.google || !google.accounts || !google.accounts.oauth2) {
       return no("Google स्क्रिप्ट लोड नाही (इंटरनेट तपासा)");
     }
     if(cid().startsWith("PASTE")) return no("Client ID भरलेला नाही");
-    if(!interactive) return no("टोकन संपले आहे. 'Drive sync' बटण दाबा.");
-    
-    const client = google.accounts.oauth2.initTokenClient({
-      client_id: cid(),
-      scope: "https://www.googleapis.com/auth/drive.file",
-      callback: r => {
-        if(r.error) return no(r.error);
-        TK = r.access_token;
-        TX = Date.now() + (r.expires_in - 60) * 1000;
-        localStorage.mdmtk = JSON.stringify({t: TK, x: TX});
-        localStorage.mdmok = 1;
-        ok(TK);
-      },
-      error_callback: e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.type || "लॉगिन रद्द"))
-    });
-    client.requestAccessToken({prompt: ""});
+
+    initGis();
+    if(!tokenClient) return no("Google क्लायंट सुरू करता आले नाही");
+
+    tokenClient.callback = r => {
+      if(r.error){
+        TK = null; TX = 0;
+        localStorage.removeItem("mdmtk");
+        return no(r.error_description || r.error);
+      }
+      TK = r.access_token;
+      TX = Date.now() + (r.expires_in - 60) * 1000;
+      localStorage.mdmtk = JSON.stringify({t: TK, x: TX});
+      localStorage.mdmok = 1;
+      ok(TK);
+    };
+
+    tokenClient.error_callback = e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.message || e.type || "लॉगिन रद्द"));
+
+    tokenClient.requestAccessToken({});
   });
 }
 
@@ -319,7 +329,7 @@ async function gx(u,o={},interactive=false){
   const r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});
   if(r.status==401&&!o.rt){
     TK=null;TX=0;localStorage.removeItem("mdmtk");
-    return gx(u,{...o,rt:1},interactive);
+    return gx(u,{...o,rt:1},false);
   }
   if(!r.ok)throw new Error("HTTP "+r.status+" "+(await r.text()).slice(0,120));
   return r;
