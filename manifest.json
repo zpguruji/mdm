@@ -30,5 +30,12 @@
    "type": "image/png",
    "purpose": "maskable"
   }
- ]
+ ],
+ "related_applications": [
+  {
+   "platform": "webapp",
+   "url": "https://zpguruji.github.io/mdm/manifest.json"
+  }
+ ],
+ "prefer_related_applications": false
 }

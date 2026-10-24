@@ -26,7 +26,18 @@ header{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:10px;
 .dh{background:#14532d;color:#fff;padding:26px 16px 16px}.dh b{display:block;font-size:18px}.dh small{color:#bfdcc8;font-size:12px}
 #dw nav{flex:1;padding:8px;overflow-y:auto}#dw nav button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:12px 12px;font:inherit;color:#1d2a1f;cursor:pointer}#dw nav button.on{background:#e3eedf;font-weight:700;color:#14532d}
 .smenu button{padding:10px 12px 10px 32px!important;font-size:14px}
-.df{padding:12px;font-size:12px;color:#5b6b5e;border-top:1px solid #d5dccf;text-align:center}#md{position:fixed;inset:0;background:#0009;z-index:30;display:none;align-items:center;justify-content:center;padding:16px}#md .mc{background:#fff;border-radius:12px;padding:16px;max-width:440px;width:100%;max-height:85vh;overflow:auto;font-size:14px}#ts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1d2a1f;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;z-index:20;max-width:92%;text-align:center;display:none}footer{text-align:center;font-size:12px;color:#6b7a6e;padding:18px 12px 24px}
+.df{padding:12px;font-size:12px;color:#5b6b5e;border-top:1px solid #d5dccf;text-align:center}#md{position:fixed;inset:0;background:#0009;z-index:30;display:none;align-items:center;justify-content:center;padding:16px}#md .mc{background:#fff;border-radius:12px;padding:16px;max-width:440px;width:100%;max-height:85vh;overflow:auto;font-size:14px}#ts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1d2a1f;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;z-index:20;max-width:92%;text-align:center;display:none}#lp{position:fixed;inset:0;z-index:60;display:none;overflow-y:auto;background:radial-gradient(circle at 50% 0,#22a85c 0,#0b5d2a 46%,#05391b 100%);color:#fff}
+#lp .w{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 18px;text-align:center;max-width:520px;margin:auto;animation:lpin .6s ease both}
+@keyframes lpin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}@keyframes lpfl{50%{transform:translateY(-8px)}}
+#lp img{width:148px;height:148px;border-radius:34px;box-shadow:0 14px 32px #0007,0 0 0 4px #ffffff33;animation:lpfl 3.2s ease-in-out infinite}
+#lp h1{font-size:36px;margin:18px 0 0;letter-spacing:.5px;line-height:1.2}#lp .sub{color:#d6f5e0;font-size:16px;font-weight:600}
+#lp .wl{background:#ffffff1f;border:1px solid #ffffff3d;border-radius:14px;padding:12px 14px;margin:16px 0 14px;font-size:14px;line-height:1.7}
+#lp h2{font-size:16px;margin:2px 0 10px;color:#ffe27a}#lp .ft{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:100%}
+#lp .ft div{background:#fff;color:#0b5d2a;border-radius:13px;padding:10px 6px;font-size:13px;font-weight:700;line-height:1.35;box-shadow:0 4px 10px #0003}#lp .ft span{display:block;font-size:24px}
+#lp .pb{width:100%;margin-top:20px;padding:15px;font:inherit;font-size:17px;font-weight:700;border:0;border-radius:32px;background:linear-gradient(#ffd54a,#ffb300);color:#3a2600;box-shadow:0 7px 18px #0006;cursor:pointer}
+#lp .sb{width:100%;margin-top:11px;padding:13px;font:inherit;font-size:15px;border:2px solid #ffffffaa;border-radius:32px;background:transparent;color:#fff;cursor:pointer}
+#lp .cr{margin-top:18px;font-size:11px;color:#bfe6cc}
+footer{text-align:center;font-size:12px;color:#6b7a6e;padding:18px 12px 24px}
 main{padding:12px;max-width:960px;margin:auto}.c{background:#fff;border:1px solid #d5dccf;border-radius:8px;padding:12px;margin-bottom:12px}
 label{display:block;font-size:12px;margin:8px 0 2px;color:#4a5a4d}input,select{width:100%;padding:9px;border:1px solid #aab8a9;border-radius:6px;font:inherit;background:#fff}input[type=checkbox]{width:auto}
 .g{display:grid;grid-template-columns:1fr 1fr;gap:8px}.b{background:#14532d;color:#fff;border:0;padding:10px 14px;border-radius:6px;font:inherit;margin:8px 6px 0 0;cursor:pointer}.b.r{background:#a4271d}.b.w{background:#5b6b5e}
@@ -65,6 +76,13 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
 <button id="ib" onclick="ins()" style="display:none;color:#14532d;font-weight:700">📲&nbsp; app इन्स्टॉल करा</button>
 </nav>
 <div class="df">संकल्पना व निर्मिती<br><b>Somnath Gaikwad sir</b></div></aside>
+<div id="lp" class="np"><div class="w"><img src="icon-512.png" alt="MDM"><h1>MDM App</h1><div class="sub">शालेय पोषण आहार नोंदवही</div>
+<div class="wl">🙏 <b>स्वागत आहे!</b><br>रोजची नोंद, धान्य साठा आणि सर्व रिपोर्ट आता तुमच्या मोबाईलवर. सोपे, जलद आणि मोफत.</div>
+<h2>✨ एका क्लिकवर मिळवा</h2>
+<div class="ft"><div><span>📋</span>दैनंदिन अहवाल</div><div><span>📄</span>मासिक उपयोगिता प्रपत्र</div><div><span>📑</span>प्रपत्र 'ड'</div><div><span>🍽️</span>चव नोंद रजिस्टर</div><div><span>📦</span>साठा नोंद (आवक / जावक)</div><div><span>📊</span>आजचा शिल्लक साठा</div></div>
+<div id="lpmsg" style="margin-top:14px;font-size:14px;color:#ffe27a;line-height:1.6"></div>
+<button class="pb" onclick="ins()">📲 App Install करा</button><button class="sb" onclick="lpGo()">Continue with web browser</button>
+<div class="cr">App developed by Somnath Gaikwad sir</div></div></div>
 <main id="v"></main><div id="ts" class="np"></div><div id="md" class="np"><div class="mc"><div id="mt"></div><button class="b" id="my">सेव्ह करा</button><button class="b w" id="mc" onclick="$('md').style.display='none'">परत जा</button></div></div><footer class="np">App developed by Somnath Gaikwad sir</footer>
 <script>
 const IT0=["तांदूळ","वाटाणा","मुगडाळ","चवळी","हरभरा","मसूरडाळ","मटकी","मूग","तूरडाळ","सोयाबीन वडी","हळद","मीठ","कांदा लसूण मसाला","जिरे","मोहरी","मिरची पावडर","गरम मसाला","तेल","गूळ","साखर","नाचणी","अंडी"];let IT=[];
@@ -217,9 +235,9 @@ function vt(){
   }else if(SUB_T==2){
     content='<div class="c"><h3>पाककृती मेनू व्यवस्थापन</h3><p style="font-size:12px;color:#555">प्रत्येक मेनूमध्ये कोणत्या वस्तू वापरायच्या ते निवडा. तांदूळ सर्व मेनूमध्ये प्रमाणानुसार आपोआप येतो. दोन डाळी मिळून वापरत असाल तर दोन्हींना "निम्मे प्रमाण" निवडा.</p><div style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><select style="flex:1" onchange="CMenu=this.value;vt()">'+DR.menus.map((x,i)=>'<option value="'+i+'" '+(i==CMenu?"selected":"")+'>'+x.n+'</option>').join("")+'</select>'+(DR.menus.length?'<button class="b r" style="margin:0;white-space:nowrap" onclick="xm()">🗑 हटवा</button>':"")+'</div>'+(m?'<div class="sc"><table><thead><tr><th class="l">वस्तू<th>प्रमाण वापर</tr></thead><tbody>'+DR.items.map((it,i)=>i&&!it.h?'<tr><td class="l">'+it.n+'</td><td><select onchange="mp('+i+',this.value)"><option value="">वापरत नाही</option>'+[[1,"पूर्ण प्रमाण"],[.5,"निम्मे प्रमाण"],[.25,"पाव प्रमाण"]].map(([v,t])=>'<option value="'+v+'" '+(m.p[i]==v?"selected":"")+'>'+t+'</option>').join("")+'</select></td></tr>':"").join("")+'</tbody></table></div>':"")+'<label style="margin-top:12px">नवीन मेनूचे नाव जोडा</label><div style="display:flex;gap:8px"><input id="nm" placeholder="मेनूचे नाव..."><button class="b" style="margin:0;white-space:nowrap" onclick="am()">+ जोडा</button></div></div>';
   }else if(SUB_T==4){
-    content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा. राजमा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="नग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="उदा. राजमा"><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
+    content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा.हिरवा वाठाणा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="नग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="हिरवा वाठाणा"><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
   }else{
-    content='<div class="c"><h3>Google Drive sync</h3><details class="np" '+(DEFAULT_CID.startsWith("PASTE")?"open":"")+'><summary style="font-size:12px">प्रगत: स्वतःचा Google Client ID</summary><label>Google Client ID</label><input value="'+esc(cid().startsWith("PASTE")?"":cid())+'" oninput="localStorage.mdmcid=this.value.trim();TK=null"></details><button class="b" onclick="sync(1)">Drive शी जोडा / आता sync करा</button><label style="display:flex;gap:8px;align-items:center;margin-top:12px;color:inherit;font-size:14px"><input type="checkbox" '+(localStorage.mdmauto=="1"?"checked":"")+' onchange="localStorage.mdmauto=this.checked?\'1\':\'0\'"> प्रत्येक नोंदीनंतर आपोआप Drive sync करा (ऐच्छिक)</label><p style="font-size:12px;margin:8px 0 0;color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</p><p id="gs" style="font-size:12px">'+GS+'</p><p style="font-size:12px;color:#555">install केलेल्या app मध्ये Google खाते निवडताना 400 येत असेल तर Chrome ब्राउझरमध्ये ही लिंक उघडून sync करा, किंवा खालील "बॅकअप शेअर करा" वापरा.</p></div><div class="c"><h3>डेटा बॅकअप व रिस्टोअर</h3><button class="b" style="margin:0" onclick="bkp()">📤 बॅकअप शेअर करा (Drive / WhatsApp / ईमेल)</button><button class="b w" style="margin:8px 0 0" onclick="exp()">💾 फक्त डाउनलोड करा</button><p style="font-size:12px;margin:8px 0 0;color:#4a5a4d">Google लॉगिन लागत नाही. '+(localStorage.mdmbk?"शेवटचा बॅकअप शेअर: "+dm(ds2(new Date(+localStorage.mdmbk)))+". ":"")+'Drive sync अडले तरी हा पर्याय नेहमी चालतो.</p><label style="margin-top:12px">बॅकअप फाइल पुनर्स्थापित (Restore) करा</label><input type="file" accept=".json" onchange="imp(event)"></div><div class="c"><h3>app शेअर करा</h3><button class="b" onclick="shr()">📲 app ची लिंक इतर शाळांना शेअर करा</button></div>';
+    content='<div class="c"><h3>Google Drive sync</h3><details class="np" '+(DEFAULT_CID.startsWith("PASTE")?"open":"")+'><summary style="font-size:12px">प्रगत: स्वतःचा Google Client ID</summary><label>Google Client ID</label><input value="'+esc(cid().startsWith("PASTE")?"":cid())+'" oninput="localStorage.mdmcid=this.value.trim();TK=null"></details><button class="b" onclick="sync(1)">Drive शी जोडा / आता sync करा</button><label style="margin-top:12px">Google खाते (ईमेल) — ऐच्छिक</label><input type="email" placeholder="उदा. tumche@gmail.com" value="'+esc(localStorage.mdmhint||"")+'" oninput="localStorage.mdmhint=this.value.trim().toLowerCase()"><p style="font-size:12px;color:#555;margin:2px 0 8px">येथे Drive साठी वापरायचा Gmail भरला की Google "Choose an account" पान दाखवत नाही, त्यामुळे 400 एरर टळतो. पहिल्या यशस्वी sync नंतर हा आपोआप भरला जातो. दुसरे खाते वापरायचे असल्यास तो बदला किंवा रिकामा करा.</p><label style="display:flex;gap:8px;align-items:center;margin-top:12px;color:inherit;font-size:14px"><input type="checkbox" '+(localStorage.mdmauto=="1"?"checked":"")+' onchange="localStorage.mdmauto=this.checked?\'1\':\'0\'"> प्रत्येक नोंदीनंतर आपोआप Drive sync करा (ऐच्छिक)</label><p style="font-size:12px;margin:8px 0 0;color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</p><p id="gs" style="font-size:12px">'+GS+'</p><p style="font-size:12px;color:#555">Google खाते निवडताना 400 येत असेल तर: (1) खाते दाबण्याआधी एकदा Back दाबा, मग खाते निवडा; (2) वरचा Google ईमेल रकाना भरा; (3) किंवा Chrome ब्राउझरमध्ये ही लिंक उघडून sync करा; (4) किंवा खालील "बॅकअप शेअर करा" वापरा.</p></div><div class="c"><h3>डेटा बॅकअप व रिस्टोअर</h3><button class="b" style="margin:0" onclick="bkp()">📤 बॅकअप शेअर करा (Drive / WhatsApp / ईमेल)</button><button class="b w" style="margin:8px 0 0" onclick="exp()">💾 फक्त डाउनलोड करा</button><p style="font-size:12px;margin:8px 0 0;color:#4a5a4d">Google लॉगिन लागत नाही. '+(localStorage.mdmbk?"शेवटचा बॅकअप शेअर: "+dm(ds2(new Date(+localStorage.mdmbk)))+". ":"")+'Drive sync अडले तरी हा पर्याय नेहमी चालतो. फाइल .txt म्हणून जाते (फोन फक्त अशाच फाइल शेअर करू देतो). परत आणताना खालील "Restore" मध्ये तीच फाइल निवडा.</p><label style="margin-top:12px">बॅकअप फाइल पुनर्स्थापित (Restore) करा</label><input type="file" accept=".json,.txt,text/plain,application/json" onchange="imp(event)"></div><div class="c"><h3>app शेअर करा</h3><button class="b" onclick="shr()">📲 app ची लिंक इतर शाळांना शेअर करा</button></div>';
   }
   $("v").innerHTML=content+(SUB_T==3?"":'<div class="np" style="position:sticky;bottom:0;background:#f3f5ef;padding:10px 0;margin-top:12px"><button class="b" style="width:100%;margin:0;padding:12px;font-weight:700" onclick="ss()">💾 जतन करा (Save Settings)</button></div>');
 }
@@ -278,49 +296,40 @@ return'<div style="text-align:center"><b>पीएम पोषण आहार 
 function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
 // ---- Google Drive Sync ----
-const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0,tokenClient=null;
+const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
 try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}catch(e){}
-
-function initGis(){
-  if(tokenClient || !window.google || !google.accounts || !google.accounts.oauth2) return;
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: cid(),
-    scope: "https://www.googleapis.com/auth/drive.file",
-    callback: ""
-  });
-}
-window.addEventListener("load", () => setTimeout(initGis, 800));
 
 function tok(interactive=false){
   return new Promise((ok,no)=>{
-    if(TK && Date.now() < (TX - 60000)) return ok(TK);
-
-    if(!interactive) return no("टोकन संपले आहे. 'Drive sync' बटण दाबा.");
+    //  टोकन 2 मिनीट पेक्षा जास्‍त वेळ झाला नसल्‍यास वापरा
+    if(TK && Date.now() < (TX - 120000)) return ok(TK);
+    
+    // जुना टोकन संपले असेल तर
+    TK = null;
+    TX = 0;
+    localStorage.removeItem("mdmtk");
 
     if(!window.google || !google.accounts || !google.accounts.oauth2) {
       return no("Google स्क्रिप्ट लोड नाही (इंटरनेट तपासा)");
     }
     if(cid().startsWith("PASTE")) return no("Client ID भरलेला नाही");
-
-    initGis();
-    if(!tokenClient) return no("Google क्लायंट सुरू करता आले नाही");
-
-    tokenClient.callback = r => {
-      if(r.error){
-        TK = null; TX = 0;
-        localStorage.removeItem("mdmtk");
-        return no(r.error_description || r.error);
-      }
-      TK = r.access_token;
-      TX = Date.now() + (r.expires_in - 60) * 1000;
-      localStorage.mdmtk = JSON.stringify({t: TK, x: TX});
-      localStorage.mdmok = 1;
-      ok(TK);
-    };
-
-    tokenClient.error_callback = e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.message || e.type || "लॉगिन रद्द"));
-
-    tokenClient.requestAccessToken({});
+    if(!interactive) return no("टोकन संपले आहे. 'Drive sync' बटण दाबा.");
+    
+    const client = google.accounts.oauth2.initTokenClient({
+      client_id: cid(),
+      hint: (localStorage.mdmhint||"").trim()||undefined,
+      scope: "https://www.googleapis.com/auth/drive.file",
+      callback: r => {
+        if(r.error) return no(r.error);
+        TK = r.access_token;
+        TX = Date.now() + (r.expires_in - 60) * 1000;
+        localStorage.mdmtk = JSON.stringify({t: TK, x: TX});
+        localStorage.mdmok = 1;
+        ok(TK);
+      },
+      error_callback: e => no(e.type == "popup_failed_to_open" ? "पॉप-अप ब्लॉक झाले. ब्राउझरमध्ये Pop-ups Allow करा." : (e.type || "लॉगिन रद्द"))
+    });
+    client.requestAccessToken({prompt: ""});
   });
 }
 
@@ -329,7 +338,7 @@ async function gx(u,o={},interactive=false){
   const r=await fetch(u,{...o,headers:{Authorization:"Bearer "+t,...(o.headers||{})}});
   if(r.status==401&&!o.rt){
     TK=null;TX=0;localStorage.removeItem("mdmtk");
-    return gx(u,{...o,rt:1},false);
+    return gx(u,{...o,rt:1},interactive);
   }
   if(!r.ok)throw new Error("HTTP "+r.status+" "+(await r.text()).slice(0,120));
   return r;
@@ -389,6 +398,11 @@ function apply(p){
   localStorage.mdmlt=Date.now();
 }
 
+async function fetchHint(){
+  if(localStorage.mdmhint||!TK)return;
+  try{const r=await fetch(AP+"drive/v3/about?fields=user(emailAddress)",{headers:{Authorization:"Bearer "+TK}});
+    if(r.ok){const j=await r.json(),e=j.user&&j.user.emailAddress;if(e)localStorage.mdmhint=e.toLowerCase()}}catch(e){}
+}
 async function sync(manual=0){
   if(busy)return;
   busy=1;
@@ -411,39 +425,35 @@ async function sync(manual=0){
       if(Object.keys(S.days).length&&!confirm("Drive वरील डेटा नवीन आहे. फोनवरील डेटा त्याने बदलायचा?")){
         st("sync रद्द केले");busy=0;return;
       }
-      const p={};
-      for(const n in ids){
-        if(n.endsWith(".json"))p[n]=await(await gx(AP+"drive/v3/files/"+ids[n]+"?alt=media",{},isInter)).json();
-      }
+      const p={},names=Object.keys(ids).filter(n=>n.endsWith(".json"));
+      const arr=await Promise.all(names.map(n=>gx(AP+"drive/v3/files/"+ids[n]+"?alt=media",{},isInter).then(r=>r.json())));
+      names.forEach((n,i)=>p[n]=arr[i]);
+      localStorage.removeItem("mdmh");
       apply(p);
       st("Drive वरून डेटा घेतला ✔",1);
       busy=0;
       return go(T);
     }
     
-    const ts0=S.ts,P=parts();
-    for(const n in P){
-      const body=JSON.stringify(P[n]);
+    const ts0=S.ts,P=parts(),hs=JSON.parse(localStorage.mdmh||"{}");
+    const hf=t=>{let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return h+"/"+t.length};
+    const up=async n=>{
+      const body=JSON.stringify(P[n]),h=hf(body),hk=f+":"+n;
+      if(ids[n]&&hs[hk]===h)return;
       let fileId=ids[n];
       if(!fileId){
-        const cr=await gx(AP+"drive/v3/files",{
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({name:n,parents:[f]})
-        },isInter);
-        const crj=await cr.json();
-        fileId=crj.id;
-        ids[n]=fileId;
+        const crj=await(await gx(AP+"drive/v3/files",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:n,parents:[f]})},isInter)).json();
+        fileId=crj.id;ids[n]=fileId;
       }
-      await gx(AP+"upload/drive/v3/files/"+fileId+"?uploadType=media",{
-        method:"PATCH",
-        headers:{"Content-Type":"application/json"},
-        body:body
-      },isInter);
-    }
-    
+      await gx(AP+"upload/drive/v3/files/"+fileId+"?uploadType=media",{method:"PATCH",headers:{"Content-Type":"application/json"},body:body},isInter);
+      hs[hk]=h;
+    };
+    await Promise.all(Object.keys(P).filter(n=>n!="Profiles.json").map(up));
+    await up("Profiles.json");
+    localStorage.mdmh=JSON.stringify(hs);
     localStorage.mdmls=ts0;
     localStorage.mdmlt=Date.now();
+    fetchHint();
     st("☁ मोबाईल आणि Drive दोन्हीकडे जतन झाले ✔",1);
     if(T=="h")vh();
   }catch(e){
@@ -460,9 +470,9 @@ async function sync(manual=0){
 }
 
 async function bkp(){
-  const name="mdm-backup-"+tod()+".json",txt=JSON.stringify(S);
+  const name="mdm-backup-"+tod()+".txt",txt=JSON.stringify(S);
   try{
-    const f=new File([txt],name,{type:"application/json"});
+    const f=new File([txt],name,{type:"text/plain"});
     if(navigator.canShare&&navigator.canShare({files:[f]})){
       await navigator.share({files:[f],title:"MDM बॅकअप",text:"MDM पोषण आहार नोंदवही बॅकअप ("+dm(tod())+")"});
       localStorage.mdmbk=Date.now();toast("✔ बॅकअप शेअर केला");return;
@@ -472,12 +482,18 @@ async function bkp(){
 }
 function loginHelp(){
   const u=location.href.split("#")[0].replace(/index\.html$/,"");
-  ask('<b>Google लॉगिन अडले</b><p style="font-size:13px">'+(SA?'install केलेल्या app मध्ये Google खाते निवडताना अडचण येऊ शकते (400 एरर).':'ब्राउझरमधील Google session बिघडलेली असू शकते.')+'</p><p style="font-size:13px"><b>उपाय:</b><br>1) <b>Chrome ब्राउझरमध्ये</b> ही लिंक उघडून तिथे "Drive sync" दाबा. Google मध्ये लॉग इन असल्यास अडचण येत नाही. तुमचा डेटा त्याच फोनवर तोच असतो.<br>2) किंवा आता <b>बॅकअप शेअर</b> करा. फाइल Drive / WhatsApp / ईमेलला पाठवता येते आणि त्यासाठी Google लॉगिन लागत नाही.</p><p style="font-size:12px;word-break:break-all;background:#f3f5ef;padding:6px;border-radius:6px">'+u+'</p><button class="b w" style="margin:0 0 6px" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+u+'\');toast(\'लिंक कॉपी झाली\')">🔗 लिंक कॉपी करा</button>',()=>bkp(),"📤 बॅकअप शेअर करा","बंद करा");
+  ask('<b>Google लॉगिन अडले</b><p style="font-size:13px">'+(SA?'install केलेल्या app मध्ये Google खाते निवडताना अडचण येऊ शकते (400 एरर).':'ब्राउझरमधील Google session बिघडलेली असू शकते.')+'</p><p style="font-size:13px"><b>उपाय:</b><br>1) <b>Choose an account</b> आल्यावर खाते दाबण्याआधी एकदा <b>Back</b> दाबा, मग खाते निवडा. (Chrome ची "Sign in to Chrome" पट्टी आली तर Skip दाबा.)<br>2) <b>Chrome ब्राउझरमध्ये</b> ही लिंक उघडून तिथे "Drive sync" दाबा. तुमचा डेटा त्याच फोनवर तोच असतो.<br>3) किंवा आता <b>बॅकअप शेअर</b> करा. फाइल Drive / WhatsApp / ईमेलला पाठवता येते आणि त्यासाठी Google लॉगिन लागत नाही.</p><p style="font-size:12px;word-break:break-all;background:#f3f5ef;padding:6px;border-radius:6px">'+u+'</p><button class="b w" style="margin:0 0 6px" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+u+'\');toast(\'लिंक कॉपी झाली\')">🔗 लिंक कॉपी करा</button>',()=>bkp(),"📤 बॅकअप शेअर करा","बंद करा");
 }
 function shr(){const u=location.href.split("#")[0].replace(/index\.html$/,"");navigator.share?navigator.share({title:"MDM पोषण आहार नोंदवही",text:"शालेय पोषण आहार नोंदवही app",url:u}):prompt("लिंक कॉपी करा",u)}
 let IP=null;const SA=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
-addEventListener("beforeinstallprompt",e=>{e.preventDefault();IP=e});addEventListener("appinstalled",()=>{$("ib").style.display="none";toast("✔ app इन्स्टॉल झाला")});
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();IP=e});addEventListener("appinstalled",()=>{localStorage.mdminst=1;$("ib").style.display="none";toast("✔ app इन्स्टॉल झाला");const m=$("lpmsg");if(m)m.textContent="✔ App install झाला! आता होम स्क्रीनवरील आयकॉनवरून उघडा.";document.querySelectorAll("#lp .pb").forEach(b=>b.style.display="none")});
 if(!SA)$("ib").style.display="block";
 function ins(){if(IP){IP.prompt();IP.userChoice.then(()=>{IP=null})}else alert("Chrome मध्ये वरच्या ⋮ मेनूमधून 'Install app' किंवा 'Add to Home screen' निवडा.\n\niPhone वर Safari मध्ये Share बटण → 'Add to Home Screen'.")}
-go(S.sch.name?"h":"t");if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+function lpGo(){sessionStorage.mdmland=1;$("lp").style.display="none";document.body.style.overflow="";go(S.sch.name?"h":"t")}
+if(SA)localStorage.mdminst=1;
+if(!SA&&!localStorage.mdminst&&!sessionStorage.mdmland){
+  $("lp").style.display="flex";document.body.style.overflow="hidden";
+  if(navigator.getInstalledRelatedApps)navigator.getInstalledRelatedApps().then(r=>{if(r&&r.length){localStorage.mdminst=1;lpGo()}}).catch(()=>{});
+}else go(S.sch.name?"h":"t");
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script></body></html>
