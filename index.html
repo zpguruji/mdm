@@ -37,6 +37,12 @@ header{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:10px;
 #lp .pb{width:100%;margin-top:20px;padding:15px;font:inherit;font-size:17px;font-weight:700;border:0;border-radius:32px;background:linear-gradient(#ffd54a,#ffb300);color:#3a2600;box-shadow:0 7px 18px #0006;cursor:pointer}
 #lp .sb{width:100%;margin-top:11px;padding:13px;font:inherit;font-size:15px;border:2px solid #ffffffaa;border-radius:32px;background:transparent;color:#fff;cursor:pointer}
 #lp .cr{margin-top:18px;font-size:11px;color:#bfe6cc}
+.gc{background:#fff;border:1px solid #d5dccf;border-radius:14px;margin-bottom:10px;overflow:hidden}.gh{display:flex;align-items:center;gap:10px;padding:12px;cursor:pointer}
+.gn{background:#e6ecde;color:#14532d;font-weight:700;border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex:none}.gi{font-size:22px;flex:none}
+.gh b{display:block;font-size:16px;line-height:1.3}.gh small{color:#6b7a6e;font-size:12px}.ga{margin-left:auto;color:#14532d;transition:transform .2s}.gc.o .ga{transform:rotate(180deg)}
+.gb{display:none;padding:4px 14px 14px;font-size:14px;line-height:1.75;border-top:1px solid #eef1ea}.gc.o .gb{display:block}.gb ol,.gb ul{padding-left:20px;margin:6px 0}.gb li{margin:3px 0}
+.gtp{background:#fff8d6;border:1px solid #f1d56a;border-radius:10px;padding:8px 10px;margin:10px 0;font-size:13px}.gwn{background:#fdecea;border:1px solid #e8a49c;border-radius:10px;padding:8px 10px;margin:10px 0;font-size:13px}
+.gok{background:#e8f5ec;border:1px solid #9fd1ae;border-radius:10px;padding:8px 10px;margin:10px 0;font-size:13px}.gfl{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#14532d;margin:10px 0 14px}.gfl span{background:#e6ecde;border-radius:20px;padding:5px 10px}
 footer{text-align:center;font-size:12px;color:#6b7a6e;padding:18px 12px 24px}
 main{padding:12px;max-width:960px;margin:auto}.c{background:#fff;border:1px solid #d5dccf;border-radius:8px;padding:12px;margin-bottom:12px}
 label{display:block;font-size:12px;margin:8px 0 2px;color:#4a5a4d}input,select{width:100%;padding:9px;border:1px solid #aab8a9;border-radius:6px;font:inherit;background:#fff}input[type=checkbox]{width:auto}
@@ -72,6 +78,7 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
   <button data-set="4" onclick="go('t',4)">धान्यादी वस्तू व्यवस्थापन</button>
   <button data-set="3" onclick="go('t',3)">Drive शी जोडा व बॅकअप</button>
 </div>
+<button data-t="g" onclick="go('g')">📖&nbsp; App गाईड</button>
 <button data-t="c" onclick="go('c')">📞&nbsp; संपर्क</button>
 <button id="ib" onclick="ins()" style="display:none;color:#14532d;font-weight:700">📲&nbsp; app इन्स्टॉल करा</button>
 </nav>
@@ -97,11 +104,13 @@ const cols=c=>IT.map((_,i)=>i).filter(i=>!S.items[i].h || (r3(c.o[i])!=0 || r3(c
 function fixn(){for(let i=1;i<10;i++)if(S.N[i][0]==20&&S.N[i][1]==20)S.N[i][1]=30;S.nv=2}
 function mig(){S.N=JSON.parse(JSON.stringify(D.N));S.N[0]=[S.rL||100,S.rU||150];S.menus=JSON.parse(JSON.stringify(S.menus));S.menus.forEach(m=>{for(const k in m.p){const n=S.N[k][0];m.p[k]=n>0?Math.round(m.p[k]/n*100)/100:1}})}
 const $=i=>document.getElementById(i),r3=x=>Math.round(x*1000)/1000,f3=x=>r3(x).toFixed(3),fx=(i,x)=>un(i)=="नग"?Math.round(x):f3(x),un=i=>((S.items||[])[i]||{}).u||"किलो",esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");let SQ,GS="";
-const pend=()=>!!(localStorage.mdmok&&(+localStorage.mdmls||0)<(S.ts||0));
+const hfn=t=>{let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return h+"/"+t.length};
+const snap=()=>{const r={...S};delete r.ts;return hfn(JSON.stringify(r))};
+const pend=()=>{if(!localStorage.mdmok)return false;if(!localStorage.mdmsh){if((+localStorage.mdmls||0)>=(S.ts||0)){localStorage.mdmsh=snap();return false}return true}return localStorage.mdmsh!=snap()};
 const old=()=>!!localStorage.mdmok&&(!+localStorage.mdmlt||Date.now()-localStorage.mdmlt>30*864e5);
 const lst=()=>{if(!localStorage.mdmok)return"💡 Drive जोडलेले नाही. डेटा सुरक्षित राहण्यासाठी Drive जोडा आणि किमान महिन्यातून एकदा Drive sync करा.";const t=+localStorage.mdmlt;return(t?"शेवटचे sync: "+dm(ds2(new Date(t)))+". ":"अजून sync झालेले नाही. ")+"💡 डेटा सुरक्षित राहण्यासाठी किमान महिन्यातून एकदा Drive sync करा."+(old()?(t?" ⚠ 30 दिवसांपेक्षा जास्त झाले, आता sync करा.":" ⚠ आता sync करा."):"")};
 const st=(t,k)=>{GS=t;const e=$("gs");if(e)e.textContent=t;if(k)toast(t)};
-const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok)st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(0),3000)}else if(localStorage.mdmok)st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
+const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok&&pend())st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(0),3000)}else if(localStorage.mdmok&&pend())st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
 const ds2=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),tod=()=>ds2(new Date());
 const wd=s=>{const[y,m,d]=s.split("-");return new Date(y,m-1,d).getDay()},dm=s=>s.split("-").reverse().join("-");
 
@@ -154,10 +163,11 @@ function go(t,x){
   else if(t=="r")title=RN[RP];
   else if(t=="n")title="आजचा शिल्लक साठा";
   else if(t=="c")title="संपर्क";
+  else if(t=="g")title="App गाईड";
   $("ht").textContent=title;
   $("hsub").textContent=$("dn").textContent=(S.sch.name||"")+(S.sch.udise?" • UDISE "+S.sch.udise:"");
   scrollTo(0,0);
-  ({h:vh,d:vd,s:vs,t:vt,r:vr,n:vn,c:vc})[t]();
+  ({h:vh,d:vd,s:vs,t:vt,r:vr,n:vn,c:vc,g:vg})[t]();
 }
 
 const GN=["इ. 1 ते 5 वी","इ. 6 ते 8 वी"],GL=["प्राथमिक (1 ते 5)","उच्च प्राथमिक (6 ते 8)"],GP=["प्राथमिक","उच्च प्राथमिक"],hg=g=>S.cls.some(k=>g?k>=6:k<=5),gs=()=>[0,1].filter(hg);
@@ -235,7 +245,7 @@ function vt(){
   }else if(SUB_T==2){
     content='<div class="c"><h3>पाककृती मेनू व्यवस्थापन</h3><p style="font-size:12px;color:#555">प्रत्येक मेनूमध्ये कोणत्या वस्तू वापरायच्या ते निवडा. तांदूळ सर्व मेनूमध्ये प्रमाणानुसार आपोआप येतो. दोन डाळी मिळून वापरत असाल तर दोन्हींना "निम्मे प्रमाण" निवडा.</p><div style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><select style="flex:1" onchange="CMenu=this.value;vt()">'+DR.menus.map((x,i)=>'<option value="'+i+'" '+(i==CMenu?"selected":"")+'>'+x.n+'</option>').join("")+'</select>'+(DR.menus.length?'<button class="b r" style="margin:0;white-space:nowrap" onclick="xm()">🗑 हटवा</button>':"")+'</div>'+(m?'<div class="sc"><table><thead><tr><th class="l">वस्तू<th>प्रमाण वापर</tr></thead><tbody>'+DR.items.map((it,i)=>i&&!it.h?'<tr><td class="l">'+it.n+'</td><td><select onchange="mp('+i+',this.value)"><option value="">वापरत नाही</option>'+[[1,"पूर्ण प्रमाण"],[.5,"निम्मे प्रमाण"],[.25,"पाव प्रमाण"]].map(([v,t])=>'<option value="'+v+'" '+(m.p[i]==v?"selected":"")+'>'+t+'</option>').join("")+'</select></td></tr>':"").join("")+'</tbody></table></div>':"")+'<label style="margin-top:12px">नवीन मेनूचे नाव जोडा</label><div style="display:flex;gap:8px"><input id="nm" placeholder="मेनूचे नाव..."><button class="b" style="margin:0;white-space:nowrap" onclick="am()">+ जोडा</button></div></div>';
   }else if(SUB_T==4){
-    content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा.हिरवा वाठाणा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="नग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="धान्‍यादीचे नाव"><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
+    content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा. राजमा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="नग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="उदा. राजमा"><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
   }else{
     content='<div class="c"><h3>Google Drive sync</h3><details class="np" '+(DEFAULT_CID.startsWith("PASTE")?"open":"")+'><summary style="font-size:12px">प्रगत: स्वतःचा Google Client ID</summary><label>Google Client ID</label><input value="'+esc(cid().startsWith("PASTE")?"":cid())+'" oninput="localStorage.mdmcid=this.value.trim();TK=null"></details><button class="b" onclick="sync(1)">Drive शी जोडा / आता sync करा</button><label style="margin-top:12px">Google खाते (ईमेल) — ऐच्छिक</label><input type="email" placeholder="उदा. tumche@gmail.com" value="'+esc(localStorage.mdmhint||"")+'" oninput="localStorage.mdmhint=this.value.trim().toLowerCase()"><p style="font-size:12px;color:#555;margin:2px 0 8px">येथे Drive साठी वापरायचा Gmail भरला की Google "Choose an account" पान दाखवत नाही, त्यामुळे 400 एरर टळतो. पहिल्या यशस्वी sync नंतर हा आपोआप भरला जातो. दुसरे खाते वापरायचे असल्यास तो बदला किंवा रिकामा करा.</p><label style="display:flex;gap:8px;align-items:center;margin-top:12px;color:inherit;font-size:14px"><input type="checkbox" '+(localStorage.mdmauto=="1"?"checked":"")+' onchange="localStorage.mdmauto=this.checked?\'1\':\'0\'"> प्रत्येक नोंदीनंतर आपोआप Drive sync करा (ऐच्छिक)</label><p style="font-size:12px;margin:8px 0 0;color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</p><p id="gs" style="font-size:12px">'+GS+'</p><p style="font-size:12px;color:#555">Google खाते निवडताना 400 येत असेल तर: (1) खाते दाबण्याआधी एकदा Back दाबा, मग खाते निवडा; (2) वरचा Google ईमेल रकाना भरा; (3) किंवा Chrome ब्राउझरमध्ये ही लिंक उघडून sync करा; (4) किंवा खालील "बॅकअप शेअर करा" वापरा.</p></div><div class="c"><h3>डेटा बॅकअप व रिस्टोअर</h3><button class="b" style="margin:0" onclick="bkp()">📤 बॅकअप शेअर करा (Drive / WhatsApp / ईमेल)</button><button class="b w" style="margin:8px 0 0" onclick="exp()">💾 फक्त डाउनलोड करा</button><p style="font-size:12px;margin:8px 0 0;color:#4a5a4d">Google लॉगिन लागत नाही. '+(localStorage.mdmbk?"शेवटचा बॅकअप शेअर: "+dm(ds2(new Date(+localStorage.mdmbk)))+". ":"")+'Drive sync अडले तरी हा पर्याय नेहमी चालतो. फाइल .txt म्हणून जाते (फोन फक्त अशाच फाइल शेअर करू देतो). परत आणताना खालील "Restore" मध्ये तीच फाइल निवडा.</p><label style="margin-top:12px">बॅकअप फाइल पुनर्स्थापित (Restore) करा</label><input type="file" accept=".json,.txt,text/plain,application/json" onchange="imp(event)"></div><div class="c"><h3>app शेअर करा</h3><button class="b" onclick="shr()">📲 app ची लिंक इतर शाळांना शेअर करा</button></div>';
   }
@@ -395,6 +405,7 @@ function apply(p){
   ri();
   localStorage.mdm=JSON.stringify(S);
   localStorage.mdmls=S.ts;
+  localStorage.mdmsh=snap();
   localStorage.mdmlt=Date.now();
 }
 
@@ -435,7 +446,7 @@ async function sync(manual=0){
       return go(T);
     }
     
-    const ts0=S.ts,P=parts(),hs=JSON.parse(localStorage.mdmh||"{}");
+    const sh0=snap(),ts0=S.ts,P=parts(),hs=JSON.parse(localStorage.mdmh||"{}");
     const hf=t=>{let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return h+"/"+t.length};
     const up=async n=>{
       const body=JSON.stringify(P[n]),h=hf(body),hk=f+":"+n;
@@ -452,6 +463,7 @@ async function sync(manual=0){
     await up("Profiles.json");
     localStorage.mdmh=JSON.stringify(hs);
     localStorage.mdmls=ts0;
+    localStorage.mdmsh=sh0;
     localStorage.mdmlt=Date.now();
     fetchHint();
     st("☁ मोबाईल आणि Drive दोन्हीकडे जतन झाले ✔",1);
@@ -469,6 +481,98 @@ async function sync(manual=0){
   busy=0;
 }
 
+const GD=[
+{n:1,ic:"ℹ️",t:"App परिचय",s:"About MDM App",o:1,b:`
+<p><b>MDM App</b> हे प्रधानमंत्री पोषण शक्ती निर्माण (शालेय पोषण आहार / मध्यान्ह भोजन) योजनेची रोजची नोंद, धान्य साठा आणि सर्व रिपोर्ट मोबाईलवर करण्यासाठी बनवलेले मोफत app आहे. मुख्याध्यापक आणि पोषण आहार प्रभारींसाठी.</p>
+<p>🔒 तुमचा डेटा तुमच्या फोनमध्ये साठवला जातो. Drive जोडले तर तुमच्या स्वतःच्या Google Drive मधील <b>MDM_Data</b> फोल्डरमध्ये जातो. कोणत्याही तिसऱ्या server वर पाठवला जात नाही.</p>
+<p><b>मुख्य वैशिष्ट्ये:</b></p>
+<ul><li>📋 दैनंदिन नोंद: इयत्तावार पट, हजर, लाभार्थी आणि पाककृती</li><li>🌾 धान्य, डाळी व मसाल्यांचा वापर आपोआप मोजला जातो</li><li>📦 आवक/जावक व साठा: 1 ते 5 वी आणि 6 ते 8 वी साठी वेगळा</li><li>📊 5 रिपोर्ट: उपयोगिता प्रमाणपत्र, दैनंदिन नोंद अहवाल, पूरक आहार अहवाल, प्रपत्र 'ड', चव नोंद रजिस्टर. प्रिंट / PDF</li><li>🍲 पाककृती आणि वस्तू तुम्हीच ठरवता (नवीन जोडा, बदला, लपवा)</li><li>☁️ Google Drive sync, बॅकअप शेअर आणि इंटरनेटशिवायही चालते</li></ul>`},
+{n:2,ic:"🚀",t:"पहिल्यांदा वापरताना",s:"Getting Started",b:`
+<p>प्रथम वापरताना खालील पायऱ्या पूर्ण करा:</p>
+<div class="gfl"><span>⚙️ सेटिंग</span>➜<span>📦 सुरुवातीचा साठा</span>➜<span>📋 रोजची नोंद</span>➜<span>📊 रिपोर्ट</span></div>
+<ol><li><b>शाळा प्रोफाइल:</b> ☰ → सेटिंग → शाळा प्रोफाइल व वर्ग. शाळेचे नाव (आवश्यक), केंद्र, तालुका, UDISE, जिल्हा भरा आणि तुमच्या शाळेतील इयत्ता निवडा. खाली <b>💾 जतन करा</b>.</li>
+<li><b>प्रमाण:</b> सेटिंग → तांदूळ व धान्यादी प्रमाण. प्रति विद्यार्थी ग्रॅम भरा (1–5 वी व 6–8 वी चे वेगळे). जतन करा.</li>
+<li><b>पाककृती:</b> सेटिंग → पाककृती मेनू व्यवस्थापन. तुमचे मेनू तपासा किंवा नवीन जोडा. जतन करा.</li>
+<li><b>सुरुवातीचा साठा:</b> ☰ → आवक / जावक → सुरुवातीचा साठा (1 एप्रिल). सध्याची शिल्लक गटानुसार भरून जतन करा.</li>
+<li><b>Drive जोडा (शिफारस):</b> सेटिंग → Drive शी जोडा व बॅकअप → "Drive शी जोडा / आता sync करा".</li>
+<li><b>रोजची नोंद:</b> मुख्य पान → <b>+ नवीन दैनंदिन नोंद</b>.</li></ol>
+<div class="gtp">💡 <b>टीप:</b> शाळेचा अधिकृत Google ईमेल वापरा. मुख्याध्यापक बदलले तरी नवीन मुख्याध्यापक त्याच ईमेलने लॉगिन करून सर्व जुना डेटा पाहू शकतात.</div>
+<div class="gwn">⚠️ <b>महत्त्वाचे:</b> Google ची परवानगी विंडो आली की Drive फाइल्ससाठी परवानगीचा checkbox असल्यास तो टिक करा. ती परवानगी न दिल्यास Drive sync चालणार नाही. (app फक्त स्वतः बनवलेल्या फाइल्स पाहतो.)</div>`},
+{n:3,ic:"📝",t:"दैनंदिन नोंद कशी करावी",s:"Daily Entry",b:`
+<ol><li>मुख्य पान → <b>+ नवीन दैनंदिन नोंद</b>. पुढचा दिनांक आपोआप येतो, हवा तर बदला.</li>
+<li><b>पाककृती</b> निवडा. आहार शिजवला नसेल तर "आज आहार शिजवला नाही" निवडून कारण निवडा (सुट्टी, सहल, साठा संपला इ.). शाळा सुरू होती पण आहार शिजला नाही तर "कार्यदिन म्हणून नोंदवा" टिक करा.</li>
+<li><b>पट, हजर, लाभार्थी</b> भरा: 1–5 वी चा आणि 6–8 वी चा वेगळा तक्ता आहे. मागच्या दिवसाचे आकडे आपोआप येतात. हजर बदलला की लाभार्थी तितकाच होतो.</li>
+<li>गुरुवारी वगैरे <b>पूरक आहार</b> निवडा.</li>
+<li><b>सेव्ह करा</b> दाबा. एक तपासणी विंडो येते: एकूण ताटे, कोणत्या वस्तू किती वापरल्या आणि इशारे. बरोबर असेल तर पुन्हा <b>सेव्ह करा</b>.</li></ol>
+<div class="gok">📤 <b>आउटपुट:</b> तुमच्या प्रमाणानुसार धान्य, डाळ, मसाला, तेल यांचा वापर आपोआप मोजला जाऊन साठ्यातून वजा होतो आणि सर्व रिपोर्टमध्ये येतो.</div>
+<div class="gwn">⚠️ <b>इशारे:</b> लाभार्थी हजरपेक्षा जास्त असेल, ऋण संख्या असेल किंवा साठा कमी पडत असेल तर app सांगतो. तरीही सेव्ह करता येते.</div>
+<p>✏️ <b>जुनी नोंद दुरुस्त / हटवणे:</b> मुख्य पानावर महिन्याच्या कार्डावरील "दिवस ›" दाबा → यादीतील तारखेवर दाबा → बदल करून सेव्ह करा किंवा <b>ही नोंद हटवा</b>.</p>`},
+{n:4,ic:"🍲",t:"पाककृती (मेनू) व्यवस्थापन",s:"Menu Management",b:`
+<p>रस्ता: ☰ → सेटिंग → <b>पाककृती मेनू व्यवस्थापन</b></p>
+<p><b>➕ नवीन मेनू जोडणे</b></p>
+<ol><li>खाली "नवीन मेनूचे नाव जोडा" मध्ये नाव लिहा (उदा. राजमा चावल) आणि <b>+ जोडा</b> दाबा.</li>
+<li>वरच्या यादीत तो मेनू निवडलेला दिसतो. त्यात वापरायच्या वस्तूंसाठी निवडा.</li>
+<li><b>💾 जतन करा</b>.</li></ol>
+<p><b>🔁 मेनूतील वस्तू बदलणे</b></p>
+<ol><li>वरच्या यादीतून मेनू निवडा.</li>
+<li>प्रत्येक वस्तूसमोर निवडा: <b>वापरत नाही</b> / <b>पूर्ण प्रमाण</b> / <b>निम्मे प्रमाण</b> / <b>पाव प्रमाण</b>.</li>
+<li>जतन करा.</li></ol>
+<div class="gtp">💡 <b>उदाहरण:</b> "मूग शेवगा वरण भात" मध्ये मूग आणि तूरडाळ दोन्हींना "निम्मे" निवडले तर प्रत्येकी अर्धे प्रमाण वापरले जाते. प्रमाण 20 ग्रॅम असेल तर 10 + 10 ग्रॅम. तांदूळ सर्व मेनूमध्ये आपोआप धरला जातो.</div>
+<p><b>🗑 मेनू हटवणे:</b> यादीतून मेनू निवडा → <b>🗑 हटवा</b> → जतन करा.</p>
+<div class="gwn">⚠️ मेनूतील बदल फक्त <b>पुढच्या</b> नोंदींना लागू होतात. आधी सेव्ह केलेल्या दिवसांचे आकडे बदलत नाहीत.</div>`},
+{n:5,ic:"🌾",t:"धान्यादी वस्तू व प्रमाण",s:"Items & Quantities",b:`
+<p><b>📏 प्रमाण बदलणे:</b> सेटिंग → <b>तांदूळ व धान्यादी प्रमाण</b>. प्रति विद्यार्थी ग्रॅम भरा, 1–5 वी व 6–8 वी चे वेगळे (अंडी: नग). 0 किंवा रिकामे म्हणजे वापर नाही. जतन करा.</p>
+<p><b>➕ नवीन वस्तू (उदा. राजमा) जोडणे:</b></p>
+<ol><li>सेटिंग → <b>धान्यादी वस्तू व्यवस्थापन</b>.</li>
+<li>खाली नाव लिहा, एकक निवडा (किलो किंवा नग) आणि <b>+ जोडा</b>. मग <b>जतन करा</b>.</li>
+<li>सेटिंग → तांदूळ व धान्यादी प्रमाण मध्ये तिचे प्रमाण भरा.</li>
+<li>पाककृती मेनूमध्ये ती वस्तू वापरायच्या मेनूत निवडा.</li>
+<li>आवक / जावक मध्ये तिची आवक नोंदवा.</li></ol>
+<p><b>🙈 उपलब्ध नसलेली वस्तू लपवणे:</b> धान्यादी वस्तू व्यवस्थापनमध्ये "दाखवा" चा टिक काढा आणि जतन करा. ती फॉर्म, मेनू आणि रिपोर्टमधून दिसणार नाही. तिचा जुना डेटा असेल तर रिपोर्टमध्ये दिसत राहते.</p>
+<p><b>✏️ नाव बदलणे:</b> त्याच पानावर नावाच्या रकान्यात बदल करा.</p>
+<p><b>🗑 काढणे:</b> तुम्ही नवीन जोडलेली आणि कधीही न वापरलेली शेवटची वस्तूच कायमची काढता येते. इतर वस्तू फक्त लपवता येतात.</p>`},
+{n:6,ic:"📦",t:"आवक / जावक व साठा",s:"Stock In / Out",b:`
+<p>☰ → <b>आवक / जावक</b> मध्ये चार पाने आहेत:</p>
+<ul><li><b>आवक धान्य नोंद:</b> गट (1–5 किंवा 6–8), वस्तू, प्रमाण, स्त्रोत (शासकीय पुरवठा, देणगी, उसनवार इ.), दिनांक. <b>आवक नोंद जोडा</b>.</li>
+<li><b>जावक धान्य नोंद:</b> कारण (खराब झाले, उसनवार दिले, चोरी इ.) भरून जावक नोंदवा.</li>
+<li><b>सुरुवातीचा साठा (1 एप्रिल):</b> शैक्षणिक वर्षाच्या सुरुवातीची शिल्लक, गटानुसार स्वतंत्र. जतन करा.</li>
+<li><b>आवक / जावक यादी:</b> सर्व नोंदी. चुकीची नोंद ✕ ने काढा.</li></ul>
+<div class="gok">📋 <b>आजचा शिल्लक साठा</b> (☰ मेनू): आजपर्यंतच्या सर्व नोंदी आणि खर्च धरून दोन्ही गटांची आणि एकूण शिल्लक दाखवतो. ऋण असेल तर लाल रंगात.</div>
+<div class="gwn">⚠️ जावक शिल्लकपेक्षा जास्त असेल तर app इशारा देतो. साठा बरोबर येण्यासाठी आधी सुरुवातीचा साठा भरा.</div>`},
+{n:7,ic:"📊",t:"रिपोर्ट व प्रिंट",s:"Reports & Print",b:`
+<ol><li>☰ → <b>रिपोर्ट</b> दाबा. खाली रिपोर्टची यादी उघडते.</li>
+<li>हवा तो रिपोर्ट निवडा, <b>महिना</b> निवडा (आणि हवा तो गट: 1–5 किंवा 6–8).</li>
+<li><b>रिपोर्ट पहा</b> दाबा.</li>
+<li>रिपोर्टच्या खाली <b>🖨 प्रिंट / PDF</b> दाबा. PDF हवी असेल तर प्रिंट विंडोत "Save as PDF" निवडा.</li></ol>
+<table><tr><th>रिपोर्ट<th>पेपर<th>काय मिळते</tr>
+<tr><td class="l">उपयोगिता प्रमाणपत्र<td>पोर्ट्रेट<td class="l">मासिक सर्व वस्तूंची शिल्लक, आवक, वापर, इंधन अनुदान, मानधन</tr>
+<tr><td class="l">दैनंदिन नोंद अहवाल<td>लँडस्केप<td class="l">दिवसवार पट, लाभार्थी, पाककृती आणि वस्तू वापर</tr>
+<tr><td class="l">पूरक आहार अहवाल<td>पोर्ट्रेट<td class="l">पूरक आहाराचे दिवस</tr>
+<tr><td class="l">प्रपत्र 'ड'<td>लँडस्केप<td class="l">एका पानावर दोन्ही गट: तांदूळ व धान्यादी माहिती</tr>
+<tr><td class="l">चव नोंद रजिस्टर<td>पोर्ट्रेट<td class="l">महिन्याच्या तारखांचा रिकामा तक्ता, हाताने भरण्यासाठी</tr></table>
+<div class="gtp">💡 उपयोगिता प्रमाणपत्रासाठी रिपोर्ट पाहण्यापूर्वी "शाळा भेट संख्या" आणि "आरोग्य तपासणी" भरा. सेटिंगमध्ये शाळेची माहिती भरलेली असेल तरच ती रिपोर्टच्या वर येते. पेपर पोर्ट्रेट/लँडस्केप आपोआप ठरतो.</div>`},
+{n:8,ic:"☁️",t:"Drive sync व बॅकअप",s:"Sync & Backup",b:`
+<ul><li><b>Drive जोडणे:</b> सेटिंग → Drive शी जोडा व बॅकअप → "Drive शी जोडा / आता sync करा". Google खाते निवडा आणि परवानगी द्या.</li>
+<li><b>किती वेळा sync करावे:</b> किमान महिन्यातून एकदा. मुख्य पानावर "शेवटचे sync" ची तारीख दिसते. 30 दिवस झाल्यावर लाल इशारा येतो. प्रत्येक नोंदीनंतर आपोआप हवे असेल तर "आपोआप Drive sync" चा टिक करा.</li>
+<li><b>Google ईमेल रकाना:</b> तिथे तुमचा Gmail भरला की Google खाते निवडण्याचे पान येत नाही.</li>
+<li><b>📤 बॅकअप शेअर:</b> Google लॉगिनशिवाय फाइल Drive / WhatsApp / ईमेलला पाठवते. परत आणण्यासाठी "बॅकअप पुनर्स्थापित (Restore)" मध्ये तीच फाइल निवडा.</li>
+<li><b>नवीन फोनवर:</b> app उघडा → Drive जोडा आणि sync करा, किंवा Restore वापरा.</li></ul>
+<div class="gwn">⚠️ <b>Google मध्ये 400 एरर आला तर:</b> Choose an account आल्यावर खाते दाबण्याआधी एकदा <b>Back</b> दाबा, मग खाते निवडा. Chrome ची "Sign in to Chrome" पट्टी आली तर Skip दाबा. किंवा Chrome ब्राउझरमध्ये ही लिंक उघडून sync करा.</div>`},
+{n:9,ic:"❓",t:"अडचणी व उपाय",s:"Troubleshooting",b:`
+<ul><li>📄 <b>रिपोर्टच्या वर शाळेचे नाव रिकामे:</b> सेटिंग → शाळा प्रोफाइलमध्ये माहिती भरून जतन करा, किंवा Drive sync करा.</li>
+<li>⛔ <b>"साठा अपुरा" इशारा:</b> सुरुवातीचा साठा किंवा आवक नोंदवलेली नाही. ती नोंदवा.</li>
+<li>🔄 <b>नवीन आवृत्ती दिसत नाही:</b> app पूर्ण बंद करून पुन्हा उघडा.</li>
+<li>📱 <b>फोन बदलला / डेटा गेला:</b> Drive जोडून sync करा किंवा बॅकअप Restore करा.</li>
+<li>💾 <b>जतन न केलेले बदल:</b> सेटिंग आणि सुरुवातीच्या साठ्यात "जतन करा" दाबल्याशिवाय बदल लागू होत नाहीत.</li>
+<li>📲 <b>app install:</b> ब्राउझर मेनू → "Install app" / "Add to Home screen". iPhone वर Safari → Share → Add to Home Screen.</li></ul>`},
+{n:10,ic:"🔒",t:"गोपनीयता व संपर्क",s:"Privacy & Contact",b:`
+<p>तुमचा डेटा फक्त तुमच्या फोनमध्ये आणि (तुम्ही जोडले तर) तुमच्या स्वतःच्या Google Drive मध्ये राहतो. आम्ही तो पाहू शकत नाही, जाहिराती किंवा ट्रॅकिंग नाही.</p>
+<p>🔗 <a href="privacy.html" target="_blank" style="color:#14532d;font-weight:700">गोपनीयता धोरण (Privacy Policy) वाचा</a></p>
+<p>📞 अडचण किंवा सूचना असल्यास <a href="#" onclick="go('c');return false" style="color:#14532d;font-weight:700">संपर्क पान</a> उघडा.</p>
+<p style="font-size:12px;color:#6b7a6e">App developed by Somnath Gaikwad sir</p>`}
+];
+function gtg(h){h.parentNode.classList.toggle("o")}
+function vg(){$("v").innerHTML='<div class="c"><h3>📖 MDM App गाईड</h3><p style="font-size:13px;margin:0">app कसा वापरायचा ते सोप्या पायऱ्यांत. कार्ड दाबून उघडा/बंद करा.</p><div class="gfl"><span>⚙️ सेटिंग</span>➜<span>📦 साठा</span>➜<span>📋 नोंद</span>➜<span>📊 रिपोर्ट</span></div></div>'+GD.map(g=>'<div class="gc'+(g.o?" o":"")+'"><div class="gh" onclick="gtg(this)"><div class="gn">'+g.n+'</div><div class="gi">'+g.ic+'</div><div><b>'+g.t+'</b><small>'+g.s+'</small></div><div class="ga">▾</div></div><div class="gb">'+g.b+'</div></div>').join("")}
 async function bkp(){
   const name="mdm-backup-"+tod()+".txt",txt=JSON.stringify(S);
   try{
