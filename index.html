@@ -32,8 +32,9 @@ header{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:10px;
 #lp img{width:148px;height:148px;border-radius:34px;box-shadow:0 14px 32px #0007,0 0 0 4px #ffffff33;animation:lpfl 3.2s ease-in-out infinite}
 #lp h1{font-size:36px;margin:18px 0 0;letter-spacing:.5px;line-height:1.2}#lp .sub{color:#d6f5e0;font-size:16px;font-weight:600}
 #lp .wl{background:#ffffff1f;border:1px solid #ffffff3d;border-radius:14px;padding:12px 14px;margin:16px 0 14px;font-size:14px;line-height:1.7}
-#lp h2{font-size:16px;margin:2px 0 10px;color:#ffe27a}#lp .ft{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:100%}
-#lp .ft div{background:#fff;color:#0b5d2a;border-radius:13px;padding:10px 6px;font-size:13px;font-weight:700;line-height:1.35;box-shadow:0 4px 10px #0003}#lp .ft span{display:block;font-size:24px}
+#lp h2{font-size:16px;margin:2px 0 10px;color:#ffe27a}#lp .ft{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;margin:10px 0 14px}
+#lp .ft div{background:#fff;color:#0b5d2a;border-radius:10px;padding:6px 6px;font-size:11.5px;font-weight:700;line-height:1.2;box-shadow:0 3px 8px #0003;display:flex;align-items:center;gap:5px;text-align:left;overflow:hidden;white-space:nowrap}
+#lp .ft span:first-child{font-size:18px;flex-shrink:0}
 #lp .pb{width:100%;margin-top:20px;padding:15px;font:inherit;font-size:17px;font-weight:700;border:0;border-radius:32px;background:linear-gradient(#ffd54a,#ffb300);color:#3a2600;box-shadow:0 7px 18px #0006;cursor:pointer}
 #lp .sb{width:100%;margin-top:11px;padding:13px;font:inherit;font-size:15px;border:2px solid #ffffffaa;border-radius:32px;background:transparent;color:#fff;cursor:pointer}
 #lp .cr{margin-top:18px;font-size:11px;color:#bfe6cc}
@@ -48,12 +49,54 @@ main{padding:12px;max-width:960px;margin:auto}.c{background:#fff;border:1px soli
 label{display:block;font-size:12px;margin:8px 0 2px;color:#4a5a4d}input,select{width:100%;padding:9px;border:1px solid #aab8a9;border-radius:6px;font:inherit;background:#fff}input[type=checkbox]{width:auto}
 .g{display:grid;grid-template-columns:1fr 1fr;gap:8px}.b{background:#14532d;color:#fff;border:0;padding:10px 14px;border-radius:6px;font:inherit;margin:8px 6px 0 0;cursor:pointer}.b.r{background:#a4271d}.b.w{background:#5b6b5e}
 td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid #7a8a7c;padding:4px 5px;text-align:center}th{background:#e6ecde}.sc{overflow-x:auto;-webkit-overflow-scrolling:touch}.l{text-align:left}.it{table-layout:fixed}.it td,.it th{padding:4px 3px}h3{margin:2px 0 8px}
-@media print{thead{display:table-header-group}tr{break-inside:avoid;page-break-inside:avoid}th{-webkit-print-color-adjust:exact;print-color-adjust:exact}nav,.np{display:none!important}body{background:#fff;padding:0}.c{border:0;padding:0}main{padding:0;max-width:none}.sc{overflow:visible!important}.rp3 table{font-size:9px}.rp1 table,.rp2 table{font-size:12px}.rp1,.rp2{font-size:14px}.rp4 table{font-size:10px}.rp5 table{font-size:13px}}
+@media print{thead{display:table-header-group}tr{break-inside:avoid;page-break-inside:avoid}th{-webkit-print-color-adjust:exact;print-color-adjust:exact}nav,.np{display:none!important}body{background:#fff;padding:0}.c{border:0;padding:0}main{padding:0;max-width:none}.sc{overflow:visible!important}.rp3 table{font-size:9px}.rp1 table,.rp2 table{font-size:12px}.rp1,.rp2{font-size:14px}.rp4 table{font-size:10px}.rp5 table{font-size:13px}.rp6 table{font-size:12px}.rp6{font-size:14px}}
+/* ३-डॉट्स पल्स/बाउन्स ॲनिमेशन */
+.dots-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.dots-loader span {
+  width: 7px;
+  height: 7px;
+  background-color: #3a2600;
+  border-radius: 50%;
+  display: inline-block;
+  animation: dotBounce 1.2s infinite ease-in-out both;
+}
+.dots-loader span:nth-child(1) { animation-delay: -0.32s; }
+.dots-loader span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.3); opacity: 0.4; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+
+/* इन्स्टॉल पूर्ण झाल्यानंतरचे सुंदर अभिनंदन कार्ड */
+.inst-success-box {
+  background: #ffffff;
+  color: #14532d;
+  border-radius: 14px;
+  padding: 16px 14px;
+  margin-top: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  border: 2px solid #86efac;
+  animation: lpin 0.5s ease both;
+  text-align: center;
+}
+.inst-success-icon {
+  font-size: 38px;
+  line-height: 1;
+  margin-bottom: 6px;
+  display: block;
+}
 </style><style id="pgs">@page{size:portrait;margin:8mm}</style></head><body><header class="np"><button id="mb" onclick="dr(1)" aria-label="मेनू">☰</button><div><b id="ht">मुख्य</b><small id="hsub"></small></div></header>
 <div id="ov" class="np" onclick="dr(0)"></div>
 <aside id="dw" class="np"><div class="dh"><b>पोषण आहार नोंदवही</b><small id="dn"></small></div>
 <nav>
-<button data-t="h" onclick="go('h')">🏠&nbsp; मुख्य</button>
+<button data-t="h" onclick="go('h')">📝&nbsp; दैनंदिन नोंद</button>
 <button data-t="s" onclick="togg('ssub','sar')">📦&nbsp; आवक / जावक <span id="sar" style="float:right">▾</span></button>
 <div id="ssub" class="smenu" style="display:none">
   <button data-s="0" onclick="go('s',0)">आवक धान्य नोंद</button>
@@ -64,6 +107,7 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
 <button data-t="r" onclick="togg('rsub','rar')">📊&nbsp; रिपोर्ट <span id="rar" style="float:right">▾</span></button>
 <div id="rsub" class="smenu" style="display:none">
   <button data-r="1" onclick="go('r',1)">उपयोगिता प्रमाणपत्र</button>
+  <button data-r="6" onclick="go('r',6)">वार्षिक उपयोगिता प्रमाणपत्र</button>
   <button data-r="3" onclick="go('r',3)">दैनंदिन नोंद अहवाल</button>
   <button data-r="2" onclick="go('r',2)">पूरक आहार अहवाल</button>
   <button data-r="4" onclick="go('r',4)">प्रपत्र 'ड'</button>
@@ -84,23 +128,43 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
 </nav>
 <div class="df">संकल्पना व निर्मिती<br><b>Somnath Gaikwad sir</b></div></aside>
 <div id="lp" class="np"><div class="w"><img src="icon-512.png" alt="MDM"><h1>MDM App</h1><div class="sub">शालेय पोषण आहार नोंदवही</div>
-<div class="wl">🙏 <b>स्वागत आहे!</b><br>रोजची नोंद, धान्य साठा आणि सर्व रिपोर्ट आता तुमच्या मोबाईलवर. सोपे, जलद आणि मोफत.</div>
-<h2>✨ एका क्लिकवर मिळवा</h2>
-<div class="ft"><div><span>📋</span>दैनंदिन अहवाल</div><div><span>📄</span>मासिक उपयोगिता प्रपत्र</div><div><span>📑</span>प्रपत्र 'ड'</div><div><span>🍽️</span>चव नोंद रजिस्टर</div><div><span>📦</span>साठा नोंद (आवक / जावक)</div><div><span>📊</span>आजचा शिल्लक साठा</div></div>
+<div class="wl" style="background:rgba(255, 255, 255, 0.12);border:1px solid rgba(255, 255, 255, 0.25);border-radius:12px;padding:9px 12px;margin:10px 0 10px;font-size:12.5px;line-height:1.55;box-shadow:0 4px 12px rgba(0,0,0,0.15)">
+  <div style="font-size:14.5px;font-weight:700;color:#ffe27a;margin-bottom:3px;display:flex;align-items:center;justify-content:center;gap:6px">
+    <span>✨</span> <span>सस्नेह स्वागत!</span>
+  </div>
+  शालेय पोषण आहार दैनंदिन नोंद, धान्य साठा व सर्व शासकीय अहवाल आता मोबाईलवर. <b>जलद, अचूक आणि १००% मोफत.</b>
+</div>
+<h2 style="font-size:15px;margin:2px 0 8px;color:#ffe27a">✨ एका क्लिकवर मिळवा</h2>
+<div class="ft">
+  <div><span>📋</span><span>दैनंदिन अहवाल</span></div>
+  <div><span>📄</span><span>मासिक उपयोगिता</span></div>
+  <div><span>📑</span><span>प्रपत्र 'ड'</span></div>
+  <div><span>🍽️</span><span>चव नोंद रजिस्टर</span></div>
+  <div><span>📦</span><span>आवक / जावक साठा</span></div>
+  <div><span>📊</span><span>शिल्लक साठा</span></div>
+</div>
 <div id="lpmsg" style="margin-top:14px;font-size:14px;color:#ffe27a;line-height:1.6"></div>
 <button class="pb" onclick="ins()">📲 App Install करा</button><button class="sb" onclick="lpGo()">Continue with web browser</button>
 <div class="cr">App developed by Somnath Gaikwad sir</div></div></div>
 <main id="v"></main><div id="ts" class="np"></div><div id="md" class="np"><div class="mc"><div id="mt"></div><button class="b" id="my">सेव्ह करा</button><button class="b w" id="mc" onclick="$('md').style.display='none'">परत जा</button></div></div><footer class="np">App developed by Somnath Gaikwad sir</footer>
 <script>
+var HFY = "";
 const IT0=["तांदूळ","वाटाणा","मुगडाळ","चवळी","हरभरा","मसूरडाळ","मटकी","मूग","तूरडाळ","सोयाबीन वडी","हळद","मीठ","कांदा लसूण मसाला","जिरे","मोहरी","मिरची पावडर","गरम मसाला","तेल","गूळ","साखर","नाचणी","अंडी"];let IT=[];
 const MN=["जानेवारी","फेब्रुवारी","मार्च","एप्रिल","मे","जून","जुलै","ऑगस्ट","सप्टेंबर","ऑक्टोबर","नोव्हेंबर","डिसेंबर"],WD=["रविवार","सोमवार","मंगळवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"];
+const NEWM=[
+{n:"व्हेजिटेबल पुलाव",p:{1:1,10:1,11:1,12:1,13:1,14:1,17:1}},
+{n:"मसाले भात",p:{1:1,10:1,11:1,12:1,13:1,14:1,17:1}},
+{n:"मटार पुलाव",p:{1:1,10:1,11:1,12:1,13:1,14:1,17:1}},
+{n:"चवळी खिचडी",p:{3:1,10:1,11:1,12:1,17:1}},
+{n:"मोड आलेले कडधान्य (स्प्राऊट्स)",p:{6:1,10:1,11:1,12:1,13:1,14:1,17:1}}];
 const D={sch:{name:"",kendra:"",taluka:"",jilha:"",udise:""},rL:100,rU:150,N:[[100,150],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[.25,.25],[2,2],[.75,.75],[0,0],[0,0],[0,0],[0,0],[5,5],[0,0],[0,0],[0,0],[0,0]],items:IT0.map((n,i)=>({n,u:i==21?"नग":"किलो",h:0})),fuel:2.59,fuel2:2.59,hon:5000,cooks:2,lvl:"प्राथमिक",
-menus:[{n:"सोयाबीन पुलाव",p:{9:1,10:1,11:1,12:1,17:1}},{n:"मूग शेवगा वरण भात",p:{7:.5,8:.5,10:1,11:1,12:1,17:1}},{n:"मूग डाळ खिचडी",p:{2:1,10:1,11:1,12:1,17:1}}],
+menus:[{n:"सोयाबीन पुलाव",p:{9:1,10:1,11:1,12:1,17:1}},{n:"मूग शेवगा वरण भात",p:{7:.5,8:.5,10:1,11:1,12:1,17:1}},{n:"मूग डाळ खिचडी",p:{2:1,10:1,11:1,12:1,17:1}}].concat(JSON.parse(JSON.stringify(NEWM))),dmv:1,
 sup:["चिक्की","शेंगा लाडू","राजगिरा लाडू"],cls:[1,2,3,4,5,6,7,8],op:[],op2:[],opd:"2026-04-01",ob:[],days:{},inn:[],mon:{}};
-let S;try{const L=JSON.parse(localStorage.mdm);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2}catch(e){S=JSON.parse(JSON.stringify(D))}
+let S;try{const L=JSON.parse(localStorage.mdm);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm()}catch(e){S=JSON.parse(JSON.stringify(D))}
 function ri(){IT=S.items.map(x=>x.n);while(S.N.length<S.items.length)S.N.push([0,0])}ri();
 const vis=()=>IT.map((_,i)=>i).filter(i=>!S.items[i].h);
 const cols=c=>IT.map((_,i)=>i).filter(i=>!S.items[i].h || (r3(c.o[i])!=0 || r3(c.rc[i])!=0 || r3(c.us[i])!=0 || r3(c.c[i])!=0));
+function addDm(){const have=new Set(S.menus.map(m=>m.n));S.menus=JSON.parse(JSON.stringify(S.menus));NEWM.forEach(m=>{if(!have.has(m.n))S.menus.push(JSON.parse(JSON.stringify(m)))});S.dmv=1}
 function fixn(){for(let i=1;i<10;i++)if(S.N[i][0]==20&&S.N[i][1]==20)S.N[i][1]=30;S.nv=2}
 function mig(){S.N=JSON.parse(JSON.stringify(D.N));S.N[0]=[S.rL||100,S.rU||150];S.menus=JSON.parse(JSON.stringify(S.menus));S.menus.forEach(m=>{for(const k in m.p){const n=S.N[k][0];m.p[k]=n>0?Math.round(m.p[k]/n*100)/100:1}})}
 const $=i=>document.getElementById(i),r3=x=>Math.round(x*1000)/1000,f3=x=>r3(x).toFixed(3),fx=(i,x)=>un(i)=="नग"?Math.round(x):f3(x),un=i=>((S.items||[])[i]||{}).u||"किलो",esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");let SQ,GS="";
@@ -174,7 +238,7 @@ const wh=({er,wr})=>(er.length?'<p style="color:#b42318">⛔ '+er.join("<br>⛔ 
 function dr(o){$("dw").classList.toggle("o",!!o);$("ov").classList.toggle("o",!!o)}
 function togg(id,arid){const e=$(id),o=e.style.display=="block";e.style.display=o?"none":"block";$(arid).textContent=o?"▾":"▴"}
 
-const RN={1:"उपयोगिता प्रमाणपत्र",2:"पूरक आहार अहवाल",3:"दैनंदिन नोंद अहवाल",4:"प्रपत्र 'ड'",5:"चव नोंद रजिस्टर"};
+const RN={6:"वार्षिक उपयोगिता प्रमाणपत्र",1:"उपयोगिता प्रमाणपत्र",2:"पूरक आहार अहवाल",3:"दैनंदिन नोंद अहवाल",4:"प्रपत्र 'ड'",5:"चव नोंद रजिस्टर"};
 const SN=["आवक धान्य नोंद","जावक धान्य नोंद","सुरुवातीचा साठा (1 एप्रिल)","आवक / जावक यादी"];
 const TN=["शाळा प्रोफाइल व वर्ग","तांदूळ व धान्यादी प्रमाण","पाककृती मेनू व्यवस्थापन","Drive शी जोडा व बॅकअप","धान्यादी वस्तू व्यवस्थापन"];
 
@@ -196,8 +260,8 @@ function go(t,x){
   if(t=="r"){$("rsub").style.display="block";$("rar").textContent="▴"}
   if(t=="s"){$("ssub").style.display="block";$("sar").textContent="▴"}
   if(t=="t"){$("tsub").style.display="block";$("tar").textContent="▴"}
-  let title="मुख्य";
-  if(t=="d")title="दैनंदिन नोंद";
+  let title="दैनंदिन नोंद";
+  if(t=="d")title="नवीन नोंद";
   else if(t=="s")title="आवक/जावक: "+SN[SUB_S];
   else if(t=="t")title="सेटिंग: "+TN[SUB_T];
   else if(t=="r")title=RN[RP];
@@ -226,10 +290,113 @@ function ms(c=CM,g=0){const K=MD(c),A=K.map(k=>S.days[k]).filter(Boolean),f=d=>+
 return{ds,pl,roll:(g?l.p2:l.p1)||0,work:A.filter(d=>!d.h||d.w).length,hol:A.filter(d=>d.h&&!d.w).length,sp:A.filter(d=>d.s&&f(d)>0).length}}
 const NC=["रविवारची शासकीय सुट्टी","स्थानिक सुट्टी","स्नेह भोजन","शाळेची सहल","उन्हाळी सुट्टी","दिवाळी सुट्टी","स्वयंपाकी/मदतनीस अनुपस्थित होते","तांदूळ व इतर साठा संपला","इतर"];
 function nx(){const k=Object.keys(S.days).sort().pop();if(!k)return tod();const[y,m,d]=k.split("-");return ds2(new Date(y,m-1,+d+1))}
-function vh(){const ks=Object.keys(S.days).sort(),c=tod().slice(0,7),e=ks.length&&ks[ks.length-1].slice(0,7)>c?ks[ks.length-1].slice(0,7):c;let m=ks.length?ks[0].slice(0,7):c;const L=[];
-while(m<=e){L.push(m);const[y,n]=m.split("-");m=n=="12"?(+y+1)+"-01":y+"-"+String(+n+1).padStart(2,"0")}
-$("v").innerHTML='<div class="c np"><button class="b" style="margin:0;width:100%" onclick="CD=nx();go(\'d\')">+ नवीन दैनंदिन नोंद</button><p style="margin:8px 0 0"><button class="b w" style="margin:0" onclick="sync(1)">Drive sync</button> <button class="b w" style="margin:0 0 0 6px" onclick="bkp()">📤 बॅकअप शेअर</button> <span id="gs" style="font-size:12px">'+(GS||(pend()?"⚠ Drive वर पाठवणे बाकी":""))+'</span></p><p class="np" style="font-size:12px;margin:6px 0 0;color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</p>'+(SA?"":'<button class="b" style="margin:8px 0 0;width:100%" onclick="ins()">📲 मोबाईलवर app इन्स्टॉल करा</button>')+'</div>'+
-L.reverse().map(m=>{const q=gs().map(g=>ms(m,g)),[y,n]=m.split("-");return'<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:18px">'+MN[+n-1]+' '+y+'</b><button class="b w" style="margin:0;padding:4px 10px" onclick="CD=\''+m+'-01\';go(\'d\')">'+new Date(y,n,0).getDate()+' दिवस ›</button></div><table><tr><th class="l">तपशील'+gs().map(g=>'<th>'+GL[g]+'</th>').join("")+'</tr>'+[["पट","roll"],["लाभार्थी (ताटे)","pl"],["पूरक आहार दिवस","sp"],["सुट्टीचे दिवस","hol"],["कार्यदिन","work"],["शिजवलेले दिवस","ds"]].map(([a,k])=>'<tr><td class="l">'+a+q.map(s=>'<td>'+(k=="ds"?s.ds.length:s[k])+'</td>').join("")+'</tr>').join("")+'</table></div>'}).join("")}
+function vh(){
+  const ks = Object.keys(S.days).sort();
+  const c = (typeof tod === "function" ? tod() : new Date().toISOString().slice(0, 10)).slice(0, 7);
+  const cy = parseInt(c.slice(0, 4), 10);
+  const cmn = parseInt(c.slice(5, 7), 10);
+  const curFY = cmn >= 4 ? cy : cy - 1;
+
+  // उपलब्ध आर्थिक वर्षे गोळा करणे
+  const fyset = new Set([curFY]);
+  ks.forEach(function(d){
+    const y = parseInt(d.slice(0, 4), 10);
+    const m = parseInt(d.slice(5, 7), 10);
+    fyset.add(m >= 4 ? y : y - 1);
+  });
+  const fys = Array.from(fyset).sort(function(a, b){ return b - a; });
+
+  // डीफॉल्ट चालू आर्थिक वर्ष सेट करणे
+  if (!HFY || !fys.includes(Number(HFY))) {
+    HFY = String(curFY);
+  }
+
+  // निवडलेल्या आर्थिक वर्षातील महिने तयार करणे
+  const selFY = Number(HFY);
+  const nextFY = selFY + 1;
+  const fyMonths = [];
+  for (let m = 4; m <= 12; m++) fyMonths.push(selFY + "-" + String(m).padStart(2, "0"));
+  for (let m = 1; m <= 3; m++) fyMonths.push(nextFY + "-" + String(m).padStart(2, "0"));
+
+  // फक्त चालू महिन्यापर्यंत किंवा ज्या महिन्यांत नोंदी आहेत तेच महिने घेणे
+  const activeMonths = fyMonths.filter(function(m){
+    return m <= c || ks.some(function(d){ return d.indexOf(m) === 0; });
+  }).reverse();
+
+  $("v").innerHTML = '<div class="c np">' +
+    '<button class="b" style="margin:0;width:100%;padding:13px;font-size:16px;font-weight:700" onclick="CD=nx();go(\'d\')">+ नवीन दैनंदिन नोंद</button>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">' +
+      '<button onclick="sync(1)" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#eef6ea;color:#14532d;border:1.5px solid #a4cfa9;border-radius:8px;padding:10px 4px;font:inherit;font-weight:700;font-size:14px;cursor:pointer">' +
+        '<svg width="18" height="18" viewBox="0 0 87.3 78" style="vertical-align:middle;flex-shrink:0"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>' +
+        '<span>Drive sync</span>' +
+      '</button>' +
+      '<button onclick="bkp()" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#fff8ea;color:#8f4b00;border:1.5px solid #f1cf8e;border-radius:8px;padding:10px 4px;font:inherit;font-weight:700;font-size:14px;cursor:pointer">' +
+        '<span style="font-size:16px">📤</span> <span>बॅकअप शेअर</span>' +
+      '</button>' +
+    '</div>' +
+    '<p style="margin:8px 0 0"><span id="gs" style="font-size:12px;font-weight:600">'+(GS||(pend()?"⚠ Drive वर पाठवणे बाकी":""))+'</span></p>' +
+    '<p class="np" style="font-size:12px;margin:6px 0 0;color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</p>' +
+    (SA?"":'<button class="b" style="margin:10px 0 0;width:100%;background:#0f3f22" onclick="ins()">📲 मोबाईलवर app इन्स्टॉल करा</button>') +
+  '</div>' +
+
+  // आर्थिक वर्ष ड्रॉपडाउन बार (योग्य पॅडिंग व कॉम्पॅक्ट आकार)
+  '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 12px 0;padding:8px 12px;background:#eef6ea;border:1px solid #d0e4ce;border-radius:8px">' +
+    '<div style="display:flex;align-items:center;gap:6px;font-weight:700;color:#14532d;font-size:14px;white-space:nowrap;flex-shrink:0">' +
+      '<span style="font-size:16px">📊</span> <span>आर्थिक वर्ष:</span>' +
+    '</div>' +
+    '<select style="width:auto;min-width:115px;max-width:135px;padding:5px 10px;border-radius:6px;border:1.5px solid #14532d;font:inherit;font-size:13.5px;font-weight:700;color:#14532d;background:#ffffff;box-shadow:0 1px 2px rgba(0,0,0,0.06);cursor:pointer;flex-shrink:0" onchange="HFY=this.value;vh()">' +
+      fys.map(function(y){
+        const ny = String(Number(y) + 1).slice(2);
+        return '<option value="'+y+'" '+(String(y)===String(HFY)?'selected':'')+'>'+y+'-'+ny+'</option>';
+      }).join("") +
+    '</select>' +
+  '</div>' +
+
+  // महिन्यांची कार्डे
+  activeMonths.map(function(m, idx){
+    const q = gs().map(function(g){ return ms(m, g); });
+    const parts = m.split("-");
+    const y = parts[0];
+    const n = parts[1];
+    const tbl = '<table><tr><th class="l">तपशील'+gs().map(function(g){ return '<th>'+GL[g]+'</th>'; }).join("")+'</tr>'+
+      [["पट","roll"],["लाभार्थी (ताटे)","pl"],["पूरक आहार दिवस","sp"],["सुट्टीचे दिवस","hol"],["कार्यदिन","work"],["शिजवलेले दिवस","ds"]].map(function(pair){
+        const a = pair[0], k = pair[1];
+        return '<tr><td class="l">'+a+q.map(function(s){ return '<td>'+(k=="ds"?s.ds.length:s[k])+'</td>'; }).join("")+'</tr>';
+      }).join("")+
+      '</table>';
+
+    if(idx === 0){
+      return '<div class="c">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #edf2ec">' +
+          '<b style="font-size:17px;color:#14532d;display:flex;align-items:center;gap:6px">' +
+            '<span>🗓️</span>' + MN[Number(n)-1]+' '+y +
+          '</b>' +
+          '<button onclick="CD=\''+m+'-01\';go(\'d\')" style="display:flex;align-items:center;gap:4px;background:#eef6ea;color:#14532d;border:1.5px solid #a4cfa9;border-radius:20px;padding:5px 12px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.05)">' +
+            '<span>📅</span> रोजच्या नोंदी पहा ›' +
+          '</button>' +
+        '</div>' +
+        tbl +
+      '</div>';
+    }
+
+    return '<details class="c" style="padding:0;overflow:hidden">' +
+      '<summary style="padding:14px;font-size:16px;font-weight:700;color:#14532d;cursor:pointer;background:#f9fbf8;display:flex;align-items:center;justify-content:space-between;list-style:none">' +
+        '<div style="display:flex;align-items:center;gap:8px">' +
+          '<span>🗓️</span>' + MN[Number(n)-1]+' '+y +
+        '</div>' +
+        '<span style="font-size:13.5px;color:#666;font-weight:400">मागील महिना तपशील ▾</span>' +
+      '</summary>' +
+      '<div style="padding:12px;border-top:1px solid #edf2ec">' +
+        '<div style="display:flex;justify-content:flex-end;margin-bottom:10px">' +
+          '<button onclick="CD=\''+m+'-01\';go(\'d\')" style="display:flex;align-items:center;gap:4px;background:#eef6ea;color:#14532d;border:1.5px solid #a4cfa9;border-radius:20px;padding:5px 12px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer">' +
+            '<span>📅</span> रोजच्या नोंदी पहा ›' +
+          '</button>' +
+        '</div>' +
+        tbl +
+      '</div>' +
+    '</details>';
+  }).join("");
+}
 function vd(){const ym=CD.slice(0,7),pr=Object.keys(S.days).filter(k=>k<CD&&!S.days[k].h).sort().pop(),q=(S.days[pr]||{}).c||{},d=S.days[CD]||{},c=d.c&&Object.keys(d.c).length?d.c:q,known=NC.includes(d.hr);
 $("v").innerHTML='<div class="c"><label>दिनांक ('+WD[wd(CD)]+')</label><input type="date" id="dt" value="'+CD+'" onchange="CD=this.value;vd()"><label>पाककृती</label><select id="m" onchange="vm()"><option value="" disabled '+(!d.h&&!d.m?"selected":"")+'>पाककृती निवडा</option><option value="-" style="color:#a4271d" '+(d.h?"selected":"")+'>⛔ आज आहार शिजवला नाही</option>'+S.menus.map(m=>'<option '+(!d.h&&m.n==d.m?"selected":"")+'>'+m.n+'</option>').join("")+(d.h||!d.m||S.menus.some(x=>x.n==d.m)?"":'<option selected>'+esc(d.m)+'</option>')+'</select><div id="nc"><label>कारण</label><select id="hs" onchange="vm()">'+NC.map(x=>'<option '+(x==(known?d.hr:d.hr?"इतर":"")?"selected":"")+'>'+x+'</option>').join("")+'</select><input id="hr" value="'+esc(!known&&d.hr?d.hr:"")+'" placeholder="कारण लिहा…"><label><input type="checkbox" id="w" '+(d.w?"checked":"")+'> हा दिवस \'कार्यदिन\' म्हणून नोंदवा</label><p style="font-size:12px">आहार शिजला नसला तरी शाळा सुरू असल्यास हे निवडा. साठ्यातून काही वजा होणार नाही, पण कार्यदिनात मोजला जाईल.</p></div><div id="ok">'+gs().map(g=>'<div style="margin:12px 0 6px;padding:8px;background:#f9fbf8;border:1px solid #d5dccf;border-radius:6px"><b style="color:#14532d;font-size:14px">'+GN[g]+' स्वतंत्र नोंद</b><table style="margin-top:6px"><tr><th>इयत्ता<th>पट<th>हजर<th>लाभार्थी</tr>'+S.cls.filter(k=>g?k>=6:k<=5).map(k=>{const x=c[k]||[0,0,0];return'<tr><td><b>'+k+' वी</b><td><input type="number" min="0" id="r'+k+'" value="'+x[0]+'"><td><input type="number" min="0" id="p'+k+'" value="'+x[1]+'"><td><input type="number" min="0" id="b'+k+'" value="'+x[2]+'"></tr>'}).join("")+'<tr style="background:#eef4ec;font-weight:700"><td>एकूण '+(g?"6 ते 8":"1 ते 5")+'<td id="tr'+g+'">0<td id="tp'+g+'">0<td id="tb'+g+'">0</tr></table></div>').join("")+'<label>पूरक आहार</label><select id="s"><option value="">दिला नाही</option>'+S.sup.map(x=>'<option '+(x==d.s?"selected":"")+'>'+x+'</option>').join("")+'</select><div id="pv"></div></div><button class="b" onclick="sd()">सेव्ह करा</button><button class="b r" onclick="dd()">ही नोंद हटवा</button></div><div class="c"><h3>'+MN[+ym.slice(5)-1]+' महिन्यातील नोंदी</h3><table><tr><th>तारीख<th>लाभार्थी 1-5<th>लाभार्थी 6-8<th>एकूण ताटे<th>पाककृती / कारण</tr>'+Object.keys(S.days).filter(k=>k.startsWith(ym)).sort().map(k=>{const e=S.days[k];return'<tr onclick="CD=\''+k+'\';vd()"><td>'+dm(k)+'<td>'+(e.h?"—":e.a1||0)+'<td>'+(e.h?"—":e.a2||0)+'<td><b>'+(e.h?"—":(e.a1||0)+(e.a2||0))+'</b><td class="l">'+(e.h?e.hr:e.m)+'</td></tr>'}).join("")+'</table></div>';
 document.querySelectorAll("#ok input[type=number]").forEach(i=>i.oninput=()=>{if(i.id[0]=="p"){const b=$("b"+i.id.slice(1));if(!b.dataset.m)b.value=i.value}if(i.id[0]=="b")i.dataset.m=1;pv()});vm()}
@@ -323,7 +490,72 @@ function vt(){
   }else if(SUB_T==4){
     content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा. हिरवा वाटाणा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="नग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="धान्‍यादीचे नाव..."><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
   }else{
-    content='<div class="c"><h3>Google Drive sync</h3><details class="np" '+(DEFAULT_CID.startsWith("PASTE")?"open":"")+'><summary style="font-size:12px">प्रगत: स्वतःचा Google Client ID</summary><label>Google Client ID</label><input value="'+esc(cid().startsWith("PASTE")?"":cid())+'" oninput="localStorage.mdmcid=this.value.trim();TK=null"></details><button class="b" onclick="sync(1)">Drive शी जोडा / आता sync करा</button><label style="margin-top:12px">Google खाते (ईमेल) — ऐच्छिक</label><input type="email" placeholder="उदा. tumche@gmail.com" value="'+esc(localStorage.mdmhint||"")+'" oninput="localStorage.mdmhint=this.value.trim().toLowerCase()"><p style="font-size:12px;color:#555;margin:2px 0 8px">येथे Drive साठी वापरायचा Gmail भरला की Google "Choose an account" पान दाखवत नाही, त्यामुळे 400 एरर टळतो. पहिल्या यशस्वी sync नंतर हा आपोआप भरला जातो. दुसरे खाते वापरायचे असल्यास तो बदला किंवा रिकामा करा.</p><label style="display:flex;gap:8px;align-items:center;margin-top:12px;color:inherit;font-size:14px"><input type="checkbox" '+(localStorage.mdmauto=="1"?"checked":"")+' onchange="localStorage.mdmauto=this.checked?\'1\':\'0\'"> प्रत्येक नोंदीनंतर आपोआप Drive sync करा (ऐच्छिक)</label><p style="font-size:12px;margin:8px 0 0;color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</p><p id="gs" style="font-size:12px">'+GS+'</p><p style="font-size:12px;color:#555">Google खाते निवडताना 400 येत असेल तर: (1) खाते दाबण्याआधी एकदा Back दाबा, मग खाते निवडा; (2) वरचा Google ईमेल रकाना भरा; (3) किंवा Chrome ब्राउझरमध्ये ही लिंक उघडून sync करा; (4) किंवा खालील "बॅकअप शेअर करा" वापरा.</p></div><div class="c"><h3>डेटा बॅकअप व रिस्टोअर</h3><button class="b" style="margin:0" onclick="bkp()">📤 बॅकअप शेअर करा (Drive / WhatsApp / ईमेल)</button><button class="b w" style="margin:8px 0 0" onclick="exp()">💾 फक्त डाउनलोड करा</button><p style="font-size:12px;margin:8px 0 0;color:#4a5a4d">Google लॉगिन लागत नाही. '+(localStorage.mdmbk?"शेवटचा बॅकअप शेअर: "+dm(ds2(new Date(+localStorage.mdmbk)))+". ":"")+'Drive sync अडले तरी हा पर्याय नेहमी चालतो. फाइल .txt म्हणून जाते (फोन फक्त अशाच फाइल शेअर करू देतो). परत आणताना खालील "Restore" मध्ये तीच फाइल निवडा.</p><label style="margin-top:12px">बॅकअप फाइल पुनर्स्थापित (Restore) करा</label><input type="file" accept=".json,.txt,text/plain,application/json" onchange="imp(event)"></div><div class="c"><h3>app शेअर करा</h3><button class="b" onclick="shr()">📲 app ची लिंक इतर शाळांना शेअर करा</button></div>';
+    content='<div class="c">' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
+        '<svg width="22" height="22" viewBox="0 0 87.3 78" style="flex-none:1"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>' +
+        '<h3 style="margin:0;font-size:17px;color:#14532d">Google Drive Sync</h3>' +
+      '</div>' +
+
+      '<button class="b" style="margin:0;width:100%;padding:13px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 3px 8px #0002" onclick="sync(1)">' +
+        '<svg width="18" height="18" viewBox="0 0 87.3 78"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#fff"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#fff"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#fff"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#fff"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#fff"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#fff"/></svg>' +
+        '<span>Drive शी जोडा / आता sync करा</span>' +
+      '</button>' +
+
+      '<div style="background:#f9fbf8;border:1px solid #dbe3d8;border-radius:8px;padding:10px;margin-top:12px">' +
+        '<label style="margin:0 0 4px;font-weight:700;color:#14532d">Google खाते (ईमेल) — ऐच्छिक</label>' +
+        '<input type="email" style="background:#fff;border:1.5px solid #aab8a9" placeholder="उदा.zpschool@gmail.com" value="'+esc(localStorage.mdmhint||"")+'" oninput="localStorage.mdmhint=this.value.trim().toLowerCase()">' +
+        '<p style="font-size:12px;color:#556b5a;margin:6px 0 0;line-height:1.5">💡 येथे Gmail भरल्यास Google "Choose an account" पान टाळते, त्यामुळे 400 एरर येत नाही.</p>' +
+      '</div>' +
+
+      '<label style="display:flex;align-items:center;gap:10px;margin-top:12px;background:#f3f6f1;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:14px;color:#1d2a1f">' +
+        '<input type="checkbox" style="width:18px;height:18px" '+(localStorage.mdmauto=="1"?"checked":"")+' onchange="localStorage.mdmauto=this.checked?\'1\':\'0\'">' +
+        '<span>प्रत्येक नोंदीनंतर आपोआप Drive sync करा (ऐच्छिक)</span>' +
+      '</label>' +
+
+      '<div style="background:#eef6ea;border-left:4px solid #14532d;border-radius:0 8px 8px 0;padding:8px 12px;margin-top:12px;font-size:12px;line-height:1.6">' +
+        '<div id="gs" style="font-weight:700;color:#14532d;margin-bottom:2px">'+GS+'</div>' +
+        '<div style="color:'+(old()?"#b42318":"#4a5a4d")+'">'+lst()+'</div>' +
+      '</div>' +
+
+      '<details style="margin-top:12px;background:#fff8ea;border:1px solid #f1cf8e;border-radius:8px;padding:8px 10px;font-size:12px;line-height:1.6">' +
+        '<summary style="font-weight:700;color:#8f4b00;cursor:pointer">❓ Google खाते निवडताना 400 एरर आल्यास उपाय</summary>' +
+        '<p style="margin:6px 0 0;color:#555">१) खाते दाबण्याआधी एकदा <b>Back</b> दाबा, मग खाते निवडा.<br>२) वरचा Google ईमेल रकाना भरा.<br>३) किंवा Chrome ब्राउझरमध्ये उघडून sync करा.<br>४) किंवा खालील "बॅकअप शेअर करा" वापरा.</p>' +
+      '</details>' +
+
+      '<details class="np" style="margin-top:8px" '+(DEFAULT_CID.startsWith("PASTE")?"open":"")+'>' +
+        '<summary style="font-size:12px;color:#5b6b5e;cursor:pointer">⚙️ प्रगत: स्वतःचा Google Client ID</summary>' +
+        '<input style="margin-top:6px" value="'+esc(cid().startsWith("PASTE")?"":cid())+'" oninput="localStorage.mdmcid=this.value.trim();TK=null">' +
+      '</details>' +
+    '</div>' +
+
+    '<div class="c">' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
+        '<span style="font-size:20px">📦</span>' +
+        '<h3 style="margin:0;font-size:17px;color:#14532d">डेटा बॅकअप व रिस्टोअर</h3>' +
+      '</div>' +
+
+      '<button class="b" style="margin:0;width:100%;padding:12px;background:#8f4b00;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px" onclick="bkp()">' +
+        '<span>📤</span> बॅकअप शेअर करा (Drive / WhatsApp)' +
+      '</button>' +
+      
+      '<button class="b w" style="margin:8px 0 0;width:100%;padding:10px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px" onclick="exp()">' +
+        '<span>💾</span> फक्त फाइल डाउनलोड करा' +
+      '</button>' +
+
+      '<p style="font-size:12px;margin:8px 0 0;color:#5b6b5e;line-height:1.5">' +
+        (localStorage.mdmbk?"शेवटचा बॅकअप शेअर: <b>"+dm(ds2(new Date(+localStorage.mdmbk)))+"</b>.<br>":"") +
+        'Google लॉगिन लागत नाही. Drive अडकले तरी हा पर्याय सुरक्षित चालतो.' +
+      '</p>' +
+
+      '<div style="border-top:1px dashed #d5dccf;margin-top:12px;padding-top:10px">' +
+        '<label style="margin:0 0 6px;font-weight:700;color:#14532d">बॅकअप फाइल पुनर्स्थापित (Restore) करा</label>' +
+        '<input type="file" accept=".json,.txt,text/plain,application/json" onchange="imp(event)">' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="c" style="text-align:center">' +
+      '<button class="b" style="margin:0;width:100%;background:#0b5d2a" onclick="shr()">📲 app ची लिंक इतर शाळांना शेअर करा</button>' +
+    '</div>';
   }
   $("v").innerHTML=content+(SUB_T==3?"":'<div class="np" style="position:sticky;bottom:0;background:#f3f5ef;padding:10px 0;margin-top:12px"><button class="b" style="width:100%;margin:0;padding:12px;font-weight:700" onclick="ss()">💾 जतन करा (Save Settings)</button></div>');
 }
@@ -340,16 +572,34 @@ function mp(i,v){const p=DR.menus[CMenu].p;+v?p[i]=+v:delete p[i]}
 function am(){const n=$("nm").value.trim();if(!n)return;DR.menus.push({n,p:{}});CMenu=DR.menus.length-1;vt()}
 function xm(){if(!DR.menus[CMenu])return;DR.menus.splice(CMenu,1);CMenu=0;vt()}
 function exp(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:"application/json"}));a.download="mdm-backup-"+tod()+".json";a.click()}
-function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const L=JSON.parse(r.result);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;save();alert("बॅकअप यशस्वीरीत्या लोड झाला");DR=null;go("h")}catch(x){alert("चुकीची बॅकअप फाइल!")}};r.readAsText(f)}
+function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const L=JSON.parse(r.result);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm();save();alert("बॅकअप यशस्वीरीत्या लोड झाला");DR=null;go("h")}catch(x){alert("चुकीची बॅकअप फाइल!")}};r.readAsText(f)}
 
 // ---- रिपोर्ट ----
 const H=t=>'<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना<br>'+t+' ('+GP[RG||0]+') माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="font-size:12px;margin:4px 0 8px">'+S.sch.name+' | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | UDISE: '+S.sch.udise+' | जिल्हा: '+S.sch.jilha+'</p>';
 const SG='<p style="margin-top:36px;display:flex;justify-content:space-between"><span>अध्यक्ष<br>शाळा व्यवस्थापन समिती</span><span>मुख्याध्यापक / सचिव</span></p>';
 function rv(){if(RP==1){const o=S.mon[CM]||{},v=$("mv").value,h=$("mh").value;if((o.v||"")!=v||(o.hc||"")!=h){S.mon[CM]={...o,v,hc:h};save()}}RS=1;vr()}
-function vr(){if(!hg(RG))RG=gs()[0]||0;const mo=S.mon[CM]||{};
-const isLand=(RP==3||RP==4);
+function vr(){if(!AFY)AFY=getFY(tod());if(!hg(RG))RG=gs()[0]||0;const mo=S.mon[CM]||{};
+const isLand=(RP==3||RP==4||RP==6);
 $("pgs").textContent="@page{size:"+(isLand?"landscape":"portrait")+";margin:8mm}";
-$("v").innerHTML='<div class="c np"><h3>'+RN[RP]+'</h3><label>महिना निवडा</label><input type="month" value="'+CM+'" onchange="CM=this.value;RS=0;vr()">'+(RP<4&&gs().length>1?'<label>गट निवडा</label><select onchange="RG=+this.value;RS=0;vr()">'+gs().map(g=>'<option value="'+g+'" '+(g==RG?"selected":"")+'>'+GN[g]+'</option>').join("")+'</select>':"")+(RP==1?'<label>शाळा भेट संख्या</label><input type="number" min="0" id="mv" value="'+(mo.v||"")+'"><label>आरोग्य तपासणी (नोंद)</label><input id="mh" value="'+esc(mo.hc||"")+'" placeholder="उदा. 1 वेळा / तपासणी नाही">':"")+(S.sch.name?"":'<p style="color:#b45309;font-size:12px">⚠ शाळेची माहिती रिकामी आहे. सेटिंगमध्ये भरा किंवा Drive sync करा.</p>')+'<button class="b" style="width:100%" onclick="rv()">रिपोर्ट पहा</button></div>'+(RS?'<div class="c rp rp'+RP+'">'+[0,R1,R2,R3,R4,R5][RP]()+'</div><div class="np"><button class="b" style="width:100%;margin:0 0 12px" onclick="print()">🖨 प्रिंट / PDF डाउनलोड करा ('+(isLand?'लँडस्केप':'पोर्ट्रेट')+')</button></div>':"")}
+$("v").innerHTML='<div class="c np"><h3>'+RN[RP]+'</h3>'+(RP==6?'<label>आर्थिक वर्ष (एप्रिल ते मार्च)</label><select onchange="AFY=this.value;RS=0;vr()">'+fyOpts().map(y=>'<option '+(y==AFY?"selected":"")+'>'+y+'</option>').join("")+'</select>':'<label>महिना निवडा</label><input type="month" value="'+CM+'" onchange="CM=this.value;RS=0;vr()">')+((RP<4||RP==6)&&gs().length>1?'<label>गट निवडा</label><select onchange="RG=+this.value;RS=0;vr()">'+gs().map(g=>'<option value="'+g+'" '+(g==RG?"selected":"")+'>'+GN[g]+'</option>').join("")+'</select>':"")+(RP==1?'<label>शाळा भेट संख्या</label><input type="number" min="0" id="mv" value="'+(mo.v||"")+'"><label>आरोग्य तपासणी (नोंद)</label><input id="mh" value="'+esc(mo.hc||"")+'" placeholder="उदा. 1 वेळा / तपासणी नाही">':"")+(S.sch.name?"":'<p style="color:#b45309;font-size:12px">⚠ शाळेची माहिती रिकामी आहे. सेटिंगमध्ये भरा किंवा Drive sync करा.</p>')+'<button class="b" style="width:100%" onclick="rv()">रिपोर्ट पहा</button></div>'+(RS?'<div class="c rp rp'+RP+'">'+[0,R1,R2,R3,R4,R5,R6][RP]()+'</div><div class="np"><button class="b" style="width:100%;margin:0 0 12px" onclick="print()">🖨 प्रिंट / PDF डाउनलोड करा ('+(isLand?'लँडस्केप':'पोर्ट्रेट')+')</button></div>':"")}
+let AFY=null;
+function fyOpts(){
+  const ds=[...Object.keys(S.days),...S.inn.map(e=>e.d),S.opd,...(S.ob||[]).map(r=>r.d)].filter(Boolean).sort();
+  const cur=+getFY(tod()).slice(0,4),a=ds.length?+getFY(ds[0]).slice(0,4):cur,b=ds.length?Math.max(cur,+getFY(ds[ds.length-1]).slice(0,4)):cur,L=[];
+  for(let y=b;y>=Math.min(a,b);y--)L.push(y+"-"+String(y+1).slice(-2));
+  if(!L.includes(AFY))L.unshift(AFY);return L}
+function rollOf(ym,g){const r0=ms(ym,g).roll;if(r0)return r0;let r=0;Object.keys(S.days).sort().forEach(k=>{const d=S.days[k];if(k<=ym+"-31"&&!d.h&&((g?d.p2:d.p1)||0)>0)r=g?d.p2:d.p1});return r}
+function R6(){
+  const g=RG,y0=+AFY.slice(0,4),ym=[...Array(12)].map((_,i)=>{const m=(i+3)%12+1;return (m>=4?y0:y0+1)+"-"+String(m).padStart(2,"0")});
+  let first=null,last=0,tb=0,tben=0,tcook=0,tout=0;
+  const rows=ym.map((m,i)=>{
+    const c=calc(m,g),s=ms(m,g),R0=obFor(m+"-31"),rg=R0?R0.d:"";
+    const out=r3(S.inn.filter(e=>(e.g||0)==g&&e.t<0&&e.i==0&&e.d>=rg&&e.d.slice(0,7)==m).reduce((a,e)=>a+e.q,0));
+    const cook=r3(c.us[0]-out),tot=r3(c.o[0]+c.rc[0]);
+    if(first===null)first=c.o[0];last=c.c[0];tb+=c.rc[0];tben+=s.pl;tcook+=cook;tout+=out;
+    return '<tr><td>'+(i+1)+'<td class="l">'+MN[+m.slice(5)-1]+'-'+m.slice(0,4)+'<td>'+rollOf(m,g)+'<td>'+f3(c.o[0])+'<td>'+f3(c.rc[0])+'<td>'+f3(tot)+'<td>'+s.pl+'<td>'+f3(cook)+'<td>'+f3(c.c[0])+'<td class="l" style="font-size:11px">'+(out>0?'जावक '+f3(out)+' किलो':'')+'</tr>'}).join("");
+  const tr='<tr style="font-weight:700"><td colspan="2" style="text-align:right">एकूण (Total)<td><td>'+f3(first)+'<td>'+f3(tb)+'<td>'+f3(first+tb)+'<td>'+tben+'<td>'+f3(tcook)+'<td>'+f3(last)+'<td class="l" style="font-size:11px">'+(tout>0?'जावक '+f3(tout)+' किलो':'')+'</tr>';
+  return '<div style="text-align:center;line-height:1.9"><div>प्रधानमंत्री पोषण शक्ती योजना</div><div>शालेय पोषण आहार योजना सन '+AFY+' वार्षिक साठा नोंदवही नुसार (उपयोगिता प्रमाणपत्र) — <b>'+GP[g]+' ('+GN[g]+')</b></div><div>शाळेचे नाव व UDISE CODE - '+S.sch.name+' ('+S.sch.udise+')</div><div>केंद्र - '+S.sch.kendra+' तालुका - '+S.sch.taluka+' जिल्हा - '+S.sch.jilha+'</div><div>प्रपत्र ड एप्रिल '+y0+' ते मार्च '+(y0+1)+'</div></div><div class="sc" style="margin-top:8px"><table><thead><tr><th>अ.क्र.<th>महिना<th>पटसंख्या<th>मागील शिल्लक तांदूळ<th>चालू महिन्यातील प्राप्त तांदूळ<th>एकूण तांदूळ<th>एकूण लाभार्थी<th>शिजविण्यात आलेले तांदूळ<th>महिना अखेर शिल्लक तांदूळ<th>शेरा</tr></thead><tbody>'+rows+tr+'</tbody></table></div>'+SG}
 function R1(){const c=calc(CM,RG),s=ms(CM,RG),mo=S.mon[CM]||{};
 return H("मासिक उपयोगिता प्रमाणपत्र")+'<p><b>पटसंख्या:</b> '+s.roll+' | <b>एकूण कार्यदिन:</b> '+s.work+' | <b>एकूण लाभार्थी:</b> '+s.pl+' | <b>शिजवलेले दिवस:</b> '+s.ds.length+'</p><div class="sc"><table><thead><tr><th>अ.क्र.<th>वस्तूचे नाव<th>मागील शिल्लक<th>चालू महिना आवक<th>एकूण साठा<th>वापर / जावक<th>अखेर शिल्लक</tr></thead><tbody>'+cols(c).map((i,n)=>'<tr><td>'+(n+1)+'<td class="l">'+IT[i]+' ('+un(i)+')<td>'+fx(i,c.o[i])+'<td>'+fx(i,c.rc[i])+'<td>'+fx(i,c.o[i]+c.rc[i])+'<td>'+fx(i,c.us[i])+'<td>'+fx(i,c.c[i])+'</tr>').join("")+'</tbody></table></div><p style="font-size:13px;line-height:1.7;margin-top:10px">1) महिन्यातील एकूण ताटांची संख्या - <b>'+s.pl+'</b><br>2) इंधन व भाजीपाल्यासाठी खर्च केलेले अनुदान - <b>रु. '+(s.pl*(RG?S.fuel2:S.fuel)).toFixed(2)+'</b> (प्रति विद्यार्थी दर रु. '+(RG?S.fuel2:S.fuel)+')<br>3) स्वयंपाकी तथा मदतनीस मानधन - <b>रु. '+S.hon+'</b> (संख्या - '+S.cooks+')<br>4) शाळा भेट: '+(mo.v||0)+'<br>5) आरोग्य तपासणी: '+(mo.hc||"या महिन्यात तपासणी नाही")+'</p><p style="font-size:12px">प्रमाणित करण्यात येते की, वर नमूद केलेली माहिती दैनंदिन नोंदवहीवरून घेतलेली असून अचूक व बरोबर आहे.</p>'+SG}
 function R2(){const rows=MD().filter(k=>S.days[k]&&S.days[k].s&&(RG?S.days[k].a2:S.days[k].a1)>0).map((k,i)=>{const d=S.days[k];return'<tr><td>'+(i+1)+'<td>'+dm(k)+'<td>'+WD[wd(k)]+'<td>'+(RG?d.p2:d.p1)+'<td>'+(RG?d.a2:d.a1)+'<td>'+d.s+'</tr>'}).join("");
@@ -463,7 +713,7 @@ function parts(){
   }
   return{
     "Profiles.json":{ts:S.ts||0,sch:S.sch,cooks:S.cooks,hon:S.hon,fuel:S.fuel,fuel2:S.fuel2,cls:S.cls,lvl:S.lvl},
-    "Praman.json":{rL:S.rL,rU:S.rU,items:S.items,N:S.N,nv:S.nv,menus:S.menus},
+    "Praman.json":{rL:S.rL,rU:S.rU,items:S.items,N:S.N,nv:S.nv,dmv:S.dmv,menus:S.menus},
     "Opening_Stock.json":{inn:S.inn,op:S.op,op2:S.op2,opd:S.opd,ob:S.ob},
     "Daily_Entries.json":dl,
     "Meal_Not_Cook.json":mn,
@@ -477,7 +727,7 @@ function apply(p){
   S=Object.assign({},D,{ts:a.ts,cls:a.cls||D.cls,lvl:a.lvl||D.lvl,op:os.op||[],op2:os.op2||[],ob:os.ob||[],opd:os.opd||D.opd,sch:a.sch||D.sch,cooks:a.cooks??D.cooks,hon:a.hon??D.hon,fuel:a.fuel??D.fuel,fuel2:a.fuel2??a.fuel??D.fuel2,rL:b.rL??D.rL,rU:b.rU??D.rU,menus:b.menus||D.menus,N:b.N||D.N,items:b.items||JSON.parse(JSON.stringify(D.items)),inn:os.inn||[],mon:p["School_Visit.json"]||{},sup:sf.sup||D.sup,days:Object.assign({},p["Daily_Entries.json"],p["Meal_Not_Cook.json"])});
   const bd=sf.byDate||{};for(const k in bd)if(S.days[k])S.days[k].s=bd[k];
   if(!b.N)mig();else if(!b.nv)fixn();
-  S.nv=2;
+  S.nv=2;if(!b.dmv)addDm();
   ri();
   localStorage.mdm=JSON.stringify(S);
   localStorage.mdmls=S.ts;
@@ -562,13 +812,13 @@ const GD=[
 <p><b>MDM App</b> हे प्रधानमंत्री पोषण शक्ती निर्माण (शालेय पोषण आहार / मध्यान्ह भोजन) योजनेची रोजची नोंद, धान्य साठा आणि सर्व रिपोर्ट मोबाईलवर करण्यासाठी बनवलेले मोफत app आहे. मुख्याध्यापक आणि पोषण आहार प्रभारींसाठी.</p>
 <p>🔒 तुमचा डेटा तुमच्या फोनमध्ये साठवला जातो. Drive जोडले तर तुमच्या स्वतःच्या Google Drive मधील <b>MDM_Data</b> फोल्डरमध्ये जातो. कोणत्याही तिसऱ्या server वर पाठवला जात नाही.</p>
 <p><b>मुख्य वैशिष्ट्ये:</b></p>
-<ul><li>📋 दैनंदिन नोंद: इयत्तावार पट, हजर, लाभार्थी आणि पाककृती</li><li>🌾 धान्य, डाळी व मसाल्यांचा वापर आपोआप मोजला जातो</li><li>📦 आवक/जावक व साठा: 1 ते 5 वी आणि 6 ते 8 वी साठी वेगळा</li><li>📊 5 रिपोर्ट: उपयोगिता प्रमाणपत्र, दैनंदिन नोंद अहवाल, पूरक आहार अहवाल, प्रपत्र 'ड', चव नोंद रजिस्टर. प्रिंट / PDF</li><li>🍲 पाककृती आणि वस्तू तुम्हीच ठरवता (नवीन जोडा, बदला, लपवा)</li><li>☁️ Google Drive sync, बॅकअप शेअर आणि इंटरनेटशिवायही चालते</li></ul>`},
+<ul><li>📋 दैनंदिन नोंद: इयत्तावार पट, हजर, लाभार्थी आणि पाककृती</li><li>🌾 धान्य, डाळी व मसाल्यांचा वापर आपोआप मोजला जातो</li><li>📦 आवक/जावक व साठा: 1 ते 5 वी आणि 6 ते 8 वी साठी वेगळा</li><li>📊 6 रिपोर्ट: उपयोगिता प्रमाणपत्र, वार्षिक उपयोगिता प्रमाणपत्र, दैनंदिन नोंद अहवाल, पूरक आहार अहवाल, प्रपत्र 'ड', चव नोंद रजिस्टर. प्रिंट / PDF</li><li>🍲 पाककृती आणि वस्तू तुम्हीच ठरवता (नवीन जोडा, बदला, लपवा)</li><li>☁️ Google Drive sync, बॅकअप शेअर आणि इंटरनेटशिवायही चालते</li></ul>`},
 {n:2,ic:"🚀",t:"पहिल्यांदा वापरताना",s:"Getting Started",b:`
 <p>प्रथम वापरताना खालील पायऱ्या पूर्ण करा:</p>
 <div class="gfl"><span>⚙️ सेटिंग</span>➜<span>📦 सुरुवातीचा साठा</span>➜<span>📋 रोजची नोंद</span>➜<span>📊 रिपोर्ट</span></div>
 <ol><li><b>शाळा प्रोफाइल:</b> ☰ → सेटिंग → शाळा प्रोफाइल व वर्ग. शाळेचे नाव (आवश्यक), केंद्र, तालुका, UDISE, जिल्हा भरा, तुमच्या शाळेतील इयत्ता निवडा आणि <b>इंधन/भाजीपाला दर इ. 1 ते 5 व इ. 6 ते 8 साठी वेगवेगळे</b> भरा. खाली <b>💾 जतन करा</b>.</li>
 <li><b>प्रमाण:</b> सेटिंग → तांदूळ व धान्यादी प्रमाण. प्रति विद्यार्थी ग्रॅम भरा (1–5 वी व 6–8 वी चे वेगळे). जतन करा.</li>
-<li><b>पाककृती:</b> सेटिंग → पाककृती मेनू व्यवस्थापन. तुमचे मेनू तपासा किंवा नवीन जोडा. जतन करा.</li>
+<li><b>पाककृती:</b> सेटिंग → पाककृती मेनू व्यवस्थापन. app मध्ये 8 तयार पाककृती आहेत (सोयाबीन पुलाव, मूग शेवगा वरण भात, मूग डाळ खिचडी, व्हेजिटेबल पुलाव, मसाले भात, मटार पुलाव, चवळी खिचडी, मोड आलेले कडधान्य). तुमचे मेनू तपासा, नको असलेले हटवा किंवा नवीन जोडा. जिरे/मोहरी चे प्रमाण सेटिंग → तांदूळ व धान्यादी प्रमाण मध्ये भरल्यावरच त्यांचा वापर मोजला जातो. जतन करा.</li>
 <li><b>सुरुवातीचा साठा:</b> ☰ → आवक / जावक → सुरुवातीचा साठा (1 एप्रिल). सध्याची शिल्लक गटानुसार भरून जतन करा. <b>पुढच्या वर्षी 31 मार्चची शिल्लक आपोआप 1 एप्रिलला पुढे येते</b>; प्रत्यक्ष साठा वेगळा असेल तरच "➕ नवीन वर्षाचा साठा" नोंदवा (जुने महिने बदलत नाहीत).</li>
 <li><b>Drive जोडा (शिफारस):</b> सेटिंग → Drive शी जोडा व बॅकअप → "Drive शी जोडा / आता sync करा".</li>
 <li><b>रोजची नोंद:</b> मुख्य पान → <b>+ नवीन दैनंदिन नोंद</b>.</li></ol>
@@ -625,7 +875,7 @@ const GD=[
 <tr><td class="l">दैनंदिन नोंद अहवाल<td>लँडस्केप<td class="l">दिवसवार पट, लाभार्थी, पाककृती आणि वस्तू वापर</tr>
 <tr><td class="l">पूरक आहार अहवाल<td>पोर्ट्रेट<td class="l">पूरक आहाराचे दिवस</tr>
 <tr><td class="l">प्रपत्र 'ड'<td>लँडस्केप<td class="l">एका पानावर दोन्ही गट: तांदूळ व धान्यादी माहिती</tr>
-<tr><td class="l">चव नोंद रजिस्टर<td>पोर्ट्रेट<td class="l">महिन्याच्या तारखांचा रिकामा तक्ता, हाताने भरण्यासाठी</tr></table>
+<tr><td class="l">चव नोंद रजिस्टर<td>पोर्ट्रेट<td class="l">महिन्याच्या तारखांचा रिकामा तक्ता, हाताने भरण्यासाठी</tr><tr><td class="l">वार्षिक उपयोगिता प्रमाणपत्र<td>लँडस्केप<td class="l">आर्थिक वर्षाचे 12 महिन्यांचे तांदळाचे हिशोब, गटानुसार</tr></table>
 <div class="gtp">💡 उपयोगिता प्रमाणपत्रासाठी रिपोर्ट पाहण्यापूर्वी "शाळा भेट संख्या" आणि "आरोग्य तपासणी" भरा. सेटिंगमध्ये शाळेची माहिती भरलेली असेल तरच ती रिपोर्टच्या वर येते. पेपर पोर्ट्रेट/लँडस्केप आपोआप ठरतो.</div>`},
 {n:8,ic:"☁️",t:"Drive sync व बॅकअप",s:"Sync & Backup",b:`
 <ul><li><b>Drive जोडणे:</b> सेटिंग → Drive शी जोडा व बॅकअप → "Drive शी जोडा / आता sync करा". Google खाते निवडा आणि परवानगी द्या.</li>
@@ -666,9 +916,59 @@ function loginHelp(){
 }
 function shr(){const u=location.href.split("#")[0].replace(/index\.html$/,"");navigator.share?navigator.share({title:"MDM पोषण आहार नोंदवही",text:"शालेय पोषण आहार नोंदवही app",url:u}):prompt("लिंक कॉपी करा",u)}
 let IP=null;const SA=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
-addEventListener("beforeinstallprompt",e=>{e.preventDefault();IP=e});addEventListener("appinstalled",()=>{localStorage.mdminst=1;$("ib").style.display="none";toast("✔ app इन्स्टॉल झाला");const m=$("lpmsg");if(m)m.textContent="✔ App install झाला! आता होम स्क्रीनवरील आयकॉनवरून उघडा.";document.querySelectorAll("#lp .pb").forEach(b=>b.style.display="none")});
-if(!SA)$("ib").style.display="block";
-function ins(){if(IP){IP.prompt();IP.userChoice.then(()=>{IP=null})}else alert("Chrome मध्ये वरच्या ⋮ मेनूमधून 'Install app' किंवा 'Add to Home screen' निवडा.\n\niPhone वर Safari मध्ये Share बटण → 'Add to Home Screen'.")}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();IP=e});addEventListener("appinstalled", () => {
+  localStorage.mdminst = 1;
+  const ib = $("ib");
+  if (ib) ib.style.display = "none";
+  toast("✔ App यशस्वीरीत्या इन्स्टॉल झाले!");
+
+  // इन्स्टॉल पूर्ण झाल्यावर दिसणारे सुंदर कार्ड
+  const m = $("lpmsg");
+  if (m) {
+    m.innerHTML = '<div class="inst-success-box">' +
+      '<span class="inst-success-icon">🎉</span>' +
+      '<b style="font-size:16px;color:#14532d;display:block;margin-bottom:4px">अभिनंदन! App इन्स्टॉल झाले आहे.</b>' +
+      '<p style="font-size:13px;color:#374151;margin:0 0 10px;line-height:1.5">आता मोबाईलच्या मुख्य स्क्रीनवर (Home Screen) <b>MDM App</b> चा आयकॉन तयार झाला आहे.</p>' +
+      '<button class="b" style="margin:0;width:100%;padding:10px;font-size:14px;background:#14532d;border-radius:8px;font-weight:700" onclick="lpGo()">🚀 थेट App उघडा</button>' +
+    '</div>';
+  }
+  document.querySelectorAll("#lp .pb, #lp .sb").forEach(b => b.style.display = "none");
+});
+
+if (!SA) $("ib").style.display = "block";
+
+function ins() {
+  if (IP) {
+    // बटणावर ३-डॉट्स ॲनिमेशन सुरू करणे
+    const btn = document.querySelector("#lp .pb");
+    const origHTML = btn ? btn.innerHTML : "";
+    if (btn) {
+      btn.innerHTML = '<span class="dots-loader"><span></span><span></span><span></span></span> इन्स्टॉल होत आहे…';
+      btn.style.opacity = "0.9";
+      btn.style.pointerEvents = "none";
+    }
+
+    IP.prompt();
+    IP.userChoice.then(choiceResult => {
+      if (choiceResult.outcome !== "accepted") {
+        if (btn) {
+          btn.innerHTML = origHTML;
+          btn.style.opacity = "1";
+          btn.style.pointerEvents = "auto";
+        }
+      }
+      IP = null;
+    }).catch(() => {
+      if (btn) {
+        btn.innerHTML = origHTML;
+        btn.style.opacity = "1";
+        btn.style.pointerEvents = "auto";
+      }
+    });
+  } else {
+    alert("Chrome मध्ये उजव्या कोपऱ्यातील तीन ठिपक्यांच्या (⋮) मेनूमधून 'Install app' किंवा 'Add to Home screen' निवडा.\n\niPhone वर Safari मध्ये Share बटण → 'Add to Home Screen'.");
+  }
+}
 function lpGo(){sessionStorage.mdmland=1;$("lp").style.display="none";document.body.style.overflow="";go(S.sch.name?"h":"t")}
 if(SA)localStorage.mdminst=1;
 if(!SA&&!localStorage.mdminst&&!sessionStorage.mdmland){
