@@ -20,7 +20,7 @@
 <style>
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 'Noto Sans Devanagari',system-ui,sans-serif;background:#f3f5ef;color:#1d2a1f}
 header{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:10px;background:#14532d;color:#fff;padding:10px 12px}
-#mb{background:none;border:0;color:#fff;font-size:28px;line-height:1;padding:0 6px;cursor:pointer}header b{font-size:17px;display:block;line-height:1.25}header small{font-size:11px;color:#bfdcc8}
+#mb{background:none;border:0;color:#fff;font-size:28px;line-height:1;padding:0 6px;cursor:pointer}header b{font-size:17px;display:block;line-height:1.25}header small{font-size:11px;color:#bfdcc8}#bk{display:none;width:38px;height:38px;flex-shrink:0;padding:0;border:0;border-radius:50%;background:#ffffff26;align-items:center;justify-content:center;cursor:pointer}#bk:active{background:#ffffff4d}header>div{min-width:0;flex:1}header b,header small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #ov{position:fixed;inset:0;background:#0008;display:none;z-index:9}#ov.o{display:block}
 #dw{position:fixed;top:0;bottom:0;left:0;width:80%;max-width:320px;background:#fff;z-index:10;transform:translateX(-102%);transition:transform .25s;display:flex;flex-direction:column}#dw.o{transform:none}
 .dh{background:#14532d;color:#fff;padding:26px 16px 16px}.dh b{display:block;font-size:18px}.dh small{color:#bfdcc8;font-size:12px}
@@ -92,7 +92,7 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
   margin-bottom: 6px;
   display: block;
 }
-</style><style id="pgs">@page{size:portrait;margin:8mm}</style></head><body><header class="np"><button id="mb" onclick="dr(1)" aria-label="मेनू">☰</button><div><b id="ht">मुख्य</b><small id="hsub"></small></div></header>
+</style><style id="pgs">@page{size:portrait;margin:8mm}</style></head><body><header class="np"><button id="mb" onclick="dr(1)" aria-label="मेनू">☰</button><button id="bk" onclick="goBack()" aria-label="मागे" title="मागे"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button><div><b id="ht">मुख्य</b><small id="hsub"></small></div></header>
 <div id="ov" class="np" onclick="dr(0)"></div>
 <aside id="dw" class="np"><div class="dh"><b>पोषण आहार नोंदवही</b><small id="dn"></small></div>
 <nav>
@@ -236,6 +236,7 @@ function bal(dt,ex,g,inc){
 function chk(d){const er=[],wr=[];S.cls.forEach(k=>{const x=(d.c||{})[k];if(!x)return;const[r,p,b]=x;if([r,p,b].some(v=>v<0||v%1))er.push("इयत्ता "+k+": संख्या ऋण किंवा दशांश असू नये");else{if(p>r)wr.push("इयत्ता "+k+": हजर ("+p+") पटापेक्षा ("+r+") जास्त आहेत");if(b>p)wr.push("इयत्ता "+k+": लाभार्थी ("+b+") हजेरीपेक्षा ("+p+") जास्त आहेत")}});return{er,wr}}
 const wh=({er,wr})=>(er.length?'<p style="color:#b42318">⛔ '+er.join("<br>⛔ ")+'</p>':"")+(wr.length?'<p style="color:#b45309">⚠️ '+wr.join("<br>⚠️ ")+'</p>':"");
 function dr(o){$("dw").classList.toggle("o",!!o);$("ov").classList.toggle("o",!!o)}
+function goBack(){go("h")}
 function togg(id,arid){const e=$(id),o=e.style.display=="block";e.style.display=o?"none":"block";$(arid).textContent=o?"▾":"▴"}
 
 const RN={6:"वार्षिक उपयोगिता प्रमाणपत्र",1:"उपयोगिता प्रमाणपत्र",2:"पूरक आहार अहवाल",3:"दैनंदिन नोंद अहवाल",4:"प्रपत्र 'ड'",5:"चव नोंद रजिस्टर"};
@@ -269,6 +270,7 @@ function go(t,x){
   else if(t=="c")title="संपर्क";
   else if(t=="g")title="App गाईड";
   $("ht").textContent=title;
+  {const bk=$("bk");if(bk)bk.style.display=(t=="h")?"none":"flex"}
   $("hsub").textContent=$("dn").textContent=(S.sch.name||"")+(S.sch.udise?" • UDISE "+S.sch.udise:"");
   scrollTo(0,0);
   ({h:vh,d:vd,s:vs,t:vt,r:vr,n:vn,c:vc,g:vg})[t]();
@@ -575,7 +577,7 @@ function exp(){const a=document.createElement("a");a.href=URL.createObjectURL(ne
 function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const L=JSON.parse(r.result);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm();save();alert("बॅकअप यशस्वीरीत्या लोड झाला");DR=null;go("h")}catch(x){alert("चुकीची बॅकअप फाइल!")}};r.readAsText(f)}
 
 // ---- रिपोर्ट ----
-const H=t=>'<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना<br>'+t+' ('+GP[RG||0]+') माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="font-size:12px;margin:4px 0 8px">'+S.sch.name+' | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | UDISE: '+S.sch.udise+' | जिल्हा: '+S.sch.jilha+'</p>';
+const H=t=>'<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना<br>'+t+' ('+GP[RG||0]+') माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="font-size:12px;margin:4px 0 8px;text-align:center">'+S.sch.name+' | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | UDISE: '+S.sch.udise+' | जिल्हा: '+S.sch.jilha+'</p>';
 const SG='<p style="margin-top:36px;display:flex;justify-content:space-between"><span>अध्यक्ष<br>शाळा व्यवस्थापन समिती</span><span>मुख्याध्यापक / सचिव</span></p>';
 function rv(){if(RP==1){const o=S.mon[CM]||{},v=$("mv").value,h=$("mh").value;if((o.v||"")!=v||(o.hc||"")!=h){S.mon[CM]={...o,v,hc:h};save()}}RS=1;vr()}
 function vr(){if(!AFY)AFY=getFY(tod());if(!hg(RG))RG=gs()[0]||0;const mo=S.mon[CM]||{};
@@ -625,11 +627,11 @@ function R4(){
     if(!cl.length)return'<p style="margin-top:8px"><b>धान्य व धान्यादी माहिती '+GN[g]+' :</b> या महिन्यात कोणतीही नोंद नाही.</p>';
     return'<p style="margin:12px 0 4px"><b>धान्य व माल तपशील: '+GN[g]+'</b></p><div class="sc"><table><thead><tr><th class="l">तपशील'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+[["मागील शिल्लक","o"],["प्राप्त (आवक)","rc"],["एकूण",""],["खर्च (वापर)","us"],["अखेर शिल्लक","c"]].map(([t,k])=>'<tr><td class="l"><b>'+t+'</b>'+cl.map(i=>'<td>'+fx(i,k?c[k][i]:c.o[i]+c.rc[i])+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>'}).join("");
     
-  const SG4 = '<p style="margin-top:36px;text-align:right"><span>मुख्याध्यापक / सचिव</span></p>';
+  const SG4 = '<p style="margin-top:36px;text-align:right"><span>मुख्याध्यापक</span></p>';
 
-return'<div style="text-align:center"><b>पीएम पोषण आहार योजना - प्रपत्र \'ड\'</b></div><p style="font-size:12px;margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | माहे: <b>'+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></p>'+t1+t2+SG4;
+return '<div style="text-align:center"><b>प्रधानमंत्री पोषण आहार योजना - प्रपत्र \'ड\'</b></div><p style="font-size:12px;margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | माहे: <b>'+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></p>'+t1+t2+SG4;
 }
-function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
+function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
 // ---- Google Drive Sync ----
 const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
@@ -992,5 +994,15 @@ if(!SA&&!localStorage.mdminst&&!sessionStorage.mdmland){
   $("lp").style.display="flex";document.body.style.overflow="hidden";
   if(navigator.getInstalledRelatedApps)navigator.getInstalledRelatedApps().then(r=>{if(r&&r.length){localStorage.mdminst=1;lpGo()}}).catch(()=>{});
 }else go(S.sch.name?"h":"t");
+// ---- Android मागे (system back) बटण: उघडी विंडो/मेनू बंद करा, इतर पानावरून पहिल्या पानावर या, पहिल्या पानावर app बंद ----
+function bgInit(){try{if(history.state&&history.state.g)return;history.replaceState({r:1},"");history.pushState({g:1},"")}catch(e){}}
+function bgGuard(){try{history.pushState({g:1},"")}catch(e){}}
+addEventListener("popstate",()=>{
+  if($("md")&&$("md").style.display==="flex"){$("md").style.display="none";return bgGuard()}
+  if($("dw")&&$("dw").classList.contains("o")){dr(0);return bgGuard()}
+  if(T!="h"){go("h");return bgGuard()}
+  history.back();
+});
+bgInit();
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script></body></html>
