@@ -104,6 +104,7 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
   <button data-s="2" onclick="go('s',2)">सुरुवातीचा साठा (1 एप्रिल)</button>
   <button data-s="3" onclick="go('s',3)">आवक / जावक यादी</button>
 </div>
+<button data-t="dm" onclick="go('dm')">📥&nbsp; धान्य मागणी नोंद</button>
 <button data-t="r" onclick="togg('rsub','rar')">📊&nbsp; रिपोर्ट <span id="rar" style="float:right">▾</span></button>
 <div id="rsub" class="smenu" style="display:none">
   <button data-r="1" onclick="go('r',1)">मासिक उपयोगिता प्रमाणपत्र</button>
@@ -112,6 +113,7 @@ td input{padding:6px;text-align:center;min-width:48px}table{border-collapse:coll
   <button data-r="2" onclick="go('r',2)">पूरक आहार अहवाल</button>
   <button data-r="4" onclick="go('r',4)">प्रपत्र 'ड'</button>
   <button data-r="5" onclick="go('r',5)">चव नोंद रजिस्टर</button>
+  <button data-r="7" onclick="go('r',7)">मासिक धान्य मागणी अहवाल</button>
 </div>
 <button data-t="n" onclick="go('n')">📋&nbsp; आजचा शिल्लक साठा</button>
 <button data-t="t" onclick="togg('tsub','tar')">⚙️&nbsp; सेटिंग <span id="tar" style="float:right">▾</span></button>
@@ -159,8 +161,8 @@ const NEWM=[
 {n:"मोड आलेले कडधान्य (स्प्राऊट्स)",p:{6:1,10:1,11:1,12:1,13:1,14:1,17:1}}];
 const D={sch:{name:"",kendra:"",taluka:"",jilha:"",udise:""},rL:100,rU:150,N:[[100,150],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[20,30],[.25,.25],[2,2],[.75,.75],[0,0],[0,0],[0,0],[0,0],[5,5],[0,0],[0,0],[0,0],[0,0]],items:IT0.map((n,i)=>({n,u:i==21?"नग":"किलो",h:0})),fuel:2.59,fuel2:2.59,hon:5000,cooks:2,lvl:"प्राथमिक",
 menus:[{n:"सोयाबीन पुलाव",p:{9:1,10:1,11:1,12:1,17:1}},{n:"मूग शेवगा वरण भात",p:{7:.5,8:.5,10:1,11:1,12:1,17:1}},{n:"मूग डाळ खिचडी",p:{2:1,10:1,11:1,12:1,17:1}}].concat(JSON.parse(JSON.stringify(NEWM))),dmv:1,
-sup:["चिक्की","शेंगा लाडू","राजगिरा लाडू"],cls:[1,2,3,4,5,6,7,8],op:[],op2:[],opd:"2026-04-01",ob:[],days:{},inn:[],mon:{}};
-let S;try{const L=JSON.parse(localStorage.mdm);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm()}catch(e){S=JSON.parse(JSON.stringify(D))}
+sup:["चिक्की","शेंगा लाडू","राजगिरा लाडू"],cls:[1,2,3,4,5,6,7,8],op:[],op2:[],opd:"2026-04-01",ob:[],days:{},inn:[],mon:{},demands:[]};
+let S;try{const L=JSON.parse(localStorage.mdm);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.demands)S.demands=[];if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm()}catch(e){S=JSON.parse(JSON.stringify(D))}
 function ri(){IT=S.items.map(x=>x.n);while(S.N.length<S.items.length)S.N.push([0,0])}ri();
 const vis=()=>IT.map((_,i)=>i).filter(i=>!S.items[i].h);
 const cols=c=>IT.map((_,i)=>i).filter(i=>!S.items[i].h || (r3(c.o[i])!=0 || r3(c.rc[i])!=0 || r3(c.us[i])!=0 || r3(c.c[i])!=0));
@@ -169,7 +171,7 @@ function fixn(){for(let i=1;i<10;i++)if(S.N[i][0]==20&&S.N[i][1]==20)S.N[i][1]=3
 function mig(){S.N=JSON.parse(JSON.stringify(D.N));S.N[0]=[S.rL||100,S.rU||150];S.menus=JSON.parse(JSON.stringify(S.menus));S.menus.forEach(m=>{for(const k in m.p){const n=S.N[k][0];m.p[k]=n>0?Math.round(m.p[k]/n*100)/100:1}})}
 const $=i=>document.getElementById(i),r3=x=>Math.round(x*1000)/1000,f3=x=>r3(x).toFixed(3),fx=(i,x)=>un(i)=="नग"?Math.round(x):f3(x),un=i=>((S.items||[])[i]||{}).u||"किलो",esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");let SQ,GS="";
 const hfn=t=>{let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return h+"/"+t.length};
-const SNK=["sch","cls","cooks","hon","fuel","fuel2","items","N","menus","sup","op","op2","opd","ob","days","inn","mon"];
+const SNK=["sch","cls","cooks","hon","fuel","fuel2","items","N","menus","sup","op","op2","opd","ob","days","inn","mon","demands"];
 const snap=()=>hfn(JSON.stringify(SNK.map(k=>S[k]===undefined?null:S[k])));
 const pend=()=>{if(!localStorage.mdmok)return false;if(!localStorage.mdmsh2){if((+localStorage.mdmls||0)>=(S.ts||0)){localStorage.mdmsh2=snap();return false}return true}return localStorage.mdmsh2!=snap()};
 const old=()=>!!localStorage.mdmok&&(!+localStorage.mdmlt||Date.now()-localStorage.mdmlt>30*864e5);
@@ -239,7 +241,7 @@ function dr(o){$("dw").classList.toggle("o",!!o);$("ov").classList.toggle("o",!!
 function goBack(){go("h")}
 function togg(id,arid){const e=$(id),o=e.style.display=="block";e.style.display=o?"none":"block";$(arid).textContent=o?"▾":"▴"}
 
-const RN={6:"वार्षिक उपयोगिता प्रमाणपत्र",1:"उपयोगिता प्रमाणपत्र",2:"पूरक आहार अहवाल",3:"दैनंदिन नोंद अहवाल",4:"प्रपत्र 'ड'",5:"चव नोंद रजिस्टर"};
+const RN={6:"वार्षिक उपयोगिता प्रमाणपत्र",1:"उपयोगिता प्रमाणपत्र",2:"पूरक आहार अहवाल",3:"दैनंदिन नोंद अहवाल",4:"प्रपत्र 'ड'",5:"चव नोंद रजिस्टर",7:"मासिक धान्य मागणी अहवाल"};
 const SN=["आवक धान्य नोंद","जावक धान्य नोंद","सुरुवातीचा साठा (1 एप्रिल)","आवक / जावक यादी"];
 const TN=["शाळा प्रोफाइल व वर्ग","तांदूळ व धान्यादी प्रमाण","पाककृती मेनू व्यवस्थापन","Drive शी जोडा व बॅकअप","धान्यादी वस्तू व्यवस्थापन"];
 
@@ -263,6 +265,7 @@ function go(t,x){
   if(t=="t"){$("tsub").style.display="block";$("tar").textContent="▴"}
   let title="दैनंदिन नोंद";
   if(t=="d")title="नवीन नोंद";
+  else if(t=="dm")title="धान्य मागणी नोंद";
   else if(t=="s")title="आवक/जावक: "+SN[SUB_S];
   else if(t=="t")title="सेटिंग: "+TN[SUB_T];
   else if(t=="r")title=RN[RP];
@@ -273,7 +276,7 @@ function go(t,x){
   {const bk=$("bk");if(bk)bk.style.display=(t=="h")?"none":"flex"}
   $("hsub").textContent=$("dn").textContent=(S.sch.name||"")+(S.sch.udise?" • UDISE "+S.sch.udise:"");
   scrollTo(0,0);
-  ({h:vh,d:vd,s:vs,t:vt,r:vr,n:vn,c:vc,g:vg})[t]();
+  ({h:vh,d:vd,dm:vdm,s:vs,t:vt,r:vr,n:vn,c:vc,g:vg})[t]();
 }
 
 const GN=["इ. 1 ते 5 वी","इ. 6 ते 8 वी"],GL=["प्राथमिक (1 ते 5)","उच्च प्राथमिक (6 ते 8)"],GP=["प्राथमिक","उच्च प्राथमिक"],hg=g=>S.cls.some(k=>g?k>=6:k<=5),gs=()=>[0,1].filter(hg);
@@ -472,6 +475,42 @@ function ai(tType){const q=+$("sq").value,dt=$("sdt").value,i=+$("si").value,g=+
 const add=()=>{S.inn.push({d:dt,i,q,t:tType,r:$("sr").value,g});selFY=getFY(dt);save();go('s',3);done("✔ नोंद यशस्वीरीत्या जतन झाली")},have=bal(dt,"",g)[i];
 if(tType<0&&q>have+1e-9)ask('<b>⚠️ साठा अपुरा</b><p>'+GN[g]+' — '+IT[i]+': जावक '+q+' '+un(i)+', पण '+dm(dt)+' रोजी उपलब्ध साठा फक्त '+fx(i,Math.max(have,0))+' '+un(i)+'. साठा ऋण होईल.</p>',add,"तरीही जोडा");else add()}
 
+// ---- धान्य मागणी नोंद (Demand Entry) ----
+function vdm(){
+  const G = gs();
+  let content = '<div class="c"><h3>📥 धान्य मागणी नोंद</h3>' +
+    '<label>गट निवडा</label><select id="dmg">' + G.map(g => '<option value="'+g+'">'+GN[g]+'</option>').join("") + '</select>' +
+    '<label>मागणी दिनांक</label><input type="date" id="dmdt" value="'+tod()+'">' +
+    '<div class="sc"><table style="margin-top:10px"><thead><tr><th class="l">वस्तू / धान्य</th><th>मागणी प्रमाण (किलो / नग)</th></tr></thead><tbody>' +
+    vis().map(i => '<tr><td class="l"><b>'+IT[i]+'</b> ('+un(i)+')</td><td><input type="number" min="0" step="any" id="dmq'+i+'" placeholder="प्रमाण..."></td></tr>').join("") +
+    '</tbody></table></div>' +
+    '<button class="b" style="width:100%;margin-top:14px" onclick="saveDemand()">✔ मागणी नोंद जतन करा</button></div>' +
+    '<div class="c"><h3>नोंदवलेल्या मागणीची यादी</h3><div class="sc"><table><thead><tr><th>तारीख<th>गट<th>तपशील आणि प्रमाण<th>कृती</tr></thead><tbody>' +
+    ((S.demands || []).length ? S.demands.map((e, j) => 
+      '<tr><td>'+dm(e.d)+'</td><td><b>'+(e.g ? "6 ते 8" : "1 ते 5")+'</b></td><td class="l" style="font-size:11px">'+
+      Object.keys(e.items).map(i => IT[i]+': '+e.items[i]+' '+un(i)).join(" • ") +
+      '</td><td><button class="b r" style="margin:0;padding:2px 8px" onclick="S.demands.splice('+j+',1);save();vdm();done(\'🗑 मागणी नोंद हटवली\')">✕</button></td></tr>'
+    ).join('') : '<tr><td colspan="4">कोणतीही मागणी नोंदवलेली नाही.</td></tr>') +
+    '</tbody></table></div></div>';
+  $("v").innerHTML = content;
+}
+
+function saveDemand(){
+  const dt = $("dmdt").value, g = +$("dmg").value;
+  if(!dt) return alert("दिनांक भरा");
+  const items = {};
+  vis().forEach(i => {
+    const q = +$("dmq"+i).value;
+    if(q > 0) items[i] = q;
+  });
+  if(Object.keys(items).length === 0) return alert("किमान एका वस्तूचे प्रमाण भरा");
+  if(!S.demands) S.demands = [];
+  S.demands.push({d: dt, g, items});
+  save();
+  vdm();
+  done("✔ धान्य मागणी यशस्वीरीत्या जतन झाली");
+}
+
 // ---- आजचा शिल्लक साठा ----
 function vn(){const G=gs(),t=tod(),B=G.map(g=>bal(t,"",g,1));$("v").innerHTML='<div class="c"><h3>📋 आजचा शिल्लक साठा</h3><p style="font-size:12px">दिनांक: <b>'+dm(t)+'</b> (आजपर्यंतच्या सर्व नोंदी व खर्चानुसार प्रत्यक्ष शिल्लक)</p><div class="sc"><table><thead><tr><th class="l">वस्तू / धान्य'+G.map(g=>'<th>'+GN[g]+'</th>').join("")+'<th>एकूण शिल्लक</th></tr></thead><tbody>'+IT.map((n,i)=>{if(S.items[i].h&&!B.some(b=>r3(b[i])))return"";const total=G.reduce((acc,g,idx)=>acc+B[idx][i],0);return'<tr><td class="l"><b>'+n+'</b> ('+un(i)+')</td>'+G.map((g,idx)=>'<td'+(B[idx][i]<-1e-9?' style="color:#b42318;font-weight:700"':'')+'>'+fx(i,r3(B[idx][i]))+'</td>').join("")+'<td><b>'+fx(i,r3(total))+'</b> '+un(i)+'</td></tr>'}).join("")+'</tbody></table></div></div>'}
 
@@ -490,7 +529,7 @@ function vt(){
   }else if(SUB_T==2){
     content='<div class="c"><h3>पाककृती मेनू व्यवस्थापन</h3><p style="font-size:12px;color:#555">प्रत्येक मेनूमध्ये कोणत्या वस्तू वापरायच्या ते निवडा. तांदूळ सर्व मेनूमध्ये प्रमाणानुसार आपोआप येतो. दोन डाळी मिळून वापरत असाल तर दोन्हींना "निम्मे प्रमाण" निवडा.</p><div style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><select style="flex:1" onchange="CMenu=this.value;vt()">'+DR.menus.map((x,i)=>'<option value="'+i+'" '+(i==CMenu?"selected":"")+'>'+x.n+'</option>').join("")+'</select>'+(DR.menus.length?'<button class="b r" style="margin:0;white-space:nowrap" onclick="xm()">🗑 हटवा</button>':"")+'</div>'+(m?'<div class="sc"><table><thead><tr><th class="l">वस्तू<th>प्रमाण वापर</tr></thead><tbody>'+DR.items.map((it,i)=>i&&!it.h?'<tr><td class="l">'+it.n+'</td><td><select onchange="mp('+i+',this.value)"><option value="">वापरत नाही</option>'+[[1,"पूर्ण प्रमाण"],[.5,"निम्मे प्रमाण"],[.25,"पाव प्रमाण"]].map(([v,t])=>'<option value="'+v+'" '+(m.p[i]==v?"selected":"")+'>'+t+'</option>').join("")+'</select></td></tr>':"").join("")+'</tbody></table></div>':"")+'<label style="margin-top:12px">नवीन मेनूचे नाव जोडा</label><div style="display:flex;gap:8px"><input id="nm" placeholder="मेनूचे नाव..."><button class="b" style="margin:0;white-space:nowrap" onclick="am()">+ जोडा</button></div></div>';
   }else if(SUB_T==4){
-    content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा. हिरवा वाटाणा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="नग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="धान्‍यादीचे नाव..."><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
+    content='<div class="c"><h3>धान्यादी वस्तू व्यवस्थापन</h3><p style="font-size:12px;color:#555">नाव बदलता येते. उपलब्ध नसलेली वस्तू "दाखवा" मधून काढा, म्हणजे ती फॉर्म, मेनू आणि रिपोर्टमध्ये येणार नाही (जुना डेटा सुरक्षित राहतो). नवीन वस्तू (उदा. हिरवा वाटाणा) खाली जोडा, जतन करा, मग "तांदूळ व धान्यादी प्रमाण" मध्ये तिचे प्रमाण भरा आणि मेनूत निवडा.</p><div class="sc"><table class="it"><colgroup><col style="width:44%"><col style="width:32%"><col style="width:24%"></colgroup><thead><tr><th class="l">वस्तूचे नाव<th>एकक<th>दाखवा</tr></thead><tbody>'+DR.items.map((it,i)=>'<tr><td><input style="text-align:left;min-width:0" value="'+esc(it.n)+'" oninput="DR.items['+i+'].n=this.value"></td><td><select style="padding:6px 2px;font-size:14px;min-width:0" '+(i==0?"disabled":"")+' onchange="DR.items['+i+'].u=this.value"><option '+(it.u!="nग"?"selected":"")+'>किलो</option><option '+(it.u=="नग"?"selected":"")+'>नग</option></select></td><td><input type="checkbox" '+(it.h?"":"checked")+(i==0?" disabled":"")+' onchange="DR.items['+i+'].h=this.checked?0:1">'+(i>=22&&i==DR.items.length-1&&!usedi(i)?'<br><button class="b r" style="margin:4px 0 0;padding:3px 8px" onclick="rmi()">🗑 काढा</button>':"")+'</td></tr>').join("")+'</tbody></table></div><label style="margin-top:12px">नवीन वस्तू जोडा</label><div style="display:flex;gap:8px"><input id="ni" placeholder="धान्‍यादीचे नाव..."><select id="nu" style="width:90px"><option>किलो</option><option>नग</option></select><button class="b" style="margin:0;white-space:nowrap" onclick="ani()">+ जोडा</button></div></div>';
   }else{
     content='<div class="c">' +
       '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
@@ -499,7 +538,7 @@ function vt(){
       '</div>' +
 
       '<button class="b" style="margin:0;width:100%;padding:13px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 3px 8px #0002" onclick="sync(1)">' +
-        '<svg width="18" height="18" viewBox="0 0 87.3 78"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#fff"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#fff"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#fff"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#fff"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#fff"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#fff"/></svg>' +
+        '<svg width="18" height="18" viewBox="0 0 87.3 78"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#fff"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#fff"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#fff"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#fff"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#fff"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>' +
         '<span>Drive शी जोडा / आता sync करा</span>' +
       '</button>' +
 
@@ -574,16 +613,16 @@ function mp(i,v){const p=DR.menus[CMenu].p;+v?p[i]=+v:delete p[i]}
 function am(){const n=$("nm").value.trim();if(!n)return;DR.menus.push({n,p:{}});CMenu=DR.menus.length-1;vt()}
 function xm(){if(!DR.menus[CMenu])return;DR.menus.splice(CMenu,1);CMenu=0;vt()}
 function exp(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:"application/json"}));a.download="mdm-backup-"+tod()+".json";a.click()}
-function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const L=JSON.parse(r.result);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm();save();alert("बॅकअप यशस्वीरीत्या लोड झाला");DR=null;go("h")}catch(x){alert("चुकीची बॅकअप फाइल!")}};r.readAsText(f)}
+function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const L=JSON.parse(r.result);S=Object.assign({},D,L);if(L.fuel2===undefined)S.fuel2=S.fuel;if(!L.items)S.items=JSON.parse(JSON.stringify(D.items));if(!L.demands)S.demands=[];if(!L.N)mig();else if(!L.nv)fixn();S.nv=2;if(!L.dmv)addDm();save();alert("बॅकअप यशस्वीरीत्या लोड झाला");DR=null;go("h")}catch(x){alert("चुकीची बॅकअप फाइल!")}};r.readAsText(f)}
 
 // ---- रिपोर्ट ----
 const H=t=>'<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना<br>'+t+' ('+GP[RG||0]+') माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="font-size:12px;margin:4px 0 8px;text-align:center">'+S.sch.name+' | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | UDISE: '+S.sch.udise+' | जिल्हा: '+S.sch.jilha+'</p>';
-const SG='<p style="margin-top:36px;display:flex;justify-content:space-between"><span>अध्यक्ष<br>शाळा व्यवस्थापन समिती</span><span>मुख्याध्यापक / सचिव</span></p>';
+const SG='<p style="margin-top:36px;display:flex;justify-content:space-between"><span>अध्यक्ष<br>शाळा व्यवस्थापन समिती</span><span>मुख्याध्यापक</span></p>';
 function rv(){if(RP==1){const o=S.mon[CM]||{},v=$("mv").value,h=$("mh").value;if((o.v||"")!=v||(o.hc||"")!=h){S.mon[CM]={...o,v,hc:h};save()}}RS=1;vr()}
 function vr(){if(!AFY)AFY=getFY(tod());if(!hg(RG))RG=gs()[0]||0;const mo=S.mon[CM]||{};
 const isLand=(RP==3||RP==4||RP==6);
 $("pgs").textContent="@page{size:"+(isLand?"landscape":"portrait")+";margin:8mm}";
-$("v").innerHTML='<div class="c np"><h3>'+RN[RP]+'</h3>'+(RP==6?'<label>आर्थिक वर्ष (एप्रिल ते मार्च)</label><select onchange="AFY=this.value;RS=0;vr()">'+fyOpts().map(y=>'<option '+(y==AFY?"selected":"")+'>'+y+'</option>').join("")+'</select>':'<label>महिना निवडा</label><input type="month" value="'+CM+'" onchange="CM=this.value;RS=0;vr()">')+((RP<4||RP==6)&&gs().length>1?'<label>गट निवडा</label><select onchange="RG=+this.value;RS=0;vr()">'+gs().map(g=>'<option value="'+g+'" '+(g==RG?"selected":"")+'>'+GN[g]+'</option>').join("")+'</select>':"")+(RP==1?'<label>शाळा भेट संख्या</label><input type="number" min="0" id="mv" value="'+(mo.v||"")+'"><label>आरोग्य तपासणी (नोंद)</label><input id="mh" value="'+esc(mo.hc||"")+'" placeholder="उदा. 1 वेळा / तपासणी नाही">':"")+(S.sch.name?"":'<p style="color:#b45309;font-size:12px">⚠ शाळेची माहिती रिकामी आहे. सेटिंगमध्ये भरा किंवा Drive sync करा.</p>')+'<button class="b" style="width:100%" onclick="rv()">रिपोर्ट पहा</button></div>'+(RS?'<div class="c rp rp'+RP+'">'+[0,R1,R2,R3,R4,R5,R6][RP]()+'</div><div class="np"><button class="b" style="width:100%;margin:0 0 12px" onclick="print()">🖨 प्रिंट / PDF डाउनलोड करा ('+(isLand?'लँडस्केप':'पोर्ट्रेट')+')</button></div>':"")}
+$("v").innerHTML='<div class="c np"><h3>'+RN[RP]+'</h3>'+(RP==6?'<label>आर्थिक वर्ष (एप्रिल ते मार्च)</label><select onchange="AFY=this.value;RS=0;vr()">'+fyOpts().map(y=>'<option '+(y==AFY?"selected":"")+'>'+y+'</option>').join("")+'</select>':'<label>महिना निवडा</label><input type="month" value="'+CM+'" onchange="CM=this.value;RS=0;vr()">')+((RP<4||RP==6||RP==7)&&gs().length>1?'<label>गट निवडा</label><select onchange="RG=+this.value;RS=0;vr()">'+gs().map(g=>'<option value="'+g+'" '+(g==RG?"selected":"")+'>'+GN[g]+'</option>').join("")+'</select>':"")+(RP==1?'<label>शाळा भेट संख्या</label><input type="number" min="0" id="mv" value="'+(mo.v||"")+'"><label>आरोग्य तपासणी (नोंद)</label><input id="mh" value="'+esc(mo.hc||"")+'" placeholder="उदा. 1 वेळा / तपासणी नाही">':"")+(S.sch.name?"":'<p style="color:#b45309;font-size:12px">⚠ शाळेची माहिती रिकामी आहे. सेटिंगमध्ये भरा किंवा Drive sync करा.</p>')+'<button class="b" style="width:100%" onclick="rv()">रिपोर्ट पहा</button></div>'+(RS?'<div class="c rp rp'+RP+'">'+[0,R1,R2,R3,R4,R5,R6,R7][RP]()+'</div><div class="np"><button class="b" style="width:100%;margin:0 0 12px" onclick="print()">🖨 प्रिंट / PDF डाउनलोड करा ('+(isLand?'लँडस्केप':'पोर्ट्रेट')+')</button></div>':"")}
 let AFY=null;
 function fyOpts(){
   const ds=[...Object.keys(S.days),...S.inn.map(e=>e.d),S.opd,...(S.ob||[]).map(r=>r.d)].filter(Boolean).sort();
@@ -616,7 +655,7 @@ function R4(){
   const A=gs().map(g=>({g,c:calc(CM,g),s:ms(CM,g)}));
   const ord=[1,2,3,4,5,6,7,8,9,20, 10,11,12,13,14,15,16,17,18,19,21, ...IT.map((_,i)=>i).filter(i=>i>=22)];
 
-  const t1='<div class="sc"><table><thead><tr><th>वर्ग<th>पट<th>कामाचे दिवस<th>शिजवलेले दिवस<th>मागील शिल्लक तांदूळ<th>प्राप्त तांदूळ<th>एकूण तांदूळ<th>एकूण लाभार्थी (ताटे)<th>शिजवलेला तांदूळ<th>अखेर शिल्लक तांदूळ</tr></thead><tbody>'+A.map(({g,c,s})=>'<tr><td class="l"><b>'+(g?"इ. 6 वी ते 8 वी":"इ. 1 ली ते 5 वी")+'</b><td>'+s.roll+'<td>'+s.work+'<td>'+s.ds.length+'<td>'+f3(c.o[0])+'<td>'+f3(c.rc[0])+'<td>'+f3(c.o[0]+c.rc[0])+'<td>'+s.pl+'<td>'+f3(c.us[0])+'<td>'+f3(c.c[0])+'</tr>').join("")+'</tbody></table></div>';
+  const t1='<div class="sc"><table><thead><tr><th>वर्ग<th>पट<th>कामाचे दिवस<th>शिजवलेले दिवस<th>मागील शिल्लक तांदूळ<th>प्राप्त तांदूळ<th>एकूण तांदूळ<th>एकूण लाभार्थी (ताटे)<th>शिजवलेला तांदूळ<th>अखेर शिल्लक तांदूळ</tr></thead><tbody>'+A.map(({g,c,s})=>'<tr><td class="l"><b>'+(g?"इ. 6 ते 8 वी":"इ. 1 ली ते 5 वी")+'</b><td>'+s.roll+'<td>'+s.work+'<td>'+s.ds.length+'<td>'+f3(c.o[0])+'<td>'+f3(c.rc[0])+'<td>'+f3(c.o[0]+c.rc[0])+'<td>'+s.pl+'<td>'+f3(c.us[0])+'<td>'+f3(c.c[0])+'</tr>').join("")+'</tbody></table></div>';
   
   const t2=A.map(({g,c})=>{
     const cl=ord.filter(i=>{
@@ -633,16 +672,37 @@ return '<div style="text-align:center"><b>प्रधानमंत्री �
 }
 function R5(){return'<div style="text-align:center"><b>शालेय पोषण आहार - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
+// ---- मासिक धान्य मागणी अहवाल (Monthly Demand Report - R7) ----
+function R7(){
+  const g = RG, ym = CM;
+  const monthDemands = (S.demands || []).filter(e => (e.g||0) == g && e.d.slice(0,7) == ym);
+  
+  const totals = {};
+  monthDemands.forEach(e => {
+    for(const i in e.items){
+      totals[i] = (totals[i] || 0) + (+e.items[i] || 0);
+    }
+  });
+
+  const cl = vis().filter(i => (totals[i] || 0) > 0 || !S.items[i].h);
+  const SG5 = '<p style="margin-top:36px;text-align:right"><span>मुख्याध्यापक</span></p>';
+
+  return '<div style="text-align:center"><b>शालेय पोषण आहार योजना - मासिक धान्य मागणी अहवाल</b><br><b>('+GN[g]+') माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div>' +
+    '<p style="font-size:12px;margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | जिल्हा: '+S.sch.jilha+'</p>' +
+    '<div class="sc"><table style="margin-top:10px"><thead><tr><th>अ.क्र.<th>धान्यादी वस्तू / पदार्थ<th>एकूण मागितलेले प्रमाण (किलो / नग)</tr></thead><tbody>' +
+    (cl.length ? cl.map((i, idx) => 
+      '<tr><td>'+(idx+1)+'</td><td class="l"><b>'+IT[i]+'</b></td><td><b>'+(totals[i] ? fx(i, totals[i]) : '0')+'</b> '+un(i)+'</td></tr>'
+    ).join('') : '<tr><td colspan="3">या महिन्यात कोणतीही धान्य मागणी नोंदवलेली नाही.</td></tr>') +
+    '</tbody></table></div>' + SG5;
+}
+
 // ---- Google Drive Sync ----
 const AP="https://www.googleapis.com/",DEFAULT_CID="743508515612-k6hj9e59v0uu3fiiu9age84kmulfm1hk.apps.googleusercontent.com",cid=()=>localStorage.mdmcid||DEFAULT_CID;let TK=null,TX=0,FID=localStorage.mdmfid2||"",busy=0;
 try{const t=JSON.parse(localStorage.mdmtk);if(t&&t.x>Date.now()){TK=t.t;TX=t.x}}catch(e){}
 
 function tok(interactive=false){
   return new Promise((ok,no)=>{
-    //  टोकन 2 मिनीट पेक्षा जास्‍त वेळ झाला नसल्‍यास वापरा
     if(TK && Date.now() < (TX - 120000)) return ok(TK);
-    
-    // जुना टोकन संपले असेल तर
     TK = null;
     TX = 0;
     localStorage.removeItem("mdmtk");
@@ -720,13 +780,14 @@ function parts(){
     "Daily_Entries.json":dl,
     "Meal_Not_Cook.json":mn,
     "School_Visit.json":S.mon,
-    "Supplementary_Foods.json":{sup:S.sup,byDate:sp}
+    "Supplementary_Foods.json":{sup:S.sup,byDate:sp},
+    "Demands.json":{demands:S.demands||[]}
   };
 }
 
 function apply(p){
-  const a=p["Profiles.json"]||{},b=p["Praman.json"]||{},sf=p["Supplementary_Foods.json"]||{},os=p["Opening_Stock.json"]||{};
-  S=Object.assign({},D,{ts:a.ts,cls:a.cls||D.cls,lvl:a.lvl||D.lvl,op:os.op||[],op2:os.op2||[],ob:os.ob||[],opd:os.opd||D.opd,sch:a.sch||D.sch,cooks:a.cooks??D.cooks,hon:a.hon??D.hon,fuel:a.fuel??D.fuel,fuel2:a.fuel2??a.fuel??D.fuel2,rL:b.rL??D.rL,rU:b.rU??D.rU,menus:b.menus||D.menus,N:b.N||D.N,items:b.items||JSON.parse(JSON.stringify(D.items)),inn:os.inn||[],mon:p["School_Visit.json"]||{},sup:sf.sup||D.sup,days:Object.assign({},p["Daily_Entries.json"],p["Meal_Not_Cook.json"])});
+  const a=p["Profiles.json"]||{},b=p["Praman.json"]||{},sf=p["Supplementary_Foods.json"]||{},os=p["Opening_Stock.json"]||{},dmObj=p["Demands.json"]||{};
+  S=Object.assign({},D,{ts:a.ts,cls:a.cls||D.cls,lvl:a.lvl||D.lvl,op:os.op||[],op2:os.op2||[],ob:os.ob||[],opd:os.opd||D.opd,sch:a.sch||D.sch,cooks:a.cooks??D.cooks,hon:a.hon??D.hon,fuel:a.fuel??D.fuel,fuel2:a.fuel2??a.fuel??D.fuel2,rL:b.rL??D.rL,rU:b.rU??D.rU,menus:b.menus||D.menus,N:b.N||D.N,items:b.items||JSON.parse(JSON.stringify(D.items)),inn:os.inn||[],mon:p["School_Visit.json"]||{},sup:sf.sup||D.sup,days:Object.assign({},p["Daily_Entries.json"],p["Meal_Not_Cook.json"]),demands:dmObj.demands||[]});
   const bd=sf.byDate||{};for(const k in bd)if(S.days[k])S.days[k].s=bd[k];
   if(!b.N)mig();else if(!b.nv)fixn();
   S.nv=2;if(!b.dmv)addDm();
@@ -890,7 +951,7 @@ const GD=[
 <ul><li>📄 <b>रिपोर्टच्या वर शाळेचे नाव रिकामे:</b> सेटिंग → शाळा प्रोफाइलमध्ये माहिती भरून जतन करा, किंवा Drive sync करा.</li>
 <li>⛔ <b>"साठा अपुरा" इशारा:</b> सुरुवातीचा साठा किंवा आवक नोंदवलेली नाही. ती नोंदवा.</li>
 <li>🔄 <b>नवीन आवृत्ती दिसत नाही:</b> app पूर्ण बंद करून पुन्हा उघडा.</li>
-<li>📱 <b>फोन बदलला / डेटा गेला:</b> Drive जोडून sync करा किंवा बॅकअप Restore करा.</li>
+<li>📱 <b>फोन बदलला / डेटा गेला:</b> Drive जोड़ून sync करा किंवा बॅकअप Restore करा.</li>
 <li>💾 <b>जतन न केलेले बदल:</b> सेटिंग आणि सुरुवातीच्या साठ्यात "जतन करा" दाबल्याशिवाय बदल लागू होत नाहीत.</li>
 <li>📲 <b>app install:</b> ब्राउझर मेनू → "Install app" / "Add to Home screen". iPhone वर Safari → Share → Add to Home Screen.</li></ul>`},
 {n:10,ic:"🔒",t:"गोपनीयता व संपर्क",s:"Privacy & Contact",b:`
@@ -941,7 +1002,7 @@ addEventListener("beforeinstallprompt",e=>{e.preventDefault();IP=e});addEventLis
   if (ib) ib.style.display = "none";
   toast("✔ App यशस्वीरीत्या इन्स्टॉल झाले!");
 
-  // इन्स्टॉल पूर्ण झाल्यावर दिसणारे सुंदर कार्ड
+  // इन्स्टॉल पूर्ण झाल्यावर दिसणारे सुंदर अभिनंदन कार्ड
   const m = $("lpmsg");
   if (m) {
     m.innerHTML = '<div class="inst-success-box">' +
