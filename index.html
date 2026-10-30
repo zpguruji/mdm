@@ -1,4 +1,23 @@
-<!DOCTYPE html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MDM पोषण आहार नोंदवही</title>
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<!--
+  =========================================================================
+  * ॲपचे नाव: PM POSHAN MDM Tracking PWA (प्रधानमंत्री पोषण शक्ती निर्माण योजना)
+  * संकल्पना व निर्मिती: श्री. सोमनाथ गायकवाड सर (वेब डेव्हलोपर)
+  * शाळा: जिल्हा परिषद प्राथमिक शाळा हत्तरसंग | केंद्र: बरूर | तालुका: दक्षिण सोलापूर
+  * जिल्हा: सोलापूर, महाराष्ट्र
+  -------------------------------------------------------------------------
+  * ॲपची प्रमुख वैशिष्ट्ये व माहिती:
+    1. शालेय पोषण आहार (MDM) दैनंदिन हजेरी व तांदूळ/धान्य वापर नोंदवही.
+    2. दोन्ही गटांनुसार (इ. १ ली ते ५ वी आणि इ. ६ ते ८ वी) स्वतंत्र पट, ताटे व इंधन अनुदानाची स्वयंचलित गणना.
+    3. प्रपत्र 'ड' (मासिक उपयोगिता प्रमाणपत्र) लँडस्केप प्रिंट व PDF जनरेशन सुविधा.
+    4. Google Drive API व Google Identity Services द्वारे सुरक्षित डेटा बॅकअप व सिंक.
+    5. Google Analytics द्वारे युजर ट्रॅफिक व ॲनॅलिटिक्स मॉनिटरिंग.
+    6. मोबाईल व संगणकावर ऑफलाइन चालणारी प्रोग्रेसिव्ह वेब अप्लिकेशन (PWA) यंत्रणा.
+  =========================================================================
+-->
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MDM पोषण आहार नोंदवही</title>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTT49S0997"></script>
 <script>
@@ -189,7 +208,7 @@ const st=(t,k)=>{GS=t;const e=$("gs");if(e)e.textContent=t;if(k)toast(t)};
 const save=()=>{S.ts=Date.now();localStorage.mdm=JSON.stringify(S);if(localStorage.mdmauto!="1"){if(localStorage.mdmok&&pend())st("⚠ Drive वर पाठवणे बाकी")}else if(TK&&Date.now()<TX){clearTimeout(SQ);SQ=setTimeout(()=>sync(0),3000)}else if(localStorage.mdmok&&pend())st("Drive sync बाकी - 'Drive sync' बटण दाबा")};
 const ds2=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),tod=()=>ds2(new Date());
 
-// तारखेवरून आर्थिक वर्ष काढणे (उदा. 2026-04-01 ते 2027-03-31 = "2026-27")
+// तारखेवरून आर्थिक वर्ष काढणे 
 const getFY = d => {
   if(!d) return "";
   const y = +d.slice(0,4), m = +d.slice(5,7);
@@ -661,23 +680,62 @@ const u=ug(d)[g];return st+'<td>'+(g?d.p2:d.p1)+'<td>'+(g?d.a2:d.a1)+'<td class=
 const ds=cl.map(i=>{const a=c.us[i]/n;return a>0?Math.floor(c.c[i]/a):0});
 return H("दैनंदिन नोंद अहवाल")+'<div class="sc"><table><thead><tr><th class="l">तपशील / धान्य'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+sm+'<tr><td class="l">अंदाजे किती दिवस पुरेल?'+ds.map(x=>'<td>'+x+'</td>').join("")+'</tr></tbody></table></div><br><div class="sc"><table><thead><tr><th>दि.<th>वार<th>पट<th>ताटे<th>पाककृती'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+bd+'</tbody></table></div>'+SG}
 function R4(){
-  const A=gs().map(g=>({g,c:calc(CM,g),s:ms(CM,g)}));
-  const ord=[1,2,3,4,5,6,7,8,9,20, 10,11,12,13,14,15,16,17,18,19,21, ...IT.map((_,i)=>i).filter(i=>i>=22)];
+  const A = gs().map(g => ({g, c: calc(CM, g), s: ms(CM, g)}));
+  const ord = [1,2,3,4,5,6,7,8,9,20, 10,11,12,13,14,15,16,17,18,19,21, ...IT.map((_,i)=>i).filter(i=>i>=22)];
 
-  const t1='<div class="sc"><table><thead><tr><th>वर्ग<th>पट<th>कामाचे दिवस<th>शिजवलेले दिवस<th>मागील शिल्लक तांदूळ<th>प्राप्त तांदूळ<th>एकूण तांदूळ<th>एकूण लाभार्थी (ताटे)<th>शिजवलेला तांदूळ<th>अखेर शिल्लक तांदूळ</tr></thead><tbody>'+A.map(({g,c,s})=>'<tr><td class="l"><b>'+(g?"इ. 6 ते 8 वी":"इ. 1 ली ते 5 वी")+'</b><td>'+s.roll+'<td>'+s.work+'<td>'+s.ds.length+'<td>'+f3(c.o[0])+'<td>'+f3(c.rc[0])+'<td>'+f3(c.o[0]+c.rc[0])+'<td>'+s.pl+'<td>'+f3(c.us[0])+'<td>'+f3(c.c[0])+'</tr>').join("")+'</tbody></table></div>';
+  const t1 = '<div class="sc"><table><thead><tr><th>वर्ग<th>पट<th>कामाचे दिवस<th>शिजवलेले दिवस<th>मागील शिल्लक तांदूळ<th>प्राप्त तांदूळ<th>एकूण तांदूळ<th>एकूण लाभार्थी (ताटे)<th>शिजवलेला तांदूळ<th>अखेर शिल्लक तांदूळ</tr></thead><tbody>' + A.map(({g,c,s}) => '<tr><td class="l"><b>' + (g ? "इ. 6 ते 8 वी" : "इ. 1 ली ते 5 वी") + '</b><td>' + s.roll + '<td>' + s.work + '<td>' + s.ds.length + '<td>' + f3(c.o[0]) + '<td>' + f3(c.rc[0]) + '<td>' + f3(c.o[0]+c.rc[0]) + '<td>' + s.pl + '<td>' + f3(c.us[0]) + '<td>' + f3(c.c[0]) + '</tr>').join("") + '</tbody></table></div>';
   
-  const t2=A.map(({g,c})=>{
-    const cl=ord.filter(i=>{
+  const t2 = A.map(({g,c}) => {
+    const cl = ord.filter(i => {
       const hasData = (r3(c.o[i])!=0 || r3(c.rc[i])!=0 || r3(c.us[i])!=0 || r3(c.c[i])!=0);
       return hasData || !S.items[i].h;
     });
 
-    if(!cl.length)return'<p style="margin-top:8px"><b>धान्य व धान्यादी माहिती '+GN[g]+' :</b> या महिन्यात कोणतीही नोंद नाही.</p>';
-    return'<p style="margin:12px 0 4px"><b>धान्य व माल तपशील: '+GN[g]+'</b></p><div class="sc"><table><thead><tr><th class="l">तपशील'+cl.map(i=>'<th>'+IT[i]+'</th>').join("")+'</tr></thead><tbody>'+[["मागील शिल्लक","o"],["प्राप्त (आवक)","rc"],["एकूण",""],["खर्च (वापर)","us"],["अखेर शिल्लक","c"]].map(([t,k])=>'<tr><td class="l"><b>'+t+'</b>'+cl.map(i=>'<td>'+fx(i,k?c[k][i]:c.o[i]+c.rc[i])+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>'}).join("");
-    
-  const SG4 = '<p style="margin-top:36px;text-align:right"><span>मुख्याध्यापक</span></p>';
+    if(!cl.length) return '<p style="margin-top:8px"><b>धान्य व धान्यादी माहिती ' + GN[g] + ' :</b> या महिन्यात कोणतीही नोंद नाही.</p>';
+    return '<p style="margin:12px 0 4px"><b>धान्य व माल तपशील: ' + GN[g] + '</b></p><div class="sc"><table><thead><tr><th class="l">तपशील' + cl.map(i => '<th>' + IT[i] + '</th>').join("") + '</tr></thead><tbody>' + [["मागील शिल्लक","o"],["प्राप्त (आवक)","rc"],["एकूण",""],["खर्च (वापर)","us"],["अखेर शिल्लक","c"]].map(([t,k]) => '<tr><td class="l"><b>' + t + '</b>' + cl.map(i => '<td>' + fx(i, k ? c[k][i] : c.o[i]+c.rc[i]) + '</td>').join("") + '</tr>').join("") + '</tbody></table></div>';
+  }).join("");
+  
+  const totalPlates = A.reduce((sum, item) => sum + item.s.pl, 0);
+  let plateParts = [];
+  let fuelDescParts = [];
+  let totalFuelCost = 0;
 
-return '<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना - प्रपत्र \'ड\'</b></div><p style="font-size:12px;margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+' | तालुका: '+S.sch.taluka+' | माहे: <b>'+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></p>'+t1+t2+SG4;
+  A.forEach(item => {
+    let groupName = (item.g === 1) ? 'इ. 6 ते 8 वी' : 'इ. 1 ली ते 5 वी';
+    plateParts.push(groupName + ': ' + item.s.pl);
+
+    let rate = (item.g === 1) ? S.fuel2 : S.fuel;
+    let groupCost = item.s.pl * rate;
+    totalFuelCost += groupCost;
+    // संक्षिप्त स्वरूपात तपशील जोडला आहे
+    fuelDescParts.push(groupName + ': रु. ' + groupCost.toFixed(2));
+  });
+
+  let plateStr = '1) महिन्यातील एकूण ताटांची संख्या - <b>' + totalPlates + '</b>';
+  if(A.length > 1) {
+    plateStr += ' <span style="font-size:12px;">(' + plateParts.join(' | ') + ')</span>';
+  }
+
+  let fuelStr = '2) इंधन व भाजीपाल्यासाठी खर्च केलेले अनुदान - <b>रु. ' + totalFuelCost.toFixed(2) + '</b>';
+  if(A.length > 1) {
+    fuelStr += ' <span style="font-size:12px;">(' + fuelDescParts.join(' | ') + ')</span>';
+  } else if(A.length === 1) {
+    let rate = (A[0].g === 1) ? S.fuel2 : S.fuel;
+    fuelStr += ' (प्रति विद्यार्थी दर रु. ' + rate + ')';
+  }
+
+  const moData = (typeof mo !== 'undefined' && mo) ? mo : ((S.mo && S.mo[CM]) || {});
+
+  const extraInfo = '<p style="font-size:13px; line-height:1.7; margin-top:15px">' +
+    plateStr + '<br>' +
+    fuelStr + '<br>' +
+    '3) स्वयंपाकी तथा मदतनीस मानधन - <b>रु. ' + S.hon + '</b> (संख्या - <b>' + S.cooks + '</b>)<br>' +
+    
+    '<p style="font-size:12px">प्रमाणित करण्यात येते की, वर नमूद केलेली माहिती दैनंदिन नोंदवहीवरून घेतलेली असून अचूक व बरोबर आहे.</p>';
+
+  const SG4 = '<p style="margin-top:30px;text-align:right"><b>मुख्याध्यापक</b></p>';
+
+  return '<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना - प्रपत्र \'ड\'</b></div><p style="font-size:12px;margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>' + S.sch.name + '</b> | केंद्र: ' + S.sch.kendra + ' | तालुका: ' + S.sch.taluka + ' | माहे: <b>' + MN[+CM.slice(5)-1] + ' ' + CM.slice(0,4) + '</b></p>' + t1 + t2 + extraInfo + SG4;
 }
 function R5(){return'<div style="text-align:center"><b>प्रधानमंत्री पोषण शक्ती निर्माण योजना - चव नोंद रजिस्टर<br>माहे: '+MN[+CM.slice(5)-1]+' '+CM.slice(0,4)+'</b></div><p style="margin:4px 0 8px;text-align:center">शाळेचे नाव: <b>'+S.sch.name+'</b> | केंद्र: '+S.sch.kendra+'</p><div class="sc"><table><thead><tr><th style="width:12%">दिनांक<th>वार<th style="width:11%">चव वेळ<th style="width:11%">वाटप वेळ<th>चव घेणाऱ्याचे नाव<th style="width:25%">अभिप्राय / शेरा<th style="width:14%">स्वाक्षरी</tr></thead><tbody>'+MD().map(k=>{const w=wd(k);return'<tr style="height:32px"><td>'+dm(k)+'<td>'+WD[w]+'<td><td><td><td><td></td></tr>'}).join("")+'</tbody></table></div>'}
 
