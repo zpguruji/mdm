@@ -1,15 +1,275 @@
-<!DOCTYPE html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>गोपनीयता धोरण - MDM पोषण आहार नोंदवही</title>
-<style>body{font:16px/1.7 'Noto Sans Devanagari',system-ui,sans-serif;max-width:720px;margin:auto;padding:16px;color:#1d2a1f}h1{font-size:22px}</style></head><body>
-<h1>गोपनीयता धोरण</h1>
-<p>"MDM पोषण आहार नोंदवही" हा शाळांसाठी मोफत app आहे. यात शाळेची नोंद (पट, उपस्थिती, मेनू, साठा) ठेवता येते आणि मासिक अहवाल तयार होतात.</p>
-<h2>डेटा कुठे साठवला जातो?</h2>
-<ul><li>सर्व डेटा तुमच्या फोन/संगणकाच्या ब्राउझरमध्ये साठवला जातो.</li>
-<li>तुम्ही "Google Drive sync" चालू केल्यास, डेटा तुमच्या स्वतःच्या Google Drive मधील "MDM_Data" फोल्डरमध्ये JSON फाइल्सच्या स्वरूपात जतन होतो.</li>
-<li>app फक्त स्वतः बनवलेल्या फाइल्स वाचू/लिहू शकतो (Google Drive scope: drive.file). तुमच्या Drive मधील इतर फाइल्स appला दिसत नाहीत.</li></ul>
-<h2>आम्ही काय करत नाही</h2>
-<ul><li>तुमचा डेटा आमच्या कोणत्याही सर्व्हरवर पाठवला किंवा साठवला जात नाही; appच्या निर्मात्याला तो पाहता येत नाही.</li>
-<li>जाहिराती, ट्रॅकिंग किंवा डेटा विक्री नाही.</li>
-<li>फक्त अक्षरांसाठी Google Fonts आणि लॉगिनसाठी Google Sign-In हे Google चे घटक वापरले जातात.</li></ul>
-<h2>डेटा हटवणे</h2>
-<p>ब्राउझरचा साइट डेटा क्लिअर केल्यास फोनमधील डेटा जातो. Drive मधील "MDM_Data" फोल्डर हटवल्यास Drive वरील डेटा जातो. Google खात्याच्या Security सेटिंगमधून appची परवानगी कधीही काढता येते.</p>
-<p>संपर्क: <b>gsom567@gmail.com</b></p></body></html>
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>गोपनीयता धोरण | Privacy Policy - MDM पोषण आहार नोंदवही</title>
+<meta name="theme-color" content="#14532d">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:15.5px/1.68 'Noto Sans Devanagari',system-ui,-apple-system,sans-serif;background:#f3f5ef;color:#1d2a1f}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0b5d2a 0%,#14532d 60%,#1e7b44 100%);color:#fff;padding:12px 16px;box-shadow:0 3px 12px rgba(0,0,0,0.18)}
+.hbar{max-width:860px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hleft{display:flex;align-items:center;gap:10px}
+.bkbtn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.16);color:#fff;text-decoration:none;padding:7px 13px;border-radius:20px;font-size:13.5px;font-weight:700;border:1px solid rgba(255,255,255,0.28);transition:.2s}
+.bkbtn:hover{background:rgba(255,255,255,0.28)}
+.lang-switch{display:inline-flex;background:rgba(0,0,0,0.25);padding:3px;border-radius:24px;border:1px solid rgba(255,213,74,0.45)}
+.lang-switch button{background:transparent;border:0;color:#e2f2e6;padding:6px 14px;border-radius:20px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+.lang-switch button.active{background:#ffd54a;color:#3a2600;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+
+.hero{max-width:860px;margin:18px auto 0;padding:0 14px}
+.hero-card{background:linear-gradient(135deg,#14532d 0%,#0b5d2a 100%);color:#fff;border-radius:16px;padding:24px 20px;text-align:center;box-shadow:0 8px 24px rgba(20,83,45,0.18);border:1px solid rgba(255,255,255,0.15);position:relative;overflow:hidden}
+.hero-badge{display:inline-block;background:rgba(255,213,74,0.18);border:1px solid #ffd54a;color:#ffe27a;font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+.hero-card h1{margin:4px 0 6px;font-size:26px;line-height:1.3;color:#fff}
+.hero-card p{margin:0 auto;max-width:640px;font-size:14.5px;color:#d6f5e0}
+.trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px}
+.trust-pill{background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.25);color:#fff;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:5px}
+
+main{max-width:860px;margin:14px auto 32px;padding:0 14px}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+.card{background:#fff;border:1px solid #d5dccf;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.card h2{margin:0 0 10px;font-size:18px;color:#14532d;display:flex;align-items:center;gap:8px;border-bottom:1px solid #eef2eb;padding-bottom:8px}
+.card h2 span.ic{background:#e8f5ec;width:34px;height:34px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.card p{margin:6px 0}
+.card ul{margin:8px 0;padding-left:20px}
+.card li{margin:6px 0}
+.hl-box{background:#eef6ea;border-left:4px solid #14532d;border-radius:0 10px 10px 0;padding:10px 14px;margin-top:10px;font-size:13.5px}
+.warn-box{background:#fff8ea;border-left:4px solid #d97706;border-radius:0 10px 10px 0;padding:10px 14px;margin-top:10px;font-size:13.5px}
+code{background:#eef2eb;color:#0b5d2a;padding:2px 6px;border-radius:5px;font-size:13px;font-weight:700}
+
+.contact-box{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cbtn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;padding:10px 16px;border-radius:10px;font-weight:700;font-size:14px;color:#fff}
+.cbtn.wa{background:linear-gradient(135deg,#25D366,#128C7E)}
+.cbtn.em{background:linear-gradient(135deg,#14532d,#0b3d20)}
+
+footer{text-align:center;font-size:12.5px;color:#5b6b5e;padding:20px 14px 30px;border-top:1px solid #dce3d6}
+.en-lang{display:none}
+body.en .mr-lang{display:none}
+body.en .en-lang{display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbar">
+    <div class="hleft">
+      <a href="index.html" class="bkbtn">← <span class="mr-lang" style="display:inline">ॲपवर परत जा</span><span class="en-lang" style="display:none">Back to App</span></a>
+      <b style="font-size:16px">MDM पोषण आहार नोंदवही</b>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language Switch">
+      <button type="button" id="btn-mr" class="active" onclick="setLang('mr')">मराठी</button>
+      <button type="button" id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== मराठी विभाग (MARATHI) ==================== -->
+<div class="mr-lang">
+  <div class="hero">
+    <div class="hero-card">
+      <div class="hero-badge">🔒 १००% सुरक्षित व पारदर्शक</div>
+      <h1>गोपनीयता धोरण (Privacy Policy)</h1>
+      <p>"MDM पोषण आहार नोंदवही" हे महाराष्ट्रातील शाळांसाठी शालेय पोषण आहार (PM POSHAN) दैनंदिन नोंद, धान्य साठा व मासिक अहवाल तयार करणारे मोफत वेब ॲप आहे.</p>
+      <div class="trust-row">
+        <span class="trust-pill">🛡️ थर्ड-पार्टी सर्व्हर नाही</span>
+        <span class="trust-pill">🚫 जाहिराती नाहीत</span>
+        <span class="trust-pill">☁️ सुरक्षित Google Drive सिंक</span>
+        <span class="trust-pill">⚡ ऑफलाइन चालणारे PWA</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <div class="card">
+        <h2><span class="ic">📋</span><span>१. ॲपमध्ये कोणती माहिती भरली जाते?</span></h2>
+        <p>शालेय पोषण आहाराचे दैनंदिन कामकाज व शासकीय प्रपत्रे तयार करण्यासाठी वापरकर्ते (मुख्याध्यापक / शिक्षक) खालील माहिती स्वतः ॲपमध्ये भरतात:</p>
+        <ul>
+          <li><b>शाळेची माहिती:</b> शाळेचे नाव, केंद्र, तालुका, जिल्हा, UDISE क्रमांक आणि इयत्ता.</li>
+          <li><b>दैनंदिन व मासिक नोंदी:</b> इयत्तानिहाय विद्यार्थी पटसंख्या, उपस्थिती, लाभार्थी ताटे, दैनंदिन पाककृती मेनू आणि पूरक आहार.</li>
+          <li><b>धान्य साठा व मागणी:</b> तांदूळ व इतर धान्यादी मालाचा सुरुवातीचा साठा, आवक-जावक नोंदी आणि मासिक धान्य मागणी.</li>
+        </ul>
+        <div class="hl-box">💡 <b>महत्त्वाचे:</b> या ॲपमध्ये विद्यार्थ्यांची वैयक्तिक नावे, आधार क्रमांक, बँक खाते किंवा कोणतीही संवेदनशील वैयक्तिक माहिती मागितली जात नाही.</div>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">💾</span><span>२. तुमचा डेटा कुठे व कसा साठवला जातो?</span></h2>
+        <ul>
+          <li><b>स्थानिक स्टोरेज (Local Storage):</b> तुम्ही भरलेला सर्व डेटा प्राथमिक स्वरूपात तुमच्या स्वतःच्या मोबाईल किंवा संगणकाच्या ब्राउझरमध्ये (<code>localStorage</code> मध्ये) साठवला जातो.</li>
+          <li><b>Google Drive बॅकअप (ऐच्छिक):</b> जेव्हा तुम्ही <b>"Google Drive Sync"</b> सुविधा वापरता, तेव्हा तुमचा डेटा तुमच्या स्वतःच्या Google Drive खात्यातील <code>MDM_Data</code> नावाच्या फोल्डरमध्ये JSON फाइल्सच्या स्वरूपात सुरक्षित जतन केला जातो.</li>
+          <li><b>ऑफलाइन कार्यक्षमता:</b> हे एक प्रोग्रेसिव्ह वेब ॲप (PWA) असल्यामुळे इंटरनेट नसतानाही तुमच्या फोनमधील कॅशे व लोकल स्टोरेजच्या मदतीने पूर्णपणे चालते.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">🔐</span><span>३. Google Drive परवानगी आणि मर्यादित वापर (Limited Use Policy)</span></h2>
+        <p>डेटा बॅकअपसाठी हे ॲप अधिकृत <b>Google Identity Services</b> आणि <b>Google Drive API</b> वापरते:</p>
+        <ul>
+          <li>हे ॲप केवळ <code>https://www.googleapis.com/auth/drive.file</code> ही अत्यंत मर्यादित परवानगी (Scope) वापरते.</li>
+          <li>याचा अर्थ असा की, <b>हे ॲप तुमच्या Google Drive मधील फक्त स्वतः तयार केलेल्या (MDM_Data) फाइल्सच वाचू किंवा अपडेट करू शकते.</b></li>
+          <li>तुमच्या Google Drive वरील इतर कोणतेही फोटो, कागदपत्रे किंवा वैयक्तिक फाइल्स या ॲपला दिसत नाहीत किंवा ॲप त्या उघडू शकत नाही.</li>
+          <li><b>Google API Services User Data Policy:</b> Google कडून मिळालेल्या माहितीचा वापर Google API सेवांच्या 'Limited Use' धोरणाशी पूर्णपणे सुसंगत आहे.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">🚫</span><span>४. आम्ही काय करत नाही? (Zero Server Tracking)</span></h2>
+        <ul>
+          <li>तुमच्या शाळेचा कोणताही डेटा आमच्या किंवा कोणत्याही बाहेरील सर्व्हरवर पाठवला अथवा साठवला जात नाही.</li>
+          <li>ॲपच्या डेव्हलपरलाही तुमचा डेटा पाहता येत नाही.</li>
+          <li>आम्ही कोणत्याही कंपनीला डेटा विकत नाही, शेअर करत नाही किंवा जाहिराती दाखवत नाही.</li>
+          <li>केवळ मराठी अक्षरांसाठी <b>Google Fonts</b>, सुरक्षित लॉगिनसाठी <b>Google Sign-In</b> आणि ॲपच्या एकूण ट्रॅफिकची संख्या मोजण्यासाठी <b>Google Analytics</b> वापरले जाते.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">🗑️</span><span>५. डेटा नियंत्रण, हटवणे आणि परवानगी रद्द करणे</span></h2>
+        <p>तुमच्या डेटावर तुमचे १००% नियंत्रण आहे:</p>
+        <ul>
+          <li><b>मोबाईलमधील डेटा हटवणे:</b> तुम्ही ब्राउझरचा 'Site Data / Clear Storage' क्लिअर केल्यास फोनमधील सर्व डेटा लगेच पुसला जातो.</li>
+          <li><b>Google Drive वरील डेटा हटवणे:</b> तुम्ही तुमच्या Google Drive मध्ये जाऊन <code>MDM_Data</code> हे फोल्डर कधीही डिलीट करू शकता.</li>
+          <li><b>परवानगी काढून घेणे (Revoke Access):</b> तुम्ही तुमच्या Google खात्याच्या सुरक्षा सेटिंग्जमधून (<a href="https://myaccount.google.com/permissions" target="_blank" style="color:#14532d;font-weight:700">myaccount.google.com/permissions</a>) या ॲपची Drive परवानगी कधीही रद्द करू शकता.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">⚖️</span><span>६. अटी व शर्ती (Terms of Use)</span></h2>
+        <p>हे ॲप वापरताना खालील अटी व शर्ती लागू राहतील:</p>
+        <ul>
+          <li><b>मोफत शैक्षणिक सेवा:</b> हे वेब ॲप शाळांच्या दैनंदिन पोषण आहार नोंदी व हिशोब सुलभ करण्यासाठी पूर्णपणे मोफत उपलब्ध करून दिले आहे.</li>
+          <li><b>आकडेवारीची पडताळणी (User Responsibility):</b> ॲपमधील सर्व सूत्रे व परिमाणे काळजीपूर्वक तयार केली आहेत; तरीही शासकीय अहवाल, प्रपत्र 'ड' किंवा उपयोगिता प्रमाणपत्र सादर करण्यापूर्वी संबंधित मुख्याध्यापक / पोषण आहार प्रभारी यांनी प्रत्यक्ष नोंदवहीशी आकडेवारी तपासून खात्री करणे आवश्यक राहील.</li>
+          <li><b>डेटा बॅकअपची जबाबदारी:</b> सर्व डेटा वापरकर्त्याच्या स्वतःच्या मोबाईलमध्ये साठवला जात असल्यामुळे, मोबाईल खराब होणे, हरवणे किंवा ब्राउझर डेटा क्लिअर होणे यांपासून सुरक्षित राहण्यासाठी नियमितपणे <b>Google Drive Sync</b> किंवा <b>बॅकअप फाइल शेअर</b> करून ठेवण्याची जबाबदारी वापरकर्त्याची असेल.</li>
+          <li><b>बौद्धिक संपदा व कॉपीराइट:</b> या ॲपची संकल्पना, डिझाईन व सोर्स कोड याचे सर्व हक्क डेव्हलपरकडे राखीव आहेत. पूर्वपरवानगीशिवाय या ॲपची कॉपी करणे किंवा व्यावसायिक विक्री करणे यास सक्त मनाई आहे.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">📞</span><span>७. डेव्हलपर संपर्क माहिती</span></h2>
+        <p>या गोपनीयता धोरणाबद्दल किंवा ॲपच्या सुरक्षिततेबद्दल काही प्रश्न किंवा सूचना असल्यास खालील माध्यमातून संपर्क साधावा:</p>
+        <p>👨‍💻 <b>संकल्पना व निर्मिती:</b> श्री. सोमनाथ गायकवाड सर (Somnath Gaikwad sir)<br>
+        🏫 <b>शाळा:</b> जि. प. प्रा. शाळा हत्तरसंग, केंद्र बरूर, ता. दक्षिण सोलापूर, जि. सोलापूर (महाराष्ट्र)</p>
+        <div class="contact-box">
+          <a class="cbtn em" href="mailto:gsom567@gmail.com?subject=MDM%20App%20Privacy%20Policy%20Query">✉️ gsom567@gmail.com</a>
+          <a class="cbtn wa" target="_blank" href="https://wa.me/917020302223?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%B8%E0%A5%8B%E0%A4%AE%E0%A4%A8%E0%A4%BE%E0%A4%A5%20%E0%A4%B8%E0%A4%B0%2C%20MDM%20App%20%E0%A4%AC%E0%A4%BE%E0%A4%AC%E0%A4%A4%20%E0%A4%B8%E0%A4%82%E0%A4%AA%E0%A4%B0%E0%A5%8D%E0%A4%95.">💬 WhatsApp संपर्क</a>
+        </div>
+        <p style="font-size:12px;color:#6b7a6e;margin-top:12px">शेवटचे अद्यतन (Last Updated): एप्रिल २०२६</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ==================== ENGLISH SECTION ==================== -->
+<div class="en-lang">
+  <div class="hero">
+    <div class="hero-card">
+      <div class="hero-badge">🔒 100% Secure & Transparent</div>
+      <h1>Privacy Policy</h1>
+      <p>"MDM Poshan Aahar Register" is a free Progressive Web Application (PWA) designed for schools to manage daily PM POSHAN mid-day meal attendance, foodgrain stock, and monthly official reports.</p>
+      <div class="trust-row">
+        <span class="trust-pill">🛡️ No Third-Party Server</span>
+        <span class="trust-pill">🚫 Zero Ads</span>
+        <span class="trust-pill">☁️ User-Owned Google Drive Sync</span>
+        <span class="trust-pill">⚡ Works Offline</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid">
+      <div class="card">
+        <h2><span class="ic">📋</span><span>1. Information Stored in the App</span></h2>
+        <p>To generate daily calculations and official monthly school reports, teachers/headmasters voluntarily enter the following school-level data:</p>
+        <ul>
+          <li><b>School Profile:</b> School name, cluster (Kendra), block (Taluka), district, UDISE code, and active classes.</li>
+          <li><b>Daily & Monthly Entries:</b> Class-wise enrollment (roll), attendance, beneficiary plates served, daily recipe menu, and supplementary nutrition records.</li>
+          <li><b>Grain Stock & Demand:</b> Opening balance, stock-in/stock-out transactions, and monthly foodgrain demand quantities.</li>
+        </ul>
+        <div class="hl-box">💡 <b>Note:</b> The app does NOT collect or require students' personal names, Aadhaar numbers, bank details, or any sensitive personal information.</div>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">💾</span><span>2. Where & How Is Your Data Stored?</span></h2>
+        <ul>
+          <li><b>Local Device Storage:</b> All data entered by you is stored locally inside your own phone or computer browser's <code>localStorage</code>.</li>
+          <li><b>Google Drive Backup (Optional):</b> When you enable and click <b>"Google Drive Sync"</b>, your app data is saved directly into your own personal Google Drive inside a dedicated folder named <code>MDM_Data</code> as JSON files.</li>
+          <li><b>Offline Support:</b> Using Service Worker caching, the app works seamlessly offline without an active internet connection.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">🔐</span><span>3. Google Drive Permissions & Limited Use Compliance</span></h2>
+        <p>For cloud backup and synchronization, the app uses official <b>Google Identity Services</b> and the <b>Google Drive API</b>:</p>
+        <ul>
+          <li>The app requests only the restricted, non-invasive scope: <code>https://www.googleapis.com/auth/drive.file</code>.</li>
+          <li>This means <b>the app can ONLY view, create, and update the specific files and folder (<code>MDM_Data</code>) created by this app itself.</b></li>
+          <li>The app CANNOT see, read, modify, or access any other personal files, photos, or documents in your Google Drive.</li>
+          <li><b>Google API Services User Data Policy:</b> Our use and transfer of information received from Google APIs strictly adhere to the Google API Services User Data Policy, including the Limited Use requirements.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">🚫</span><span>4. What We Do NOT Do (Zero Server Storage)</span></h2>
+        <ul>
+          <li>We do NOT transmit or store your school data on any external or developer-owned server.</li>
+          <li>The developer has zero access to your local data or your Google Drive files.</li>
+          <li>We do NOT sell, rent, trade, or share user data with any third parties, and the app contains zero advertisements.</li>
+          <li>Third-party services used are limited to <b>Google Fonts</b> (for Devanagari typography), <b>Google Sign-In</b> (for optional Drive authentication), and basic <b>Google Analytics</b> (for aggregate page-view statistics).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">🗑️</span><span>5. Data Retention, Deletion & Revoking Access</span></h2>
+        <p>You retain 100% ownership and control over your data at all times:</p>
+        <ul>
+          <li><b>Delete Local Data:</b> Clearing your browser's site data/storage immediately deletes all records stored on your device.</li>
+          <li><b>Delete Google Drive Backup:</b> You can delete the <code>MDM_Data</code> folder directly from your Google Drive at any time.</li>
+          <li><b>Revoke App Permissions:</b> You can revoke this app's access to your Google account at any time by visiting your Google Account Security page (<a href="https://myaccount.google.com/permissions" target="_blank" style="color:#14532d;font-weight:700">myaccount.google.com/permissions</a>).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">⚖️</span><span>6. Terms of Use</span></h2>
+        <p>By accessing and using this application, you agree to the following terms and conditions:</p>
+        <ul>
+          <li><b>Free Educational Utility:</b> This web application is provided "as-is" and free of charge to assist teachers and headmasters in simplifying daily PM POSHAN mid-day meal calculations and record-keeping.</li>
+          <li><b>Verification of Official Reports:</b> While all calculations and formulas are designed for maximum accuracy, school authorities/headmasters must verify the generated figures against official school registers before submitting monthly reports (such as Prapatra 'D' or Utilization Certificates).</li>
+          <li><b>Data Backup Responsibility:</b> Since data is stored locally on the user's device, users are advised to regularly use the <b>Google Drive Sync</b> or <b>Share Backup</b> feature to prevent data loss due to device damage, loss, or browser reset.</li>
+          <li><b>Intellectual Property:</b> The concept, design, and code of this application are the intellectual property of the developer. Unauthorized copying, redistribution, or commercial sale of this app is strictly prohibited.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="ic">📞</span><span>7. Developer Contact Information</span></h2>
+        <p>If you have any questions, concerns, or suggestions regarding this Privacy Policy or the application, please contact:</p>
+        <p>👨‍💻 <b>Developed by:</b> श्री. सोमनाथ गायकवाड सर (Somnath Gaikwad sir)<br>
+        🏫 <b>School:</b> Z.P. Primary School Hattarsang, Kendra Barur, Tal. South Solapur, Dist. Solapur (Maharashtra, India)</p>
+        <div class="contact-box">
+          <a class="cbtn em" href="mailto:gsom567@gmail.com?subject=MDM%20App%20Privacy%20Policy%20Query">✉️ gsom567@gmail.com</a>
+          <a class="cbtn wa" target="_blank" href="https://wa.me/917020302223?text=Hello%20Somnath%20Sir%2C%20regarding%20MDM%20App.">💬 WhatsApp Contact</a>
+        </div>
+        <p style="font-size:12px;color:#6b7a6e;margin-top:12px">Last Updated: April 2026</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div>👨‍💻 संकल्पना व निर्मिती: <b>श्री. सोमनाथ गायकवाड सर</b> (App developed by Somnath Gaikwad sir)</div>
+</footer>
+
+<script>
+function setLang(lang){
+  const isEn = lang === 'en';
+  document.body.classList.toggle('en', isEn);
+  document.documentElement.lang = isEn ? 'en' : 'mr';
+  document.getElementById('btn-mr').classList.toggle('active', !isEn);
+  document.getElementById('btn-en').classList.toggle('active', isEn);
+  document.querySelectorAll('header .mr-lang').forEach(el => el.style.display = isEn ? 'none' : 'inline');
+  document.querySelectorAll('header .en-lang').forEach(el => el.style.display = isEn ? 'inline' : 'none');
+}
+</script>
+</body>
+</html>
