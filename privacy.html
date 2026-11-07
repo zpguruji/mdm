@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-body{margin:0;font:15px/1.5 'Noto Sans Devanagari',system-ui,sans-serif;background:#f3f5ef;color:#1d2a1f}
+body{margin:0;font:15px/1.5 'Noto Sans Devanagari',system-ui,sans-serif;background:#f3f5ef;color:#1d2a1f;overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
 header{position:sticky;top:0;z-index:8;display:flex;align-items:center;gap:10px;background:#14532d;color:#fff;padding:10px 12px}
 .bkbtn{width:38px;height:38px;flex-shrink:0;padding:0;border:0;border-radius:50%;background:#ffffff26;display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;cursor:pointer}
 .bkbtn:active{background:#ffffff4d}
@@ -40,7 +40,7 @@ main{padding:12px;max-width:960px;margin:auto}
 .card ul{margin:6px 0;padding-left:18px;font-size:14px;line-height:1.65}
 .card li{margin:4px 0}
 .hl-box{background:#eef6ea;border:1px solid #a4cfa9;border-radius:8px;padding:9px 12px;margin-top:10px;font-size:13px;line-height:1.6}
-code{background:#eef6ea;color:#14532d;padding:2px 5px;border-radius:4px;font-size:12.5px;font-weight:700}
+code{background:#eef6ea;color:#14532d;padding:2px 5px;border-radius:4px;font-size:12.5px;font-weight:700;word-break:break-all}
 
 .contact-box{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .cbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;padding:12px 10px;border-radius:10px;font-weight:700;font-size:14px;color:#fff}
@@ -58,7 +58,7 @@ body.en .en-lang{display:block}
 <header>
   <div class="hbar">
     <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
-      <a href="index.html" class="bkbtn" title="मागे">
+      <a href="index.html" class="bkbtn" title="मागे" title="Back">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
       </a>
       <div class="h-title">
@@ -243,11 +243,15 @@ body.en .en-lang{display:block}
     <div class="c card">
       <h2><span class="ic">📞</span><span>7. Developer Contact Information</span></h2>
       <p>If you have any questions, concerns, or suggestions regarding this Privacy Policy or the application, please contact:</p>
-      <p>👨‍💻 <b>Developed by:</b> श्री. सोमनाथ गायकवाड सर (Somnath Gaikwad sir)<br>
+      <p>👨‍💻 <b>Developed by:</b> श्री. सोमनाथ गायकवाड सर (Somनाथ Gaikwad sir)<br>
       🏫 <b>School:</b> Z.P. Primary School Hattarsang, Kendra Barur, Tal. South Solapur, Dist. Solapur (Maharashtra, India)</p>
       <div class="contact-box">
-        <a class="cbtn wa" target="_blank" href="https://wa.me/917020302223?text=Hello%20Somnath%20Sir%2C%20regarding%20MDM%20App.">💬 WhatsApp Contact</a>
-        <a class="cbtn em" href="mailto:gsom567@gmail.com?subject=MDM%20App%20Privacy%20Policy%20Query">✉️ Email Contact</a>
+        <a class="cbtn wa" target="_blank" href="https://wa.me/917020302223?text=Hello%20Somnath%20Sir%2C%20regarding%20MDM%20App." style="display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;text-decoration:none;padding:12px 10px;border-radius:10px;font-weight:700;font-size:14px;box-shadow:0 3px 10px rgba(37,211,102,0.3)">
+          <span>💬</span> <span>WhatsApp Contact</span>
+        </a>
+        <a class="cbtn em" href="mailto:gsom567@gmail.com?subject=MDM%20App%20Privacy%20Policy%20Query" style="display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#14532d,#0b3d20);color:#fff;text-decoration:none;padding:12px 10px;border-radius:10px;font-weight:700;font-size:14px;box-shadow:0 3px 10px rgba(20,83,45,0.25)">
+          <span>✉️</span> <span>Email Contact</span>
+        </a>
       </div>
       <p style="font-size:12px;color:#6b7a6e;margin-top:12px">Last Updated: April 2026</p>
     </div>
